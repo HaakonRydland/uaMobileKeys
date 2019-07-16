@@ -29,7 +29,8 @@ public class UaMobileKeys extends CordovaPlugin {
             return true;
         } else if (action.equals("echoMethod")) {
             String arguments = args.getString(0);
-            this.echoMethod(callbackContext, Boolean.valueOf(arguments));
+            boolean argumentResults = Boolean.valueOf(arguments);
+            this.echoMethod(callbackContext, argumentResults);
             return true;
         } else if (action.equals("externalClassMethod")) {
             this.externalClassMethod(callbackContext);
