@@ -1,0 +1,20 @@
+repositories{
+    jcenter()
+    flatDir {
+        //dirs 'libs'
+        dirs 'src/main/libs'
+    }
+}
+
+dependencies {
+    //compile(name:'foo', ext:'aar')
+    debugImplementation(group: 'com.assaabloy.mobilekeys.api', name: 'mobilekeys-android-sdk-debug', version: '7.2.2', ext: 'aar')
+    releaseImplementation(group: 'com.assaabloy.mobilekeys.api', name: 'mobilekeys-android-sdk-release', version: '7.2.2', ext: 'aar')
+}
+
+android {
+    packagingOptions {
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+    }
+}
