@@ -12,6 +12,9 @@
       </config-file>
       <config-file parent="/*" target="AndroidManifest.xml" />
       <source-file src="src/android/UaMobileKeys.java" target-dir="src/cordova/plugin/uamobilekeys/UaMobileKeys" />
+      <source-file src="src/android/UaKeyImplementation.java" target-dir="src/cordova/plugin/mobilekeys/UaKeyImplementation" />
+      <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
+      <resource-file src="libs/mobilekeys-android-sdk-debug-7.2.2.aar" target="libs/mobilekeys-android-sdk-debug-7.2.2.aar" />
    </platform>
    <platform name="ios">
       <config-file parent="/*" target="config.xml">
