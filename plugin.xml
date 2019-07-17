@@ -11,11 +11,11 @@
          </feature>
       </config-file>
       <config-file parent="/*" target="AndroidManifest.xml" />
-      <source-file src="src/android/UaMobileKeys.java" target-dir="src/cordova/plugin/uamobilekeys/UaMobileKeys" />
-      <source-file src="src/android/UaKeyImplementation.java" target-dir="src/cordova/plugin/mobilekeys/UaKeyImplementation" />
+      <asset src="src/android/gradle.properties" target="src/android/gradle.properties" />
       <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
       <framework src="build-extras.gradle" custom="true" type="gradleReference" />
-      <asset src="src/android/gradle.properties" target="src/android/gradle.properties" />
+      <source-file src="src/android/UaMobileKeys.java" target-dir="src/cordova/plugin/uamobilekeys/UaMobileKeys" />
+      <source-file src="src/android/UaKeyImplementation.java" target-dir="src/cordova/plugin/mobilekeys/UaKeyImplementation" />
       <resource-file src="libs/mobilekeys-android-sdk-debug-7.2.2.aar" target="libs/mobilekeys-android-sdk-debug-7.2.2.aar" />
       <resource-file src="libs/mobilekeys-android-sdk-release-7.2.2.aar" target="libs/mobilekeys-android-sdk-release-7.2.2.aar" />
    </platform>
