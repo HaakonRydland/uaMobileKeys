@@ -3,7 +3,7 @@ package cordova.plugin.uamobilekeys;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
 
-public class UaKeyImplementation {
+public class UaKeyImplementation extends CordovaPlugin {
     public UaKeyImplementation() {}
 
     public boolean GotContact() { return true; }
