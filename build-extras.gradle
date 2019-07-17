@@ -1,7 +1,10 @@
 android {
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 22
+        applicationId "com.cordova.uamobilekeys"
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        versionName "0.0.1"
     }
 
     packagingOptions {
