@@ -16,8 +16,8 @@
       <framework src="build-extras.gradle" custom="true" type="gradleReference" />
       <source-file src="src/android/UaMobileKeys.java" target-dir="src/cordova/plugin/uamobilekeys/UaMobileKeys" />
       <source-file src="src/android/UaKeyImplementation.java" target-dir="src/cordova/plugin/mobilekeys/UaKeyImplementation" />
-      <resource-file src="libs/mobilekeys-android-sdk-debug-7.2.2.aar" target="libs/mobilekeys-android-sdk-debug-7.2.2.aar" />
-      <resource-file src="libs/mobilekeys-android-sdk-release-7.2.2.aar" target="libs/mobilekeys-android-sdk-release-7.2.2.aar" />
+      <lib-file src="libs/mobilekeys-android-sdk-debug-7.2.2.aar" />
+      <lib-file src="libs/mobilekeys-android-sdk-release-7.2.2.aar" />
    </platform>
    <platform name="ios">
       <config-file parent="/*" target="config.xml">
