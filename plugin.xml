@@ -11,7 +11,7 @@
          </feature>
       </config-file>
       <config-file parent="/*" target="AndroidManifest.xml" />
-      <source-file src="proguard.cfg" target-dir="proguard.cfg" />
+      <source-file src="proguard.cfg" target-dir="./proguard.cfg" />
       <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
       <framework src="build-extras.gradle" custom="true" type="gradleReference" />
       <resource-file src="libs/mobilekeys-android-sdk-debug-7.2.2.aar" target="libs/mobilekeys-android-sdk-debug-7.2.2.aar" />
