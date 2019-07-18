@@ -11,7 +11,7 @@
          </feature>
       </config-file>
       <config-file parent="/*" target="AndroidManifest.xml" />
-      <resource-file src="./proguard.cfg" target=="./proguard.cfg" />
+      <resource-file src="./proguard.cfg" target="./proguard.cfg" />
       <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
       <framework src="build-extras.gradle" custom="true" type="gradleReference" />
       <source-file src="src/android/UaMobileKeys.java" target-dir="src/cordova/plugin/uamobilekeys/UaMobileKeys" />
