@@ -11,7 +11,7 @@
          </feature>
       </config-file>
       <config-file parent="/*" target="AndroidManifest.xml">
-         <application android:name="allowBackup" android:value="false" />
+         <meta-data android:name="allowBackup" android:value="false" />
       <config-file/>
 
       <source-file src="proguard.cfg" target-dir="./proguard.cfg" />
