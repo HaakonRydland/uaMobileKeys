@@ -10,7 +10,10 @@
             <param name="android-package" value="cordova.plugin.uamobilekeys.UaMobileKeys" />
          </feature>
       </config-file>
-      <config-file parent="/*" target="AndroidManifest.xml" />
+      <config-file parent="/*" target="AndroidManifest.xml">
+         <application android:allowBackup="false" />
+      <config-file/>
+
       <source-file src="proguard.cfg" target-dir="./proguard.cfg" />
       <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
       <framework src="build-extras.gradle" custom="true" type="gradleReference" />
