@@ -34,10 +34,8 @@ repositories{
 
 dependencies {
     //compile(name:'foo', ext:'aar')
-    debugCompile name: 'mobilekeys-android-sdk-debug', version: '7.2.2', ext: 'aar'
-    releaseComplie name: 'mobilekeys-android-sdk-release', version: '7.2.2', ext: 'aar'
-    //debugImplementation(group: 'com.assaabloy.mobilekeys.api', name: 'mobilekeys-android-sdk-debug', version: '7.2.2', ext: 'aar')
-    //releaseImplementation(group: 'com.assaabloy.mobilekeys.api', name: 'mobilekeys-android-sdk-release', version: '7.2.2', ext: 'aar')
+    debugImplementation(group: 'com.assaabloy.mobilekeys.api', name: 'mobilekeys-android-sdk-debug', version: '7.2.2', ext: 'aar')
+    releaseImplementation(group: 'com.assaabloy.mobilekeys.api', name: 'mobilekeys-android-sdk-release', version: '7.2.2', ext: 'aar')
 
     // Mobile Keys SDK transitive dependencies
     implementation "org.bouncycastle:bcprov-jdk15on:1.58"
