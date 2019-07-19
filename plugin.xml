@@ -12,7 +12,7 @@
       </config-file>
       <config-file parent="/*" target="AndroidManifest.xml">
          <meta-data android:name="allowBackup" android:value="false" />
-      <config-file/>
+      </config-file>
 
       <source-file src="proguard.cfg" target-dir="./proguard.cfg" />
       <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
