@@ -24,18 +24,20 @@ repositories{
     flatDir {
         //dirs 'libs'
         dirs 'src/main/libs'
-    }
+    } /*
     maven {
         url 'https://maven.google.com/'
         name 'Google'
     }
-    mavenLocal() // remove this if you like
+    mavenLocal() // remove this if you like*/
 }
 
 dependencies {
     //compile(name:'foo', ext:'aar')
-    debugImplementation(group: 'com.assaabloy.mobilekeys.api', name: 'mobilekeys-android-sdk-debug', version: '7.2.2', ext: 'aar')
-    releaseImplementation(group: 'com.assaabloy.mobilekeys.api', name: 'mobilekeys-android-sdk-release', version: '7.2.2', ext: 'aar')
+    debugCompile name: 'mobilekeys-android-sdk-debug', version: '7.2.2', ext: 'aar'
+    releaseComplie name: 'mobilekeys-android-sdk-release', version: '7.2.2', ext: 'aar'
+    //debugImplementation(group: 'com.assaabloy.mobilekeys.api', name: 'mobilekeys-android-sdk-debug', version: '7.2.2', ext: 'aar')
+    //releaseImplementation(group: 'com.assaabloy.mobilekeys.api', name: 'mobilekeys-android-sdk-release', version: '7.2.2', ext: 'aar')
 
     // Mobile Keys SDK transitive dependencies
     implementation "org.bouncycastle:bcprov-jdk15on:1.58"
@@ -53,14 +55,14 @@ dependencies {
     }
 
     //Google support libraries
-    implementation "com.android.support:appcompat-v7:${androidSupportVersion}"
+    /*implementation "com.android.support:appcompat-v7:${androidSupportVersion}"
     implementation "com.android.support:support-v13:${androidSupportVersion}"
     implementation "com.android.support:design:${androidSupportVersion}"
-    implementation "com.android.support:cardview-v7:${androidSupportVersion}"
+    implementation "com.android.support:cardview-v7:${androidSupportVersion}"*/
     implementation "com.android.support:multidex:1.0.3"
 
     // test dependencies
-    testImplementation 'junit:junit:4.12'
+    /*testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.19.0'
     testImplementation('org.robolectric:robolectric:3.5.1') {
         exclude group: 'org.bouncycastle'
@@ -69,7 +71,7 @@ dependencies {
     testImplementation('org.robolectric:shadows-multidex:3.5.1')
     testImplementation('org.robolectric:shadows-playservices:3.5.1')
     testImplementation('org.robolectric:shadows-httpclient:3.5.1')
-    testImplementation 'org.hamcrest:hamcrest-all:1.3'
+    testImplementation 'org.hamcrest:hamcrest-all:1.3'*/
 }
 
 configurations {

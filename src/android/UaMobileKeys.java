@@ -21,6 +21,7 @@ public class UaMobileKeys extends CordovaPlugin {
 
     private UaKeyImplementation uaKey = new UaKeyImplementation();
 
+    // Main method for selecting the correct native code, based on input from JavaScript Interface
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if (action.equals("coolMethod")) {
@@ -39,6 +40,7 @@ public class UaMobileKeys extends CordovaPlugin {
         return false;
     }
 
+    // Simple test-methods to ensure that contact has been made with the plugin
     private void coolMethod(String message, CallbackContext callbackContext) {
         if (message != null && message.length() > 0) {
             callbackContext.success(message);
