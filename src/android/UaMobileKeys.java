@@ -20,8 +20,8 @@ import com.assaabloy.mobilekeys.api.hce.NfcConfiguration;
 public class UaMobileKeys extends CordovaPlugin {
 
     private UaKeyImplementation uaKey = new UaKeyImplementation();
-    private UaMobileKeysImplementation uaImplementation = new UaMobileKeysImplementation();
-    
+    private UaMobileKeyImplementation uaImplementation = new UaMobileKeyImplementation();
+
     // Main method for selecting the correct native code, based on input from JavaScript Interface
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
