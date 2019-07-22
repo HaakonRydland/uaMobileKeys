@@ -6,7 +6,7 @@ import com.assaabloy.mobilekeys.api.ble.*;
 import com.assaabloy.mobilekeys.api.hce.NfcConfiguration;
 import android.content.Context;
 
-public class UaMobileKeysSetup {
+public class UaMobileKeysSetup extends CordovaPlugin {
     private MobileKeysApi mobileKeysFactory;
 
     Context context = this.cordova.getActivity().getApplicationContext();
