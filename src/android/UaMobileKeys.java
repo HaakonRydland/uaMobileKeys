@@ -20,7 +20,7 @@ import com.assaabloy.mobilekeys.api.hce.NfcConfiguration;
 public class UaMobileKeys extends CordovaPlugin {
 
     private UaKeyImplementation uaKey = new UaKeyImplementation();
-    private UaMobileKeyImplementation uaImplementation = new UaMobileKeyImplementation();
+    private UaMobileKeysApi uaKeyApi = new UaMobileKeysApi();
 
     // Main method for selecting the correct native code, based on input from JavaScript Interface
     @Override
@@ -62,27 +62,27 @@ public class UaMobileKeys extends CordovaPlugin {
 
     // Mobile keys implementation
     private void startup(CallbackContext callbackContext){
-        uaImplementation.startup(callbackContext);
+        uaKeyApi.startup(callbackContext);
     }
 
     private void isEndpointSetup(CallbackContext callbackContext){
-        uaImplementation.isEndpointSetup(callbackContext);
+        uaKeyApi.isEndpointSetup(callbackContext);
     }
 
     private void setupEndpoint(CallbackContext callbackContext){
-        uaImplementation.setupEndpoint(callbackContext);
+        uaKeyApi.setupEndpoint(callbackContext);
     }
 
     private void updateEndpoint(CallbackContext callbackContext){
-        uaImplementation.updateEndpoint(callbackContext);
+        uaKeyApi.updateEndpoint(callbackContext);
     }
 
     private void listMobileKeys(CallbackContext callbackContext){
-        uaImplementation.listMobileKeys(callbackContext);
+        uaKeyApi.listMobileKeys(callbackContext);
     }
 
     private void endpointInfo(CallbackContext callbackContext){
-        uaImplementation.endpointInfo(callbackContext);
+        uaKeyApi.endpointInfo(callbackContext);
     }
 
 
