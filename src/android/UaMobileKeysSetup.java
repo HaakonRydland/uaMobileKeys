@@ -4,13 +4,16 @@ import com.assaabloy.mobilekeys.api.ApiConfiguration;
 import com.assaabloy.mobilekeys.api.MobileKeysApi;
 import com.assaabloy.mobilekeys.api.ble.*;
 import com.assaabloy.mobilekeys.api.hce.NfcConfiguration;
+import android.content.Context;
 
 public class UaMobileKeysSetup {
     private MobileKeysApi mobileKeysFactory;
 
+    Context context = this.cordova.getActivity().getApplicationContext();
+
     private void initializeMobileKeysApi()
     {
-        OpeningTrigger[] openingTriggers = {new TapOpeningTrigger(this)};
+        OpeningTrigger[] openingTriggers = {new TapOpeningTrigger(context)};
         ScanConfiguration scanConfiguration = new ScanConfiguration.Builder(openingTriggers, 1)
                 .setBluetoothModeIfSupported(BluetoothMode.DUAL)
                 .setScanMode(ScanMode.OPTIMIZE_PERFORMANCE)
@@ -25,7 +28,7 @@ public class UaMobileKeysSetup {
                         .build())
                 .build();
         mobileKeysFactory = MobileKeysApi.getInstance();
-        mobileKeysFactory.initialize(this, apiConfiguration, scanConfiguration);
+        mobileKeysFactory.initialize(context, apiConfiguration, scanConfiguration);
         if(mobileKeysFactory.isInitialized() == false) {
             throw new IllegalStateException();
         }
