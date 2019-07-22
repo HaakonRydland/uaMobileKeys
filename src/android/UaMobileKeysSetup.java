@@ -1,5 +1,8 @@
 package cordova.plugin.uamobilekeys;
 
+import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CallbackContext;
+
 import com.assaabloy.mobilekeys.api.ApiConfiguration;
 import com.assaabloy.mobilekeys.api.MobileKeysApi;
 import com.assaabloy.mobilekeys.api.ble.*;
