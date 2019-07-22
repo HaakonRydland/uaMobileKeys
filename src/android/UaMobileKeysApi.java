@@ -15,6 +15,9 @@ import com.assaabloy.mobilekeys.api.ble.*;
 import com.assaabloy.mobilekeys.api.hce.NfcConfiguration;
 
 public class UaMobileKeysApi extends CordovaPlugin {
+
+    public UaMobileKeysApi () {}
+
     private MobileKeysApiFacade mobileKeysApiFacade;
 
     // Mobile Keys interface

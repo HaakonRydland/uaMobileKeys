@@ -20,6 +20,7 @@ import com.assaabloy.mobilekeys.api.hce.NfcConfiguration;
 public class UaMobileKeys extends CordovaPlugin {
 
     private UaKeyImplementation uaKey = new UaKeyImplementation();
+    private UaMobileKeysImplementation uaImplementation = new UaMobnileKeysImplementation();
 
     // Main method for selecting the correct native code, based on input from JavaScript Interface
     @Override
@@ -36,9 +37,54 @@ public class UaMobileKeys extends CordovaPlugin {
         } else if (action.equals("externalClassMethod")) {
             this.externalClassMethod(callbackContext);
             return true;
+        } else if (action.equals("startup")) {
+            this.startup(callbackContext);
+            return true;
+        } else if (action.equals("isEndpointSetup")) {
+            this.isEndpointSetup(callbackContext);
+            return true;
+        } else if (action.equals("setupEndpoint")) {
+            this.setupEndpoint(callbackContext);
+            return true;
+        } else if (action.equals("updateEndpoint")) {
+            this.updateEndpoint(callbackContext);
+            return true;
+        } else if (action.equals("listMobileKeys")) {
+            this.listMobileKeys(callbackContext);
+            return true;
+        } else if (action.equals("endpointInfo")) {
+            this.endpointInfo(callbackContext);
+            return true;
         }
+
         return false;
     }
+
+    // Mobile keys implementation
+    private void startup(CallbackContext callbackContext){
+        uaImplementation.startup(callbackContext);
+    }
+
+    private void isEndpointSetup(CallbackContext callbackContext){
+        uaImplementation.isEndpointSetup(callbackContext);
+    }
+
+    private void setupEndpoint(CallbackContext callbackContext){
+        uaImplementation.setupEndpoint(callbackContext);
+    }
+
+    private void updateEndpoint(CallbackContext callbackContext){
+        uaImplementation.updateEndpoint(callbackContext);
+    }
+
+    private void listMobileKeys(CallbackContext callbackContext){
+        uaImplementation.listMobileKeys(callbackContext);
+    }
+
+    private void endpointInfo(CallbackContext callbackContext){
+        uaImplementation.endpointInfo(callbackContext);
+    }
+
 
     // Simple test-methods to ensure that contact has been made with the plugin
     private void coolMethod(String message, CallbackContext callbackContext) {
