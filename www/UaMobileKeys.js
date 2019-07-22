@@ -34,7 +34,35 @@ cordova.addConstructor(UaMobileKeys.install);
 
 //#endregion
 
-//#region interface for native code
+//#region MobileKeys implementation
+UaMobileKeys.prototype.startup = function(arg0, success, error) {
+    this.pInvoke("startup", arg0, success, error);
+};
+
+UaMobileKeys.prototype.isEndpointSetup = function(arg0, success, error) {
+    this.pInvoke("isEndpointSetup", arg0, success, error);
+};
+
+UaMobileKeys.prototype.setupEndpoint = function(arg0, success, error) {
+    this.pInvoke("setupEndpoint", arg0, success, error);
+};
+
+UaMobileKeys.prototype.updateEndpoint = function(arg0, success, error) {
+    this.pInvoke("updateEndpoint", arg0, success, error);
+};
+
+UaMobileKeys.prototype.listMobileKeys = function(arg0, success, error) {
+    this.pInvoke("listMobileKeys", arg0, success, error);
+};
+
+UaMobileKeys.prototype.endpointInfo = function(arg0, success, error) {
+    this.pInvoke("endpointInfo", arg0, success, error);
+};
+
+
+//#endregion
+
+//#region interface for native code test methods
 UaMobileKeys.prototype.coolMethod = function(arg0, success, error) {
     this.pInvoke("coolMethod", arg0, success, error);
 };

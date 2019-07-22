@@ -24,6 +24,7 @@
       <source-file src="src/android/MobileKeysApiFacade.java" target-dir="src/cordova/plugin/uamobilekeys/MobileKeysApiFacade" />
       <source-file src="src/android/MobileKeysApiFactory.java" target-dir="src/cordova/plugin/uamobilekeys/MobileKeysApiFactory" />
       <source-file src="src/android/UaMobileKeysSetup.java" target-dir="src/cordova/plugin/uamobilekeys/UaMobileKeysSetup" />
+      <source-file src="src/android/UaMobileKeysApi.java" target-dir="src/cordova/plugin/uamobilekeys/UaMobileKeysApi" />
    </platform>
    <platform name="ios">
       <config-file parent="/*" target="config.xml">
