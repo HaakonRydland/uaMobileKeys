@@ -31,7 +31,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     }
 
     // isEndpointSetupComplete
-    public void isEndpointSetup(CallbackContext callbackContext) {
+    public void isEndpointSetup(CallbackContext callbackContext) throws MobileKeysException {
         MobileKeys mobileKeys = MobileKeysApi.getInstance().getMobileKeys();
         boolean isEndpointSetup = false;
         try
@@ -41,6 +41,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         catch (MobileKeysException e)
         {
             callbackContext.error("Something went wrong in isEndpointSetup()");
+            throw new MobileKeysException(InternalErrorCode.ENDPOINT_NOT_SETUP, e);
         }
 
         callbackContext.success(Boolean.toString(isEndpointSetup));
