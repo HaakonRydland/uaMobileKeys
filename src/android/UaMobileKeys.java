@@ -13,6 +13,7 @@ import com.assaabloy.mobilekeys.api.MobileKeysApi;
 import com.assaabloy.mobilekeys.api.ReaderConnectionController;
 import com.assaabloy.mobilekeys.api.ble.*;
 import com.assaabloy.mobilekeys.api.hce.NfcConfiguration;
+import com.assaabloy.mobilekeys.api.MobileKeysException;
 
 import android.content.Context;
 
