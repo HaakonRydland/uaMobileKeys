@@ -14,7 +14,7 @@ public class UaMobileKeysSetup extends CordovaPlugin {
 
     Context context = this.cordova.getActivity().getApplicationContext();
 
-    private void initializeMobileKeysApi()
+    public void initializeMobileKeysApi()
     {
         OpeningTrigger[] openingTriggers = {new TapOpeningTrigger(context)};
         ScanConfiguration scanConfiguration = new ScanConfiguration.Builder(openingTriggers, 1)

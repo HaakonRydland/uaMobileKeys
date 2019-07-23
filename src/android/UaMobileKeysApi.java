@@ -20,7 +20,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
 
     public UaMobileKeysApi () {}
     private MobileKeysApiFacade mobileKeysApiFacade;
-    private UaMobileKeysSetup keySetup = new UamobileKeysSetup();
+    private UaMobileKeysSetup keySetup = new UaMobileKeysSetup();
 
     // Mobile Keys interface
     // applicationStartup
