@@ -14,13 +14,11 @@ import android.os.Build;
 
 public class UaMobileKeysSetup extends CordovaPlugin {
     private MobileKeysApi mobileKeysFactory;
-    private CordovaWebView webView = new CordovaWebView;
 
-    super.initialize(cordova, webView);
     int androidVersionCurrentlyRunning = Build.VERSION.SDK_INT;
-    //Context context = this.cordova.getActivity().getApplicationContext();
+    Context context = this.cordova.getActivity().getApplicationContext();
 
-    Context context = (androidVersionCurrentlyRunning >= 21) ? cordova.getActivity().getWindow().getContext() : cordova.getActivity().getApplicationContext();
+    //Context context = (androidVersionCurrentlyRunning >= 21) ? cordova.getActivity().getWindow().getContext() : cordova.getActivity().getApplicationContext();
 
     public void initializeMobileKeysApi()
     {

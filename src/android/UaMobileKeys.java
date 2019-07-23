@@ -88,6 +88,8 @@ public class UaMobileKeys extends CordovaPlugin {
 
     // Simple test-methods to ensure that contact has been made with the plugin
     private void coolMethod(String message, CallbackContext callbackContext) {
+        Context context = this.cordova.getActivity().getApplicationContext();
+        
         if (message != null && message.length() > 0) {
             callbackContext.success(message);
         } else {
