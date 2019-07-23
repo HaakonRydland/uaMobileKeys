@@ -13,14 +13,15 @@ import android.content.Context;
 import android.os.Build;
 
 public class UaMobileKeysSetup extends CordovaPlugin {
-    private MobileKeysApi mobileKeysFactory;
+    public UaMobileKeysSetup() {}
 
+    private MobileKeysApi mobileKeysFactory;
     int androidVersionCurrentlyRunning = Build.VERSION.SDK_INT;
-    Context context = this.cordova.getActivity().getApplicationContext();
+    //Context context = this.cordova.getActivity().getApplicationContext();
 
     //Context context = (androidVersionCurrentlyRunning >= 21) ? cordova.getActivity().getWindow().getContext() : cordova.getActivity().getApplicationContext();
 
-    public void initializeMobileKeysApi()
+    public void initializeMobileKeysApi(Context context)
     {
         OpeningTrigger[] openingTriggers = {new TapOpeningTrigger(context)};
         ScanConfiguration scanConfiguration = new ScanConfiguration.Builder(openingTriggers, 1)
