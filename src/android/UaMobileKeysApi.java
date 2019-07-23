@@ -43,7 +43,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
             callbackContext.error("Something went wrong in isEndpointSetup()");
         }
 
-        callbackContext.success(isEndpointSetup);
+        callbackContext.success(Boolean.toString(isEndpointSetup));
     }
 
     // endpointSetup
