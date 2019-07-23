@@ -16,7 +16,7 @@ public class UaMobileKeysSetup extends CordovaPlugin {
 
     int androidVersionCurrentlyRunning = Build.VERSION.SDK_INT;
     //Context context = this.cordova.getActivity().getApplicationContext();
-    Context context = (androidVersionCurrentlyRunning >= 21) ? Cordova.getActivity().getWindow().getContext() : Cordova.getActivity().getApplicationContext();
+    Context context = (androidVersionCurrentlyRunning >= 21) ? cordova.getActivity().getWindow().getContext() : cordova.getActivity().getApplicationContext();
 
     public void initializeMobileKeysApi()
     {
