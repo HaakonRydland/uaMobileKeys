@@ -1,6 +1,7 @@
 package cordova.plugin.uamobilekeys;
 
 import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CallbackContext;
 
 import com.assaabloy.mobilekeys.api.ApiConfiguration;
@@ -13,10 +14,13 @@ import android.os.Build;
 
 public class UaMobileKeysSetup extends CordovaPlugin {
     private MobileKeysApi mobileKeysFactory;
+    private CordovaWebView webView = new CordovaWebView;
 
+    super.initialize(cordova, webView);
     int androidVersionCurrentlyRunning = Build.VERSION.SDK_INT;
     //Context context = this.cordova.getActivity().getApplicationContext();
-    Context context = (androidVersionCurrentlyRunning >= 21) ? super.cordova.getActivity().getWindow().getContext() : super.cordova.getActivity().getApplicationContext();
+
+    Context context = (androidVersionCurrentlyRunning >= 21) ? cordova.getActivity().getWindow().getContext() : cordova.getActivity().getApplicationContext();
 
     public void initializeMobileKeysApi()
     {
