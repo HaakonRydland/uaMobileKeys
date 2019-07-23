@@ -12,8 +12,9 @@ import android.content.Context;
 public class UaMobileKeysSetup extends CordovaPlugin {
     private MobileKeysApi mobileKeysFactory;
 
-    Context context = this.cordova.getActivity().getApplicationContext();
-
+    //Context context = this.cordova.getActivity().getApplicationContext();
+    Context context = IS_AT_LEAST_LOLLIPOP ? cordova.getActivity().getWindow().getContext() : cordova.getActivity().getApplicationContext();
+    
     public void initializeMobileKeysApi()
     {
         OpeningTrigger[] openingTriggers = {new TapOpeningTrigger(context)};
