@@ -33,7 +33,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
 
     // isEndpointSetupComplete
     public void isEndpointSetup(CallbackContext callbackContext) throws MobileKeysException {
-        keySetup.initializeMobileKeysApi();
+        //keySetup.initializeMobileKeysApi();
         MobileKeys mobileKeys = MobileKeysApi.getInstance().getMobileKeys();
 
         boolean isEndpointSetup = false;

@@ -25,6 +25,7 @@ public class UaMobileKeys extends CordovaPlugin {
     private UaKeyImplementation uaKey = new UaKeyImplementation();
     private UaMobileKeysApi uaKeyApi = new UaMobileKeysApi();
     private UaMobileKeysSetup uaSetup = new UaMobileKeysSetup();
+    private boolean isMobileKeysInitialized = false;
 
     // Main method for selecting the correct native code, based on input from JavaScript Interface
     @Override
@@ -59,9 +60,18 @@ public class UaMobileKeys extends CordovaPlugin {
         } else if (action.equals("endpointInfo")) {
             this.endpointInfo(callbackContext);
             return true;
+        } else if (action.equals("initializeMobileKeysApi")) {
+            this.initializeMobileKeysApi();
         }
 
         return false;
+    }
+
+    // Initialize Mobile Keys Api - should only be called once
+    private void initializeMobileKeysApi() {
+        Context context = this.cordova.getActivity().getApplicationContext();
+        uaSetup.initializeMobileKeysApi(context);
+        isMobileKeysInitialized = true;
     }
 
     // Mobile keys implementation
@@ -71,8 +81,10 @@ public class UaMobileKeys extends CordovaPlugin {
 
     private void isEndpointSetup(CallbackContext callbackContext){
         try {
-            Context context = this.cordova.getActivity().getApplicationContext();
-            uaSetup.initializeMobileKeysApi(context);
+            if (!isMobileKeysInitialized) {
+                Context context = this.cordova.getActivity().getApplicationContext();
+                uaSetup.initializeMobileKeysApi(context);
+            }
             uaKeyApi.isEndpointSetup(callbackContext);
         } catch (MobileKeysException ex) {
             System.out.println(ex);
@@ -95,7 +107,6 @@ public class UaMobileKeys extends CordovaPlugin {
     private void endpointInfo(CallbackContext callbackContext){
         uaKeyApi.endpointInfo(callbackContext);
     }
-
 
     // Simple test-methods to ensure that contact has been made with the plugin
     private void coolMethod(String message, CallbackContext callbackContext) {
