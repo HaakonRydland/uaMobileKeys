@@ -15,7 +15,6 @@ public class UaMobileKeysSetup extends CordovaPlugin {
     public UaMobileKeysSetup() {}
 
     private MobileKeysApi mobileKeysFactory;
-    int androidVersionCurrentlyRunning = Build.VERSION.SDK_INT;
 
     public void initializeMobileKeysApi(Context context)
     {
