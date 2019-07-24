@@ -46,7 +46,7 @@ public class UaMobileKeysSetup extends CordovaPlugin {
         MobileKeysApi.getInstance().getReaderConnectionController().enableHce();
     }
 
-    public void isMobileKeysInitialized() {
+    public boolean isMobileKeysInitialized() {
         return mobileKeysFactory.isInitialized();
     }
 }
