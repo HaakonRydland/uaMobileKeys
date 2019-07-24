@@ -54,7 +54,8 @@ public class UaMobileKeys extends CordovaPlugin {
             this.isEndpointSetup(callbackContext);
             return true;
         } else if (action.equals("setupEndpoint")) {
-            this.setupEndpoint(callbackContext);
+            String invitationCode = args.getString(0);
+            this.setupEndpoint(callbackContext, invitationCode);
             return true;
         } else if (action.equals("updateEndpoint")) {
             this.updateEndpoint(callbackContext);
@@ -98,8 +99,13 @@ public class UaMobileKeys extends CordovaPlugin {
         }
     }
 
-    private void setupEndpoint(CallbackContext callbackContext){
-        uaKeyApi.setupEndpoint(callbackContext);
+    private void setupEndpoint(CallbackContext callbackContext, String invitationCode){
+        try {
+            uaKeyApi.setupEndpoint(callbackContext, invitationCode);
+        } catch (MoblieKeysException ex) {
+            System.out.println(ex);
+            callbackContext.error("Something went horribly wrong in setupEndpoint()");
+        }
     }
 
     private void updateEndpoint(CallbackContext callbackContext){

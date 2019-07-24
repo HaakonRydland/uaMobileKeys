@@ -15,6 +15,7 @@ import com.assaabloy.mobilekeys.api.ble.*;
 import com.assaabloy.mobilekeys.api.hce.NfcConfiguration;
 import com.assaabloy.mobilekeys.api.MobileKeysCallback;
 import com.assaabloy.mobilekeys.api.MobileKeysException;
+import com.assaabloy.mobilekeys.api.EndpointSetupConfiguration;
 
 public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback {
 
@@ -49,7 +50,9 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     }
 
     // endpointSetup
-    public void setupEndpoint(CallbackContext callbackContext) {
+    public void setupEndpoint(CallbackContext callbackContext, String invitationCode) {
+        MobileKeysApi.getInstance().getMobileKeys().endpointSetup(this, invitationCode, new EndpointSetupConfiguration.Builder().build());
+
         callbackContext.success("Reached setupEndpoint()");
     }
 
@@ -58,7 +61,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         callbackContext.success("Reached updateEndpoint()");
     }
 
-    // listMobileKeys
+    // listMobileKeys - not void: java.util.List<MobileKey>
     public void listMobileKeys(CallbackContext callbackContext) {
         callbackContext.success("Reached listMobileKeys()");
     }
@@ -72,13 +75,13 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     @Override
     public void handleMobileKeysTransactionCompleted()
     {
-        // does something when applicationStartup was successful
+        // does something if applicationStartup was successful
     }
 
     @Override
     public void handleMobileKeysTransactionFailed(MobileKeysException mobileKeysException)
     {
-        // does something when applicationStartup was unsuccessful
+        // does something if applicationStartup was unsuccessful
     }
 }
 
