@@ -47,6 +47,6 @@ public class UaMobileKeysSetup extends CordovaPlugin {
     }
 
     public boolean isMobileKeysInitialized() {
-        return mobileKeysFactory.isInitialized();
+        return MobileKeysApi.getInstance().isInitialized();
     }
 }
