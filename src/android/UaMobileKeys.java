@@ -74,7 +74,6 @@ public class UaMobileKeys extends CordovaPlugin {
     private void initializeMobileKeysApi() {
         Context context = this.cordova.getActivity().getApplicationContext();
         uaSetup.initializeMobileKeysApi(context);
-        setIsMobileKeysInitialized(true);
     }
 
     // Mobile keys implementation
@@ -84,10 +83,6 @@ public class UaMobileKeys extends CordovaPlugin {
 
     private void isEndpointSetup(CallbackContext callbackContext){
         try {
-            if (!isMobileKeysInitialized) {
-                Context context = this.cordova.getActivity().getApplicationContext();
-                uaSetup.initializeMobileKeysApi(context);
-            }
             uaKeyApi.isEndpointSetup(callbackContext);
         } catch (MobileKeysException ex) {
             System.out.println(ex);
