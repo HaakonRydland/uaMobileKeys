@@ -25,11 +25,14 @@ public class UaMobileKeys extends CordovaPlugin {
     private UaKeyImplementation uaKey = new UaKeyImplementation();
     private UaMobileKeysApi uaKeyApi = new UaMobileKeysApi();
     private UaMobileKeysSetup uaSetup = new UaMobileKeysSetup();
-    private boolean isMobileKeysInitialized = false;
 
     // Main method for selecting the correct native code, based on input from JavaScript Interface
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+        if (!uaSetup.isMobileKeysInitialized()) {
+            this.initializeMobileKeysApi();
+        }
+
         if (action.equals("coolMethod")) {
             String message = args.getString(0);
             this.coolMethod(message, callbackContext);
@@ -71,7 +74,7 @@ public class UaMobileKeys extends CordovaPlugin {
     private void initializeMobileKeysApi() {
         Context context = this.cordova.getActivity().getApplicationContext();
         uaSetup.initializeMobileKeysApi(context);
-        isMobileKeysInitialized = true;
+        setIsMobileKeysInitialized(true);
     }
 
     // Mobile keys implementation
