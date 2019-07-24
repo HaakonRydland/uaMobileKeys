@@ -72,14 +72,13 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     @Override
     public void handleMobileKeysTransactionCompleted()
     {
-        mobileKeysApiFacade.onStartUpComplete();
+        // does something when applicationStartup was successful
     }
 
     @Override
     public void handleMobileKeysTransactionFailed(MobileKeysException mobileKeysException)
     {
-
+        // does something when applicationStartup was unsuccessful
     }
-
 }
 
