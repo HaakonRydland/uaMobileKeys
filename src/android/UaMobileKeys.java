@@ -16,6 +16,8 @@ import com.assaabloy.mobilekeys.api.hce.NfcConfiguration;
 import com.assaabloy.mobilekeys.api.MobileKeysException;
 
 import android.content.Context;
+import android.os.Build;
+
 
 /**
  * This class echoes a string called from JavaScript.
@@ -72,7 +74,9 @@ public class UaMobileKeys extends CordovaPlugin {
 
     // Initialize Mobile Keys Api - should only be called once
     private void initializeMobileKeysApi() {
-        Context context = this.cordova.getActivity().getApplicationContext();
+        //Context context = this.cordova.getActivity().getApplicationContext();
+        int androidVersionCurrentlyRunning = Build.VERSION.SDK_INT;
+        Context context = (androidVersionCurrentlyRunning >= 21) ? cordova.getActivity().getWindow().getContext() : cordova.getActivity().getApplicationContext();
         uaSetup.initializeMobileKeysApi(context);
     }
 

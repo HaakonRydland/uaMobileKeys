@@ -10,16 +10,12 @@ import com.assaabloy.mobilekeys.api.ble.*;
 import com.assaabloy.mobilekeys.api.hce.NfcConfiguration;
 
 import android.content.Context;
-import android.os.Build;
 
 public class UaMobileKeysSetup extends CordovaPlugin {
     public UaMobileKeysSetup() {}
 
     private MobileKeysApi mobileKeysFactory;
     int androidVersionCurrentlyRunning = Build.VERSION.SDK_INT;
-    //Context context = this.cordova.getActivity().getApplicationContext();
-
-    //Context context = (androidVersionCurrentlyRunning >= 21) ? cordova.getActivity().getWindow().getContext() : cordova.getActivity().getApplicationContext();
 
     public void initializeMobileKeysApi(Context context)
     {
