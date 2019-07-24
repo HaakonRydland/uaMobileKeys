@@ -102,7 +102,7 @@ public class UaMobileKeys extends CordovaPlugin {
     private void setupEndpoint(CallbackContext callbackContext, String invitationCode){
         try {
             uaKeyApi.setupEndpoint(callbackContext, invitationCode);
-        } catch (MoblieKeysException ex) {
+        } catch (MobileKeysException ex) {
             System.out.println(ex);
             callbackContext.error("Something went horribly wrong in setupEndpoint()");
         }
