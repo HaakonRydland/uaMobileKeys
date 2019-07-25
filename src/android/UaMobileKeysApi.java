@@ -74,21 +74,24 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     }
 
     public void unregisterEndpoint(CallbackContext callbackContext) {
+        cordova.getThreadPool().execute(new Runnable() {
         MobileKeysApi.getInstance().getMobileKeys().unregisterEndpoint(new MobileKeysCallback() {
-            @Override
-            public void handleMobileKeysTransactionCompleted()
-            {
-                // does something if unregisterEndpoint was successful
-                callbackContext.success("Managed to unregister endpoint. Run isEndpointSetup() to verify.");
-            }
+                @Override
+                public void handleMobileKeysTransactionCompleted ()
+                {
+                    // does something if unregisterEndpoint was successful
+                    callbackContext.success("Managed to unregister endpoint. Run isEndpointSetup() to verify.");
+                }
 
-            @Override
-            public void handleMobileKeysTransactionFailed(MobileKeysException mobileKeysException)
-            {
-                // does something if unregisterEndpoint was unsuccessful
-                callbackContext.error("Was unable to unregister endpoint");
-            }
-        });
+                @Override
+                public void handleMobileKeysTransactionFailed (MobileKeysException
+                mobileKeysException)
+                {
+                    // does something if unregisterEndpoint was unsuccessful
+                    callbackContext.error("Was unable to unregister endpoint");
+                }
+            });
+        }
     }
 
     // Interface implementations

@@ -130,9 +130,7 @@ public class UaMobileKeys extends CordovaPlugin {
     }
 
     private void unregisterEndpoint(CallbackContext callbackContext) {
-        cordova.getThreadPool().execute(new Runnable() {
             uaKeyApi.unregisterEndpoint(callbackContext);
-        }
     }
 
     // Simple test-methods to ensure that contact has been made with the plugin
