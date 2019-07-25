@@ -59,6 +59,10 @@ UaMobileKeys.prototype.endpointInfo = function(arg0, success, error) {
     this.pInvoke("endpointInfo", arg0, success, error);
 };
 
+UaMobileKeys.prototype.unregisterEndpoint = function(arg0, success, error) {
+    this.pInvoke("unregisterEndpoint", arg0, success, error);
+};
+
 
 //#endregion
 

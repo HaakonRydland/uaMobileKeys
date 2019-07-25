@@ -66,8 +66,12 @@ public class UaMobileKeys extends CordovaPlugin {
         } else if (action.equals("endpointInfo")) {
             this.endpointInfo(callbackContext);
             return true;
+        } else if (action.equals("unregisterEndpoint")) {
+            this.unregisterEndpoint(callbackContext);
+            return true;
         } else if (action.equals("initializeMobileKeysApi")) {
             this.initializeMobileKeysApi();
+            return true;
         }
 
         return false;
@@ -118,6 +122,10 @@ public class UaMobileKeys extends CordovaPlugin {
 
     private void endpointInfo(CallbackContext callbackContext){
         uaKeyApi.endpointInfo(callbackContext);
+    }
+
+    private void unregisterEndpoint(CallbackContext callbackContext) {
+        uaKeyApi.unregisterEndpoint(callbackContext);
     }
 
     // Simple test-methods to ensure that contact has been made with the plugin
