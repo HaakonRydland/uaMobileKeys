@@ -105,5 +105,14 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     {
         // does something if applicationStartup was unsuccessful
     }
+
+    public void pluginResult(CallbackContext callbackContext) {
+        JSONObject json = new JSONObject();
+        json.put("testkey", "testvalue");
+
+        PluginResult result = new PluginResult(PluginResult.status.OK, json);
+
+        callbackContext.sendPluginResult(result);
+    }
 }
 

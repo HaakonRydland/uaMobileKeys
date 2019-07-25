@@ -72,6 +72,9 @@ public class UaMobileKeys extends CordovaPlugin {
         } else if (action.equals("initializeMobileKeysApi")) {
             this.initializeMobileKeysApi();
             return true;
+        } else if (action.equals("pluginResult")) {
+            this.pluginResult(callbackContext);
+            return true;
         }
 
         return false;
@@ -151,5 +154,9 @@ public class UaMobileKeys extends CordovaPlugin {
 
     private void echoMethod(CallbackContext callbackContext, boolean outputchanger) {
         uaKey.echoMethod(callbackContext, outputchanger);
+    }
+
+    private void pluginResult(CallbackContext callbackContext) {
+        uaKeyApi.pluginResult(callbackContext);
     }
 }
