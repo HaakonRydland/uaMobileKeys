@@ -90,6 +90,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
                     callbackContext.error("Was unable to unregister endpoint");
                 }
             });
+        callbackContext.success("Tried to unregister endpoint. Run isEndpointSetup() to verify.");
     }
 
     // Interface implementations
