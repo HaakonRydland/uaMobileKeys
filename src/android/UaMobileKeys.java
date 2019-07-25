@@ -67,9 +67,7 @@ public class UaMobileKeys extends CordovaPlugin {
             this.endpointInfo(callbackContext);
             return true;
         } else if (action.equals("unregisterEndpoint")) {
-            cordova.getThreadPool().execute(new Runnable() {
-                this.unregisterEndpoint(callbackContext);
-            });
+            this.unregisterEndpoint(callbackContext);
             return true;
         } else if (action.equals("initializeMobileKeysApi")) {
             this.initializeMobileKeysApi();
@@ -121,7 +119,6 @@ public class UaMobileKeys extends CordovaPlugin {
             System.out.println(ex);
             callbackContext.error("Something went horribly wrong in updateEndpoint()");
         }
-
     }
 
     private void listMobileKeys(CallbackContext callbackContext){
@@ -133,7 +130,9 @@ public class UaMobileKeys extends CordovaPlugin {
     }
 
     private void unregisterEndpoint(CallbackContext callbackContext) {
-        uaKeyApi.unregisterEndpoint(callbackContext);
+        cordova.getThreadPool().execute(new Runnable() {
+            uaKeyApi.unregisterEndpoint(callbackContext);
+        }
     }
 
     // Simple test-methods to ensure that contact has been made with the plugin
