@@ -67,7 +67,9 @@ public class UaMobileKeys extends CordovaPlugin {
             this.endpointInfo(callbackContext);
             return true;
         } else if (action.equals("unregisterEndpoint")) {
-            this.unregisterEndpoint(callbackContext);
+            cordova.getThreadPool().execute(new Runnable() {
+                this.unregisterEndpoint(callbackContext);
+            });
             return true;
         } else if (action.equals("initializeMobileKeysApi")) {
             this.initializeMobileKeysApi();
