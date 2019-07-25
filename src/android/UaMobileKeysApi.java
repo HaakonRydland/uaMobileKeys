@@ -26,7 +26,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     // Mobile Keys interface
     // applicationStartup
     public void startup(CallbackContext callbackContext) throws MobileKeysException {
-        MobileKeys mobileKeys = MobileKeysApi.getInstance().getMobileKeys().applicationStartup(this);
+        MobileKeysApi.getInstance().getMobileKeys().applicationStartup(this);
 
         callbackContext.success("Reached startup()");
     }

@@ -113,7 +113,13 @@ public class UaMobileKeys extends CordovaPlugin {
     }
 
     private void updateEndpoint(CallbackContext callbackContext){
-        uaKeyApi.updateEndpoint(callbackContext);
+        try {
+            uaKeyApi.updateEndpoint(callbackContext);
+        } catch (MobileKeysException ex) {
+            System.out.println(ex);
+            callbackContext.error("Something went horribly wrong in updateEndpoint()");
+        }
+
     }
 
     private void listMobileKeys(CallbackContext callbackContext){
