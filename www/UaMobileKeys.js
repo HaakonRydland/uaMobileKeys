@@ -63,7 +63,7 @@ UaMobileKeys.prototype.unregisterEndpoint = function(arg0, success, error) {
     this.pInvoke("unregisterEndpoint", arg0, success, error);
 };
 
-UaMobileKeys.prototype.unregisterEndpoint = function(arg0, success, error) {
+UaMobileKeys.prototype.startScanning = function(arg0, success, error) {
     this.pInvoke("startScanning", arg0, success, error);
 };
 
@@ -83,7 +83,7 @@ UaMobileKeys.prototype.echoMethod = function(arg0, success, error) {
     this.pInvoke("echoMethod", arg0, success, error);
 };
 
-UaMobileKeys.prototype.echoMethod = function(arg0, success, error) {
+UaMobileKeys.prototype.pluginResult = function(arg0, success, error) {
     this.pInvoke("pluginResult", arg0, success, error);
 };
 
