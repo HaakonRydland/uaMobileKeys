@@ -40,6 +40,7 @@ dependencies {
     //You can depend on 5.2.1 if your application depend on support-v4 (verified drop-in replacement).
     implementation "com.mixpanel.android:mixpanel-android:4.8.7@aar"
     implementation "com.squareup.okhttp3:okhttp:3.10.0"
+    implementation 'com.google.code.gson:gson:2.8.5'
 
     // Logging in debug builds
     debugImplementation 'com.github.tony19:logback-android-core:1.1.1-6'

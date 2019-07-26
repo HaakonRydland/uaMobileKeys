@@ -13,6 +13,8 @@ import android.Manifest;
 import android.app.Notification;
 import android.content.Context;
 import java.util.List;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import com.assaabloy.mobilekeys.api.*;
 import com.assaabloy.mobilekeys.api.ApiConfiguration;
@@ -83,7 +85,9 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
             callbackContext.error("That did not go as planned");
         }
 
-        PluginResult result = new PluginResult(PluginResult.Status.OK, data);
+        String json = new Gson().toJson(data);
+
+        PluginResult result = new PluginResult(PluginResult.Status.OK, json);
         callbackContext.sendPluginResult(result);
     }
 
