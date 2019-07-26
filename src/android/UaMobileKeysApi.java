@@ -70,7 +70,18 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
 
     // listMobileKeys - not void: java.util.List<MobileKey>
     public void listMobileKeys(CallbackContext callbackContext) {
-        callbackContext.success("Reached listMobileKeys()");
+        List<MobileKey> data = null;
+        try
+        {
+            data = mobileKeysApiFacade.getMobileKeys().listMobileKeys();
+        }
+        catch (MobileKeysException e)
+        {
+            callbackContext.error(e);
+        }
+
+        PluginResult result = new PluginResult(PluginResult.Status.OK, data);
+        callbackContext.sendPluginResult(result);
     }
 
     // getEnpointInfo
