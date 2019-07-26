@@ -10,6 +10,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import android.content.pm.PackageManager;
 import android.Manifest;
+import android.app.Notification;
+import android.content.Context;
 
 import com.assaabloy.mobilekeys.api.ApiConfiguration;
 import com.assaabloy.mobilekeys.api.MobileKeys;
