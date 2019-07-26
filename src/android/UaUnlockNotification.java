@@ -43,7 +43,7 @@ public final class UaUnlockNotification {
     private static void createNotificationChannel(Context context)
     {
         NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
-                context.getString(R.string.notification_channel_name_informative),
+                context.getString("name"),
                 NotificationManager.IMPORTANCE_LOW);
 
         requireNonNull(context.getSystemService(NotificationManager.class))

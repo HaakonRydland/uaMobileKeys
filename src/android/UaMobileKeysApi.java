@@ -13,6 +13,7 @@ import android.Manifest;
 import android.app.Notification;
 import android.content.Context;
 
+import com.assaabloy.mobilekeys.api.*;
 import com.assaabloy.mobilekeys.api.ApiConfiguration;
 import com.assaabloy.mobilekeys.api.MobileKeys;
 import com.assaabloy.mobilekeys.api.MobileKeysApi;
