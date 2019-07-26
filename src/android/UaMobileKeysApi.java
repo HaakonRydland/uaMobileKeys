@@ -108,7 +108,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         // check if app has locationPermissions
         ReaderConnectionController controller = MobileKeysApi.getInstance().getReaderConnectionController();
         controller.enableHce();
-        controller.startForegroundScanning();
+        //controller.startForegroundScanning();
     }
 
     // Interface implementations
@@ -137,12 +137,13 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         }
     }
 
+    /*
     private boolean hasLocationPermissions()
     {
         return (ContextCompat.checkSelfPermission(requireContext(),
                 Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
                 ContextCompat.checkSelfPermission(requireContext(),
                         Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
-    }
+    }*/
 }
 
