@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.Manifest;
 import android.app.Notification;
 import android.content.Context;
+import java.util.List;
 
 import com.assaabloy.mobilekeys.api.*;
 import com.assaabloy.mobilekeys.api.ApiConfiguration;
@@ -78,7 +79,8 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         }
         catch (MobileKeysException e)
         {
-            callbackContext.error(e);
+            System.out.println(e);
+            callbackContext.error("That did not go as planned");
         }
 
         PluginResult result = new PluginResult(PluginResult.Status.OK, data);
