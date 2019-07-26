@@ -8,6 +8,8 @@ import org.apache.cordova.PluginResult.Status;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import android.content.pm.PackageManager;
+import android.Manifest;
 
 import com.assaabloy.mobilekeys.api.ApiConfiguration;
 import com.assaabloy.mobilekeys.api.MobileKeys;
@@ -95,6 +97,20 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         callbackContext.success("Tried to unregister endpoint. Run isEndpointSetup() to verify.");
     }
 
+    // BLE scanning for doors
+    public void startScanning(CallbackContext callbackContext) {
+        ReaderConnectionController controller = MobileKeysApi.getInstance().getReaderConnectionController();
+        controller.enableHce();
+        controller.startScanning();
+    }
+
+    public void startForegroundScanning(CallbackContext callbackContext) {
+        // check if app has locationPermissions
+        ReaderConnectionController controller = MobileKeysApi.getInstance().getReaderConnectionController();
+        controller.enableHce();
+        controller.startForegroundScanning();
+    }
+
     // Interface implementations
     @Override
     public void handleMobileKeysTransactionCompleted()
@@ -119,7 +135,14 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         } catch (JSONException ex) {
             callbackContext.error(ex.toString());
         }
+    }
 
+    private boolean hasLocationPermissions()
+    {
+        return (ContextCompat.checkSelfPermission(requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(requireContext(),
+                        Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
     }
 }
 
