@@ -108,7 +108,9 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         // check if app has locationPermissions
         ReaderConnectionController controller = MobileKeysApi.getInstance().getReaderConnectionController();
         controller.enableHce();
-        //controller.startForegroundScanning();
+
+        Notification notification = UnlockNotification.create(requireContext());
+        controller.startForegroundScanning(notification);
     }
 
     // Interface implementations
