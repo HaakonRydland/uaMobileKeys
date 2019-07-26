@@ -16,7 +16,7 @@ import static java.util.Objects.requireNonNull;
 public final class UaUnlockNotification {
     public static final String CHANNEL_ID = "unlock";
 
-    private UnlockNotification()
+    private UaUnlockNotification()
     {
         // NOP
     }
