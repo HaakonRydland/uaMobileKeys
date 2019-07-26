@@ -111,20 +111,21 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         callbackContext.success("Tried to unregister endpoint. Run isEndpointSetup() to verify.");
     }
 
-    // BLE scanning for doors
+    // BLE scanning for doors - disabled by default
     public void startScanning(CallbackContext callbackContext) {
         ReaderConnectionController controller = MobileKeysApi.getInstance().getReaderConnectionController();
         controller.enableHce();
         controller.startScanning();
     }
 
+    // må implementere UaUnlockNotification før dette virker
     public void startForegroundScanning(CallbackContext callbackContext) {
-        // check if app has locationPermissions
-        ReaderConnectionController controller = MobileKeysApi.getInstance().getReaderConnectionController();
+        // check if app has locationPermissions - implement method
+        /*ReaderConnectionController controller = MobileKeysApi.getInstance().getReaderConnectionController();
         controller.enableHce();
 
         Notification notification = UaUnlockNotification.create(requireContext());
-        controller.startForegroundScanning(notification);
+        controller.startForegroundScanning(notification); */
     }
 
     // Interface implementations

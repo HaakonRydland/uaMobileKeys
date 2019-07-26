@@ -1,3 +1,4 @@
+/*
 package cordova.plugin.uamobilekeys;
 
 import android.annotation.TargetApi;
@@ -6,7 +7,6 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Build;
-import android.support.v4.app;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.BigTextStyle;
 import android.support.v4.content.ContextCompat;
@@ -14,7 +14,8 @@ import android.support.v4.content.ContextCompat;
 import static android.support.v4.app.NotificationCompat.VISIBILITY_SECRET;
 import static java.util.Objects.requireNonNull;
 
-public final class UaUnlockNotification {
+public final class UaUnlockNotification
+{
     public static final String CHANNEL_ID = "unlock";
 
     private UaUnlockNotification()
@@ -31,9 +32,9 @@ public final class UaUnlockNotification {
         }
 
         final NotificationCompat.Builder builder = notificationBuilder(context, CHANNEL_ID)
-                .setContentTitle(context.getString("NotificationValue"))
+                .setContentTitle(context.getString(R.string.unlock_notification_title))
                 .setStyle(new BigTextStyle()
-                        .setBigContentTitle(context.getString("Unlocked this")))
+                        .setBigContentTitle(context.getString(R.string.unlock_notification_title)))
                 .setOnlyAlertOnce(true)
                 .setVisibility(VISIBILITY_SECRET);
 
@@ -44,7 +45,7 @@ public final class UaUnlockNotification {
     private static void createNotificationChannel(Context context)
     {
         NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
-                context.getString("name"),
+                context.getString(R.string.notification_channel_name_informative),
                 NotificationManager.IMPORTANCE_LOW);
 
         requireNonNull(context.getSystemService(NotificationManager.class))
@@ -53,7 +54,9 @@ public final class UaUnlockNotification {
 
     public static NotificationCompat.Builder notificationBuilder(Context context, String channelId)
     {
-        return new NotificationCompat.Builder(context, channelId);
-
+        return new NotificationCompat.Builder(context, channelId)
+                .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
+                .setSmallIcon(R.drawable.assa_seoslogo_white);
     }
 }
+*/
