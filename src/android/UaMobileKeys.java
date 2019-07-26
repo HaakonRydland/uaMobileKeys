@@ -156,7 +156,12 @@ public class UaMobileKeys extends CordovaPlugin {
         uaKey.echoMethod(callbackContext, outputchanger);
     }
 
-    private void pluginResult(CallbackContext callbackContext) {
-        uaKeyApi.pluginResult(callbackContext);
+    private void pluginResult(CallbackContext callbackContext) throws JSONException {
+        try {
+            uaKeyApi.pluginResult(callbackContext);
+        } catch (JSONException ex) {
+            callbackContext.error(ex.toString());
+        }
+
     }
 }
