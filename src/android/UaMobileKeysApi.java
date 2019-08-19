@@ -122,7 +122,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         ReaderConnectionController controller = MobileKeysApi.getInstance().getReaderConnectionController();
         controller.enableHce();
 
-        Notification notification = UaUnlockNotification.create(requireContext());
+        Notification notification = UaUnlockNotification.create(getContext());
 
         controller.startForegroundScanning(notification);
     }
@@ -133,7 +133,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         ReaderConnectionController controller = MobileKeysApi.getInstance().getReaderConnectionController();
         controller.enableHce();
 
-        Notification notification = UaUnlockNotification.create(requireContext());
+        Notification notification = UaUnlockNotification.create(getContext());
         controller.startForegroundScanning(notification);
     }
 
