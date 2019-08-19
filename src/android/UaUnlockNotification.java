@@ -1,4 +1,3 @@
-/*
 package cordova.plugin.uamobilekeys;
 
 import android.annotation.TargetApi;
@@ -32,9 +31,9 @@ public final class UaUnlockNotification
         }
 
         final NotificationCompat.Builder builder = notificationBuilder(context, CHANNEL_ID)
-                .setContentTitle(context.getString(R.string.unlock_notification_title))
+                .setContentTitle("Mobile Access is running")
                 .setStyle(new BigTextStyle()
-                        .setBigContentTitle(context.getString(R.string.unlock_notification_title)))
+                        .setBigContentTitle("Mobile Access is running"))
                 .setOnlyAlertOnce(true)
                 .setVisibility(VISIBILITY_SECRET);
 
@@ -45,7 +44,7 @@ public final class UaUnlockNotification
     private static void createNotificationChannel(Context context)
     {
         NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
-                context.getString(R.string.notification_channel_name_informative),
+                "Running foreground scan service",
                 NotificationManager.IMPORTANCE_LOW);
 
         requireNonNull(context.getSystemService(NotificationManager.class))
@@ -55,8 +54,7 @@ public final class UaUnlockNotification
     public static NotificationCompat.Builder notificationBuilder(Context context, String channelId)
     {
         return new NotificationCompat.Builder(context, channelId)
-                .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
+                //.setColor(ContextCompat.getColor(context, R.color.colorPrimary))
                 .setSmallIcon(R.drawable.assa_seoslogo_white);
     }
 }
-*/

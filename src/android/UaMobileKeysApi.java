@@ -121,17 +121,20 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     public void startScanning(CallbackContext callbackContext) {
         ReaderConnectionController controller = MobileKeysApi.getInstance().getReaderConnectionController();
         controller.enableHce();
-        controller.startScanning();
+
+        Notification notification = UaUnlockNotification.create(requireContext());
+
+        controller.startForegroundScanning(notification);
     }
 
     // må implementere UaUnlockNotification før dette virker
     public void startForegroundScanning(CallbackContext callbackContext) {
         // check if app has locationPermissions - implement method
-        /*ReaderConnectionController controller = MobileKeysApi.getInstance().getReaderConnectionController();
+        ReaderConnectionController controller = MobileKeysApi.getInstance().getReaderConnectionController();
         controller.enableHce();
 
         Notification notification = UaUnlockNotification.create(requireContext());
-        controller.startForegroundScanning(notification); */
+        controller.startForegroundScanning(notification);
     }
 
     // Interface implementations
