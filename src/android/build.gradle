@@ -49,6 +49,7 @@ dependencies {
     }
 
     implementation "com.android.support:multidex:1.0.3"
+    compile 'com.android.support:support-v4:+'
 }
 
 configurations {
