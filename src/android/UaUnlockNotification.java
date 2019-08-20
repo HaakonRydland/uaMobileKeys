@@ -40,6 +40,24 @@ public final class UaUnlockNotification
         return builder.build();
     }
 
+    public static Notification create()
+    {
+        if (Build.VERSION.SDK_INT >= 26)
+        {
+            // 26 requires a notification channel for notifications to appear
+
+        }
+
+        final NotificationCompat.Builder builder = notificationBuilder(context, CHANNEL_ID)
+                .setContentTitle("Mobile Access is running")
+                .setStyle(new BigTextStyle()
+                        .setBigContentTitle("Mobile Access is running"))
+                .setOnlyAlertOnce(true)
+                .setVisibility(VISIBILITY_SECRET);
+
+        return builder.build();
+    }
+
     @TargetApi(26)
     private static void createNotificationChannel(Context context)
     {
