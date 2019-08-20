@@ -55,7 +55,7 @@ public final class UaUnlockNotification
 
     public static NotificationCompat.Builder notificationBuilder(Context context, String channelId)
     {
-        return new NotificationCompat.Builder(context, channelId);
+        return new NotificationCompat.Builder(context, channelId)
                 .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
                 .setSmallIcon(R.drawable.mobilekeynotificationicon);
     }
