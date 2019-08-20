@@ -108,7 +108,7 @@ public class UaMobileKeys extends CordovaPlugin {
             uaKeyApi.isEndpointSetup(callbackContext);
         } catch (MobileKeysException ex) {
             System.out.println(ex);
-            callbackContext.error("Something went horribly wrong in isEndpointSetup");
+            callbackContext.error("Something went horribly wrong in isEndpointSetup()");
         }
     }
 
