@@ -118,22 +118,22 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     }
 
     // BLE scanning for doors - disabled by default
-    public void startScanning(CallbackContext callbackContext) {
+    public void startScanning(CallbackContext callbackContext, Context context) {
         ReaderConnectionController controller = MobileKeysApi.getInstance().getReaderConnectionController();
         controller.enableHce();
 
-        Notification notification = UaUnlockNotification.create();
+        Notification notification = UaUnlockNotification.create(context);
 
         controller.startForegroundScanning(notification);
     }
 
     // må implementere UaUnlockNotification før dette virker
-    public void startForegroundScanning(CallbackContext callbackContext) {
+    public void startForegroundScanning(CallbackContext callbackContext, Context context) {
         // check if app has locationPermissions - implement method
         ReaderConnectionController controller = MobileKeysApi.getInstance().getReaderConnectionController();
         controller.enableHce();
 
-        Notification notification = UaUnlockNotification.create();
+        Notification notification = UaUnlockNotification.create(context);
         controller.startForegroundScanning(notification);
     }
 
