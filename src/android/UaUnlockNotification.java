@@ -13,6 +13,8 @@ import android.support.v4.content.ContextCompat;
 import static android.support.v4.app.NotificationCompat.VISIBILITY_SECRET;
 import static java.util.Objects.requireNonNull;
 
+import cordova.plugin.uamobilekeys.R;
+
 public final class UaUnlockNotification
 {
     public static final String CHANNEL_ID = "unlock";
@@ -54,7 +56,7 @@ public final class UaUnlockNotification
     public static NotificationCompat.Builder notificationBuilder(Context context, String channelId)
     {
         return new NotificationCompat.Builder(context, channelId);
-                //.setColor(ContextCompat.getColor(context, R.color.colorPrimary))
-                //.setSmallIcon(R.drawable.assa_seoslogo_white);
+                .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
+                .setSmallIcon(R.drawable.mobilekeynotificationicon);
     }
 }
