@@ -14,7 +14,6 @@ import android.support.v4.content.ContextCompat;
 
 import static android.support.v4.app.NotificationCompat.VISIBILITY_SECRET;
 import static java.util.Objects.requireNonNull;
-import cordova.plugin.uamobilekeys.R.*;
 
 public final class UaUnlockNotification
 {
@@ -60,7 +59,7 @@ public final class UaUnlockNotification
         //int drawableId = r.getIdentifier("ic_stat_vpn_key", "drawable", "cordova.plugin.uamobilekeys");
 
         return new NotificationCompat.Builder(context, channelId)
-                .setColor(ContextCompat.getColor(context))
+                .setColor(context.getResources().getColor("#FF5722"))
                 .setSmallIcon(android.R.drawable.ic_dialog_info);
     }
 }
