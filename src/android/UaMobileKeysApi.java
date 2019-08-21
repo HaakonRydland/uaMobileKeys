@@ -105,8 +105,6 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         String json = new Gson().toJson(data);
         PluginResult result = new PluginResult(PluginResult.Status.OK, json);
         callbackContext.sendPluginResult(result);
-
-        callbackContext.success("Reached endpointInfo()");
     }
 
     public void unregisterEndpoint(CallbackContext callbackContext) {
