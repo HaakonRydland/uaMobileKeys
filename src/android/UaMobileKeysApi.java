@@ -77,7 +77,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         List<MobileKey> data = null;
         try
         {
-            data = mobileKeysApiFacade.getMobileKeys().listMobileKeys();
+            data = MobileKeysApi.getInstance().getMobileKeys().listMobileKeys();
         }
         catch (MobileKeysException e)
         {
