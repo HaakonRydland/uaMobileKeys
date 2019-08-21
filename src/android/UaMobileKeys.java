@@ -78,6 +78,9 @@ public class UaMobileKeys extends CordovaPlugin {
         } else if (action.equals("startForegroundScanning")) {
             this.startForegroundScanning(callbackContext);
             return true;
+        } else if (action.equals("stopScanning")) {
+            this.stopScanning(callbackContext);
+            return true;
         } else if (action.equals("pluginResult")) {
             this.pluginResult(callbackContext);
             return true;
@@ -152,6 +155,10 @@ public class UaMobileKeys extends CordovaPlugin {
         int androidVersionCurrentlyRunning = Build.VERSION.SDK_INT;
         Context context = (androidVersionCurrentlyRunning >= 21) ? cordova.getActivity().getWindow().getContext() : cordova.getActivity().getApplicationContext();
         uaKeyApi.startForegroundScanning(callbackContext, context);
+    }
+
+    private void stopScanning(CallbackContext callbackContext) {
+        uaKeyApi.stopScanning(callbackContext);
     }
 
     // Simple test-methods to ensure that contact has been made with the plugin

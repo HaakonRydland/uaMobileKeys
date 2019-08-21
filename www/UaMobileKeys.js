@@ -71,6 +71,10 @@ UaMobileKeys.prototype.startForegroundScanning = function(arg0, success, error) 
     this.pInvoke("startForegroundScanning", arg0, success, error);
 };
 
+UaMobileKeys.prototype.stopScanning = function(arg0, success, error) {
+    this.pInvoke("stopScanning", arg0, success, error);
+};
+
 //#endregion
 
 //#region interface for native code test methods
