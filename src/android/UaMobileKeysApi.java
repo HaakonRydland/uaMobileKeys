@@ -140,11 +140,10 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     }
 
     public void stopScanning(CallbackContext callbackContext) {
-        try
-        (
+        try {
             ReaderConnectionController controller = MobileKeysApi.getInstance().getReaderConnectionController();
             controller.stopScanning();
-         )
+        }
         catch (Exception ex)
         {
             callbackContext.error("Something went wrong in stopScanning");
