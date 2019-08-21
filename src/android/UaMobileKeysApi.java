@@ -139,7 +139,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         callbackContext.success("Reached the end of startForegroundScanning");
     }
 
-    public void stopScanning(CallbackContext()) {
+    public void stopScanning(CallbackContext callbackContext) {
         try
         (
             ReaderConnectionController controller = MobileKeysApi.getInstance().getReaderConnectionController();
@@ -147,7 +147,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
          )
         catch (Exception ex)
         {
-            callbackContext.error('Something went wrong in stopScanning');
+            callbackContext.error("Something went wrong in stopScanning");
         }
     }
 
