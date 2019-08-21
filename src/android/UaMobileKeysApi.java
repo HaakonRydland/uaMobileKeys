@@ -26,6 +26,7 @@ import com.assaabloy.mobilekeys.api.hce.NfcConfiguration;
 import com.assaabloy.mobilekeys.api.MobileKeysCallback;
 import com.assaabloy.mobilekeys.api.MobileKeysException;
 import com.assaabloy.mobilekeys.api.EndpointSetupConfiguration;
+import com.assaabloy.mobilekeys.api.EndpointInfo;
 
 public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback {
 
@@ -93,6 +94,17 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
 
     // getEnpointInfo
     public void endpointInfo(CallbackContext callbackContext) {
+        List<EndpointInfo> data = null;
+        try {
+            data = MobileKeysApi.getInstance().getMobileKeys().getEndpointInfo();
+        } catch (MobileKeysException e) {
+            System.out.println(e);
+            callbackContext.error("That went wrong");
+        }
+
+        String json = new Gson().toJson(data);
+        PluginResult result = new PluginResult(PluginResult.Status.OK, json);
+        callbackContext.sendPluginResult(result);
 
         callbackContext.success("Reached endpointInfo()");
     }
