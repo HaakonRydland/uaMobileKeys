@@ -59,7 +59,6 @@ public final class UaUnlockNotification
         //int drawableId = r.getIdentifier("ic_stat_vpn_key", "drawable", "cordova.plugin.uamobilekeys");
 
         return new NotificationCompat.Builder(context, channelId)
-                .setColor(context.getResources().getColor("#FF5722"))
                 .setSmallIcon(android.R.drawable.ic_dialog_info);
     }
 }
