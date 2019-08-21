@@ -148,6 +148,8 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         {
             callbackContext.error("Something went wrong in stopScanning");
         }
+
+        callbackContext.success("Reached the end of stopScanning()");
     }
 
     // Interface implementations
