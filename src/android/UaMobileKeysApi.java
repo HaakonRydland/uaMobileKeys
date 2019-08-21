@@ -94,7 +94,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
 
     // getEnpointInfo
     public void endpointInfo(CallbackContext callbackContext) {
-        List<EndpointInfo> data = null;
+        EndpointInfo data = null;
         try {
             data = MobileKeysApi.getInstance().getMobileKeys().getEndpointInfo();
         } catch (MobileKeysException e) {
