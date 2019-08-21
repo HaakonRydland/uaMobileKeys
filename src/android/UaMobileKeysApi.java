@@ -135,6 +135,8 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
 
         Notification notification = UaUnlockNotification.create(context);
         controller.startForegroundScanning(notification);
+
+        callbackContext.success("Reached the end of startForegroundScanning");
     }
 
     // Interface implementations
