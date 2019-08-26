@@ -13,6 +13,7 @@ import android.Manifest;
 import android.app.Notification;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.app.ActivityCompat;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 import java.util.List;
