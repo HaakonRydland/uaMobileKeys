@@ -153,7 +153,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
 
             callbackContext.success("Reached the end of startForegroundScanning");
         } else {
-            requestLocationPermissions();
+            requestLocationPermissions(context);
         }
     }
 
@@ -204,8 +204,8 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
                         Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
     }
 
-    private void requestLocationPermissions() {
-        if (!hasLocationPermissions()) {
+    private void requestLocationPermissions(context) {
+        if (!hasLocationPermissions(context)) {
             Snackbar.make(containerView,
                     "Location services is required to open lock",
                     Snackbar.LENGTH_INDEFINITE).setAction("allow", new View.OnClickListener()
