@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import android.content.pm.PackageManager;
 import android.Manifest;
 import android.app.Notification;
+import android.app.Activity;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.app.ActivityCompat;

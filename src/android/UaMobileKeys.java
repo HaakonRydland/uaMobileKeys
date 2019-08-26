@@ -17,7 +17,7 @@ import com.assaabloy.mobilekeys.api.MobileKeysException;
 
 import android.content.Context;
 import android.os.Build;
-import android.support.v4.app.ActivityCompat;
+import android.app.Activity;
 
 
 /**
