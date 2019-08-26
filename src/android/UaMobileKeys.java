@@ -28,6 +28,7 @@ public class UaMobileKeys extends CordovaPlugin {
     private UaKeyImplementation uaKey = new UaKeyImplementation();
     private UaMobileKeysApi uaKeyApi = new UaMobileKeysApi();
     private UaMobileKeysSetup uaSetup = new UaMobileKeysSetup();
+    private int REQUEST_LOCATION_PERMISSION = 1;
 
     // Main method for selecting the correct native code, based on input from JavaScript Interface
     @Override
