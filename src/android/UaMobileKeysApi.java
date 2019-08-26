@@ -132,7 +132,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     }
 
     // BLE scanning for doors - disabled by default
-    public void startScanning(CallbackContext callbackContext, Context context) {
+    public void startScanning(CallbackContext callbackContext, Context context, ActivityCompat activity) {
         ReaderConnectionController controller = MobileKeysApi.getInstance().getReaderConnectionController();
         controller.enableHce();
 
@@ -142,7 +142,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     }
 
     // må implementere UaUnlockNotification før dette virker
-    public void startForegroundScanning(CallbackContext callbackContext, Context context) {
+    public void startForegroundScanning(CallbackContext callbackContext, Context context, ActivityCompat activity) {
         // check if app has locationPermissions - implement method
         if (hasLocationPermissions(context)) {
             ReaderConnectionController controller = MobileKeysApi.getInstance().getReaderConnectionController();
@@ -153,7 +153,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
 
             callbackContext.success("Reached the end of startForegroundScanning");
         } else {
-            requestLocationPermission(context);
+            requestLocationPermission(context, activity);
         }
     }
 
@@ -204,9 +204,9 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
                         Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
     }
 
-    private void requestLocationPermission(Context context) {
+    private void requestLocationPermission(Context context, ActivityCompat activity) {
         if (!hasLocationPermissions(context)) {
-            ActivityCompat.requestPermissions(thisActivity,
+            ActivityCompat.requestPermissions(activity,
                     new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                     REQUEST_LOCATION_PERMISSION);
         }
