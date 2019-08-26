@@ -144,7 +144,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     // må implementere UaUnlockNotification før dette virker
     public void startForegroundScanning(CallbackContext callbackContext, Context context) {
         // check if app has locationPermissions - implement method
-        if (hasLocationPermissions()) {
+        if (hasLocationPermissions(context)) {
             ReaderConnectionController controller = MobileKeysApi.getInstance().getReaderConnectionController();
             controller.enableHce();
 
@@ -196,11 +196,11 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         }
     }
 
-    private boolean hasLocationPermissions()
+    private boolean hasLocationPermissions(Context context)
     {
-        return (ContextCompat.checkSelfPermission(requireContext(),
+        return (ContextCompat.checkSelfPermission(context,
                 Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
-                ContextCompat.checkSelfPermission(requireContext(),
+                ContextCompat.checkSelfPermission(context),
                         Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
     }
 
