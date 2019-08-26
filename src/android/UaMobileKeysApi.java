@@ -204,7 +204,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
                         Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
     }
 
-    private void requestLocationPermissions(context) {
+    private void requestLocationPermissions(Context context) {
         if (!hasLocationPermissions(context)) {
             Snackbar.make(containerView,
                     "Location services is required to open lock",
