@@ -36,7 +36,6 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     public UaMobileKeysApi () {}
     private MobileKeysApiFacade mobileKeysApiFacade;
     private UaMobileKeysSetup keySetup = new UaMobileKeysSetup();
-    private Snackbar mSnackbar;
 
     // Mobile Keys interface
     // applicationStartup
@@ -206,14 +205,14 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
 
     private void requestLocationPermissions(Context context) {
         if (!hasLocationPermissions(context)) {
-            Snackbar.make(containerView,
+            Snackbar snack = Snackbar.make(containerView,
                     "Location services is required to open lock",
                     Snackbar.LENGTH_INDEFINITE).setAction("allow", new View.OnClickListener()
             {
                 @Override
                 public void onClick(View v)
                 {
-                    KeysFragment.this.requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                    UaMobileKeysApi.this.requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                             REQUEST_LOCATION_PERMISSION);
                 }
             }).show();
