@@ -50,6 +50,7 @@ dependencies {
 
     implementation "com.android.support:multidex:1.0.3"
     compile 'com.android.support:support-v4:+'
+    implementation "com.android.support:design:23.0.0"
 }
 
 configurations {
