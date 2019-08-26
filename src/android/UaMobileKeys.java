@@ -149,7 +149,7 @@ public class UaMobileKeys extends CordovaPlugin {
     private void startScanning(CallbackContext callbackContext) {
         int androidVersionCurrentlyRunning = Build.VERSION.SDK_INT;
         Context context = (androidVersionCurrentlyRunning >= 21) ? cordova.getActivity().getWindow().getContext() : cordova.getActivity().getApplicationContext();
-        ActivityCompat acc = cordova.getActivity();
+        Activity acc = cordova.getActivity();
 
         uaKeyApi.startScanning(callbackContext, context, acc);
     }
@@ -157,7 +157,7 @@ public class UaMobileKeys extends CordovaPlugin {
     private void startForegroundScanning(CallbackContext callbackContext) {
         int androidVersionCurrentlyRunning = Build.VERSION.SDK_INT;
         Context context = (androidVersionCurrentlyRunning >= 21) ? cordova.getActivity().getWindow().getContext() : cordova.getActivity().getApplicationContext();
-        ActivityCompat acc = cordova.getActivity();
+        Activity acc = cordova.getActivity();
 
         uaKeyApi.startForegroundScanning(callbackContext, context, acc);
     }

@@ -133,7 +133,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     }
 
     // BLE scanning for doors - disabled by default
-    public void startScanning(CallbackContext callbackContext, Context context, ActivityCompat activity) {
+    public void startScanning(CallbackContext callbackContext, Context context, Activity activity) {
         ReaderConnectionController controller = MobileKeysApi.getInstance().getReaderConnectionController();
         controller.enableHce();
 
@@ -143,7 +143,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     }
 
     // må implementere UaUnlockNotification før dette virker
-    public void startForegroundScanning(CallbackContext callbackContext, Context context, ActivityCompat activity) {
+    public void startForegroundScanning(CallbackContext callbackContext, Context context, Activity activity) {
         // check if app has locationPermissions - implement method
         if (hasLocationPermissions(context)) {
             ReaderConnectionController controller = MobileKeysApi.getInstance().getReaderConnectionController();
@@ -205,7 +205,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
                         Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
     }
 
-    private void requestLocationPermission(Context context, ActivityCompat activity) {
+    private void requestLocationPermission(Context context, Activity activity) {
         if (!hasLocationPermissions(context)) {
             ActivityCompat.requestPermissions(activity,
                     new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
