@@ -76,22 +76,3 @@ UaMobileKeys.prototype.stopScanning = function(arg0, success, error) {
 };
 
 //#endregion
-
-//#region interface for native code test methods
-UaMobileKeys.prototype.coolMethod = function(arg0, success, error) {
-    this.pInvoke("coolMethod", arg0, success, error);
-};
-
-UaMobileKeys.prototype.externalClassMethod = function(arg0, success, error) {
-    this.pInvoke("externalClassMethod", arg0, success, error);
-};
-
-UaMobileKeys.prototype.echoMethod = function(arg0, success, error) {
-    this.pInvoke("echoMethod", arg0, success, error);
-};
-
-UaMobileKeys.prototype.pluginResult = function(arg0, success, error) {
-    this.pInvoke("pluginResult", arg0, success, error);
-};
-
-//#endregion

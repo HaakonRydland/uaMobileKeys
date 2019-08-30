@@ -36,19 +36,7 @@ public class UaMobileKeys extends CordovaPlugin {
             this.initializeMobileKeysApi();
         }
 
-        if (action.equals("coolMethod")) {
-            String message = args.getString(0);
-            this.coolMethod(message, callbackContext);
-            return true;
-        } else if (action.equals("echoMethod")) {
-            String arguments = args.getString(0);
-            boolean argumentResults = Boolean.valueOf(arguments);
-            this.echoMethod(callbackContext, argumentResults);
-            return true;
-        } else if (action.equals("externalClassMethod")) {
-            this.externalClassMethod(callbackContext);
-            return true;
-        } else if (action.equals("startup")) {
+        if (action.equals("startup")) {
             this.startup(callbackContext);
             return true;
         } else if (action.equals("isEndpointSetup")) {
@@ -81,9 +69,6 @@ public class UaMobileKeys extends CordovaPlugin {
             return true;
         } else if (action.equals("stopScanning")) {
             this.stopScanning(callbackContext);
-            return true;
-        } else if (action.equals("pluginResult")) {
-            this.pluginResult(callbackContext);
             return true;
         }
 
@@ -164,34 +149,5 @@ public class UaMobileKeys extends CordovaPlugin {
 
     private void stopScanning(CallbackContext callbackContext) {
         uaKeyApi.stopScanning(callbackContext);
-    }
-
-    // Simple test-methods to ensure that contact has been made with the plugin
-    private void coolMethod(String message, CallbackContext callbackContext) {
-        if (message != null && message.length() > 0) {
-            callbackContext.success(message);
-        } else {
-            callbackContext.error("Expected one non-empty string argument.");
-        }
-    }
-
-    private void externalClassMethod(CallbackContext callbackContext) {
-        if (uaKey.GotContact()) {
-            callbackContext.success("Got contact with external class");
-        }
-        callbackContext.error("Didn't get in touch with external class");
-    }
-
-    private void echoMethod(CallbackContext callbackContext, boolean outputchanger) {
-        uaKey.echoMethod(callbackContext, outputchanger);
-    }
-
-    private void pluginResult(CallbackContext callbackContext) throws JSONException {
-        try {
-            uaKeyApi.pluginResult(callbackContext);
-        } catch (JSONException ex) {
-            callbackContext.error(ex.toString());
-        }
-
     }
 }
