@@ -80,7 +80,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         callbackContext.success("Updated endpoint");
     }
 
-    // listMobileKeys - not void: java.util.List<MobileKey>
+    // listMobileKeys
     public void listMobileKeys(CallbackContext callbackContext) {
         List<MobileKey> data = null;
         try
@@ -114,6 +114,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         callbackContext.sendPluginResult(result);
     }
 
+    // unregisterEndpoint
     public void unregisterEndpoint(CallbackContext callbackContext) {
         MobileKeysApi.getInstance().getMobileKeys().unregisterEndpoint(new MobileKeysCallback() {
                 @Override
@@ -134,7 +135,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         callbackContext.success("Tried to unregister endpoint. Run isEndpointSetup() to verify.");
     }
 
-    // BLE scanning for doors - disabled by default
+    // BLE scanning for doors - disabled by default because it's a background process
     public void startScanning(CallbackContext callbackContext, Context context, Activity activity) {
         ReaderConnectionController controller = MobileKeysApi.getInstance().getReaderConnectionController();
         controller.enableHce();
@@ -144,9 +145,8 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         controller.startForegroundScanning(notification);
     }
 
-    // må implementere UaUnlockNotification før dette virker
+    // startForegroundScanning
     public void startForegroundScanning(CallbackContext callbackContext, Context context, Activity activity) {
-        // check if app has locationPermissions - implement method
         if (hasLocationPermissions(context)) {
             ReaderConnectionController controller = MobileKeysApi.getInstance().getReaderConnectionController();
             controller.enableHce();
@@ -173,19 +173,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         callbackContext.success("Reached the end of stopScanning()");
     }
 
-    // Interface implementations
-    @Override
-    public void handleMobileKeysTransactionCompleted()
-    {
-        // does something if applicationStartup was successful
-    }
-
-    @Override
-    public void handleMobileKeysTransactionFailed(MobileKeysException mobileKeysException)
-    {
-        // does something if applicationStartup was unsuccessful
-    }
-
+    // Checking if the app has access to bluetooth
     private boolean hasLocationPermissions(Context context)
     {
         return (ContextCompat.checkSelfPermission(context,
@@ -194,12 +182,26 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
                         Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
     }
 
+    // Prompts the user to enable access to bluetooth for the app if it's not already enabled
     private void requestLocationPermission(Context context, Activity activity) {
         if (!hasLocationPermissions(context)) {
             ActivityCompat.requestPermissions(activity,
                     new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                     REQUEST_LOCATION_PERMISSION);
         }
+    }
+
+    // MobileKeysCallback interface implementation
+    @Override
+    public void handleMobileKeysTransactionCompleted()
+    {
+        // does something if transaction was successful
+    }
+
+    @Override
+    public void handleMobileKeysTransactionFailed(MobileKeysException mobileKeysException)
+    {
+        // does something if transaction was unsuccessful
     }
 }
 
