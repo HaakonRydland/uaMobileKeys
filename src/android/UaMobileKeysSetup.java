@@ -27,7 +27,7 @@ public class UaMobileKeysSetup extends CordovaPlugin {
 
         ApiConfiguration apiConfiguration = new ApiConfiguration.Builder()
                 .setApplicationId("uamobkeys")
-                .setApplicationDescription("Sample app for testing")
+                .setApplicationDescription("Plugin for Mobile Keys")
                 .setNfcParameters(new NfcConfiguration.Builder()
                         .unsafe_setAttemptNfcWithScreenOff(false)
                         .build())

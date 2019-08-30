@@ -55,9 +55,6 @@ public final class UaUnlockNotification
 
     public static NotificationCompat.Builder notificationBuilder(Context context, String channelId)
     {
-        //Resources r = context.getResources();
-        //int drawableId = r.getIdentifier("ic_stat_vpn_key", "drawable", "cordova.plugin.uamobilekeys");
-
         return new NotificationCompat.Builder(context, channelId)
                 .setSmallIcon(android.R.drawable.ic_dialog_info);
     }
