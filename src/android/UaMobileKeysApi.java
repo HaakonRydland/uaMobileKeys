@@ -36,7 +36,6 @@ import com.assaabloy.mobilekeys.api.EndpointInfo;
 public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback {
 
     public UaMobileKeysApi () {}
-    private MobileKeysApiFacade mobileKeysApiFacade;
     private UaMobileKeysSetup keySetup = new UaMobileKeysSetup();
     private View containerView;
     private int REQUEST_LOCATION_PERMISSION = 1;
