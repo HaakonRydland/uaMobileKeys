@@ -24,8 +24,6 @@ import android.app.Activity;
  * This class echoes a string called from JavaScript.
  */
 public class UaMobileKeys extends CordovaPlugin {
-
-    private UaKeyImplementation uaKey = new UaKeyImplementation();
     private UaMobileKeysApi uaKeyApi = new UaMobileKeysApi();
     private UaMobileKeysSetup uaSetup = new UaMobileKeysSetup();
 

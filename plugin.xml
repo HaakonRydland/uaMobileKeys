@@ -25,7 +25,6 @@
       <resource-file src="src/android/res/drawable-xxhdpi/ic_stat_vpn_key.png" target="src/android/res/drawable-xxhdpi/ic_stat_vpn_key.png" />
       <resource-file src="src/android/res/drawable-xxxhdpi/ic_stat_vpn_key.png" target="src/android/res/drawable-xxxhdpi/ic_stat_vpn_key.png" />
       <source-file src="src/android/UaMobileKeys.java" target-dir="src/cordova/plugin/uamobilekeys/UaMobileKeys" />
-      <source-file src="src/android/UaKeyImplementation.java" target-dir="src/cordova/plugin/mobilekeys/UaKeyImplementation" />
       <source-file src="src/android/MobileKeysApiFacade.java" target-dir="src/cordova/plugin/uamobilekeys/MobileKeysApiFacade" />
       <source-file src="src/android/MobileKeysApiFactory.java" target-dir="src/cordova/plugin/uamobilekeys/MobileKeysApiFactory" />
       <source-file src="src/android/UaMobileKeysSetup.java" target-dir="src/cordova/plugin/uamobilekeys/UaMobileKeysSetup" />
