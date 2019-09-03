@@ -33,9 +33,9 @@ public final class UaUnlockNotification
         }
 
         final NotificationCompat.Builder builder = notificationBuilder(context, CHANNEL_ID)
-                .setContentTitle("Mobile Access is running")
+                .setContentTitle("Mobile access is running")
                 .setStyle(new BigTextStyle()
-                        .setBigContentTitle("Mobile Access is running"))
+                        .setBigContentTitle("Scanning for doors"))
                 .setOnlyAlertOnce(true)
                 .setVisibility(VISIBILITY_SECRET);
 
