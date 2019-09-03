@@ -44,7 +44,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     // applicationStartup
     public void startup(CallbackContext callbackContext) throws MobileKeysException {
         MobileKeysApi.getInstance().getMobileKeys().applicationStartup(this);
-        
+
         PluginResult result = new PluginResult(PluginResult.Status.OK, "true");
         callbackContext.sendPluginResult(result);
     }
@@ -60,7 +60,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         }
         catch (MobileKeysException e)
         {
-            callbackContext.error("Something went wrong in isEndpointSetup()");
+            callbackContext.error("ERROR");
         }
 
         callbackContext.success(Boolean.toString(isEndpointSetup));
@@ -70,14 +70,16 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     public void setupEndpoint(CallbackContext callbackContext, String invitationCode) throws MobileKeysException {
         MobileKeysApi.getInstance().getMobileKeys().endpointSetup(this, invitationCode, new EndpointSetupConfiguration.Builder().build());
 
-        callbackContext.success("Finished setting up endpoint. Run isEndpointSetup() to verify.");
+        PluginResult result = new PluginResult(PluginResult.Status.OK, "true");
+        callbackContext.sendPluginResult(result);
     }
 
     // endpointUpdate
     public void updateEndpoint(CallbackContext callbackContext) throws MobileKeysException {
         MobileKeysApi.getInstance().getMobileKeys().endpointUpdate(this);
 
-        callbackContext.success("Updated endpoint");
+        PluginResult result = new PluginResult(PluginResult.Status.OK, "true");
+        callbackContext.sendPluginResult(result);
     }
 
     // listMobileKeys
@@ -90,7 +92,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         catch (MobileKeysException e)
         {
             System.out.println(e);
-            callbackContext.error("That did not go as planned");
+            callbackContext.error("ERROR");
         }
 
         String json = new Gson().toJson(data);
@@ -106,7 +108,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
             data = MobileKeysApi.getInstance().getMobileKeys().getEndpointInfo();
         } catch (MobileKeysException e) {
             System.out.println(e);
-            callbackContext.error("That went wrong");
+            callbackContext.error("ERROR");
         }
 
         String json = new Gson().toJson(data);
@@ -121,7 +123,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
                 public void handleMobileKeysTransactionCompleted ()
                 {
                     // does something if unregisterEndpoint was successful
-                    callbackContext.success("Managed to unregister endpoint. Run isEndpointSetup() to verify.");
+                    callbackContext.success("true");
                 }
 
                 @Override
@@ -129,10 +131,11 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
                 mobileKeysException)
                 {
                     // does something if unregisterEndpoint was unsuccessful
-                    callbackContext.error("Was unable to unregister endpoint");
+                    callbackContext.error("ERROR");
                 }
             });
-        callbackContext.success("Tried to unregister endpoint. Run isEndpointSetup() to verify.");
+        PluginResult result = new PluginResult(PluginResult.Status.OK, "true");
+        callbackContext.sendPluginResult(result);
     }
 
     // BLE scanning for doors - disabled by default because it's a background process
@@ -154,7 +157,8 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
             Notification notification = UaUnlockNotification.create(context);
             controller.startForegroundScanning(notification);
 
-            callbackContext.success("Reached the end of startForegroundScanning");
+            PluginResult result = new PluginResult(PluginResult.Status.OK, "true");
+            callbackContext.sendPluginResult(result);
         } else {
             requestLocationPermission(context, activity);
         }
@@ -167,10 +171,12 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         }
         catch (Exception ex)
         {
-            callbackContext.error("Something went wrong in stopScanning");
+            PluginResult result = new PluginResult(PluginResult.Status.ERROR, "ERROR");
+            callbackContext.sendPluginResult(result);
         }
 
-        callbackContext.success("Reached the end of stopScanning()");
+        PluginResult result = new PluginResult(PluginResult.Status.OK, "true");
+        callbackContext.sendPluginResult(result);
     }
 
     // Checking if the app has access to bluetooth
