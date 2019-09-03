@@ -27,10 +27,9 @@ repositories{
 }
 
 dependencies {
-    classpath 'com.android.tools.build:gradle:3.1.4'
     //compile(name:'foo', ext:'aar')
-    debugImplementation(group: 'com.assaabloy.mobilekeys.api', name: 'mobilekeys-android-sdk-debug', version: '7.3.0', ext: 'aar')
-    releaseImplementation(group: 'com.assaabloy.mobilekeys.api', name: 'mobilekeys-android-sdk-release', version: '7.3.0', ext: 'aar')
+    //debugImplementation(group: 'com.assaabloy.mobilekeys.api', name: 'mobilekeys-android-sdk-debug', version: '7.3.0', ext: 'aar')
+    implementation(group: 'com.assaabloy.mobilekeys.api', name: 'mobilekeys-android-sdk-release', version: '7.3.0', ext: 'aar')
 
     // Mobile Keys SDK transitive dependencies
     implementation "org.bouncycastle:bcprov-jdk15on:1.58"
