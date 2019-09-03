@@ -57,9 +57,9 @@ android {
     }
 
     testOptions {
-        unitTests {
+        /*unitTests {
             includeAndroidResources = true
-        }
+        }*/
     }
 
     packagingOptions {
