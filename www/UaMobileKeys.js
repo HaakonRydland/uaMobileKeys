@@ -75,4 +75,8 @@ UaMobileKeys.prototype.stopScanning = function(arg0, success, error) {
     this.pInvoke("stopScanning", arg0, success, error);
 };
 
+UaMobileKeys.prototype.getEndpointUsername = function(arg0, success, error) {
+    this.pInvoke("getEndpointUsername", arg0, success, error);
+};
+
 //#endregion

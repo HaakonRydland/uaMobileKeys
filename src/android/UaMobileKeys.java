@@ -68,6 +68,9 @@ public class UaMobileKeys extends CordovaPlugin {
         } else if (action.equals("stopScanning")) {
             this.stopScanning(callbackContext);
             return true;
+        } else if (action.equals("getEndpointUsername")) {
+            this.getEndpointUsername(callbackContext);
+            return true;
         }
 
         return false;
@@ -147,5 +150,9 @@ public class UaMobileKeys extends CordovaPlugin {
 
     private void stopScanning(CallbackContext callbackContext) {
         uaKeyApi.stopScanning(callbackContext);
+    }
+
+    private void getEndpointUsername(CallbackContext callbackContext){
+        uaKeyApi.getEndpointUsername(callbackContext);
     }
 }

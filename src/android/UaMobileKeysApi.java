@@ -179,6 +179,22 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         callbackContext.sendPluginResult(result);
     }
 
+    public void getEndpointUsername(CallbackContext callbackContext) {
+        EndpointInfo data = null;
+        try {
+            data = MobileKeysApi.getInstance().getMobileKeys().getEndpointInfo();
+            data.GetUsername();
+
+        } catch (MobileKeysException e) {
+            System.out.println(e);
+            callbackContext.error("ERROR");
+        }
+
+        String json = new Gson().toJson(data);
+        PluginResult result = new PluginResult(PluginResult.Status.OK, json);
+        callbackContext.sendPluginResult(result);
+    }
+
     // Checking if the app has access to bluetooth
     private boolean hasLocationPermissions(Context context)
     {
