@@ -68,10 +68,12 @@ UaMobileKeys.prototype.startScanning = function(arg0, success, error) {
 };
 
 UaMobileKeys.prototype.startForegroundScanning = function(arg0, success, error) {
+    console.log('startForegroundScanning');
     this.pInvoke("startForegroundScanning", arg0, success, error);
 };
 
 UaMobileKeys.prototype.stopScanning = function(arg0, success, error) {
+    console.log('stopScanning');
     this.pInvoke("stopScanning", arg0, success, error);
 };
 

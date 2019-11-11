@@ -33,7 +33,7 @@ public final class UaUnlockNotification
         }
 
         final NotificationCompat.Builder builder = notificationBuilder(context, CHANNEL_ID)
-                .setContentTitle("Mobile access is running")
+                .setContentTitle("Mobile access is running. Close the scan window to stop scanning.")
                 .setStyle(new BigTextStyle()
                         .setBigContentTitle("Scanning for doors"))
                 .setOnlyAlertOnce(true)
