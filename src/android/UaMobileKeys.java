@@ -27,6 +27,8 @@ public class UaMobileKeys extends CordovaPlugin {
     private UaMobileKeysApi uaKeyApi = new UaMobileKeysApi();
     private UaMobileKeysSetup uaSetup = new UaMobileKeysSetup();
 
+    public UaMobileKeys() {};
+
     // Main method for selecting the correct native code, based on input from JavaScript Interface
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -64,7 +66,8 @@ public class UaMobileKeys extends CordovaPlugin {
             return true;
         } else if (action.equals("startForegroundScanning")) {
             cordova.getThreadPool().execute(new Runnable() {
-                startForegroundScanning(callbackContext);
+                UaMobileKeys newUaMobile = new UaMobileKeys();
+                newUaMobile.startForegroundScanning(callbackContext);
             });
 
             return true;
