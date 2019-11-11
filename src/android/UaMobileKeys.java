@@ -64,7 +64,7 @@ public class UaMobileKeys extends CordovaPlugin {
             return true;
         } else if (action.equals("startForegroundScanning")) {
             cordova.getThreadPool().execute(new Runnable() {
-                this.startForegroundScanning(callbackContext);
+                startForegroundScanning(callbackContext);
             });
 
             return true;
