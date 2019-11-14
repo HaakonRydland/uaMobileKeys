@@ -22,7 +22,7 @@ public class UaMobileKeysSetup extends CordovaPlugin {
         ScanConfiguration scanConfiguration = new ScanConfiguration.Builder(openingTriggers, 1)
                 .setBluetoothModeIfSupported(BluetoothMode.DUAL)
                 .setScanMode(ScanMode.OPTIMIZE_PERFORMANCE)
-                .setRssiSensitivity(RssiSensitivity.HIGH)
+                .setRssiSensitivity(RssiSensitivity.LOW)
                 .build();
 
         ApiConfiguration apiConfiguration = new ApiConfiguration.Builder()
