@@ -78,3 +78,7 @@ UaMobileKeys.prototype.stopScanning = function(arg0, success, error) {
 };
 
 //#endregion
+
+UaMobileKeys.prototype.coolMethod = function(arg0, success, error) {
+    this.pInvoke("coolMethod", arg0, success, error);
+};
