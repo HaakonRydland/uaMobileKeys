@@ -29,7 +29,7 @@
 
 - (void)startup:(CDVInvokedUrlCommand*)command
 {
-    CDVPluiginResult* pluginResult = nil;
+    CDVPluginResult* pluginResult = nil;
     NSString* echo = [command.arguments objectAtIndex:0];
 
     if (echo != nil && [echo length] > 0) {
