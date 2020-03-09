@@ -39,11 +39,10 @@
       <pods use-frameworks="true">
          <pod name="SeosMobileKeysSDK-Debug" spec="7.3.0" />
       </pods>
-      <!-- <framework src="src/ios/SeosMobileKeysSDK/SeosMobileKeysSDK.framework" /> -->
-      <framework src="src/ios/SeosMobileKeysSDK/BerTlv.framework" />
-      <framework src="src/ios/SeosMobileKeysSDK/CocoaLumberjack.framework" />
-      <framework src="src/ios/SeosMobileKeysSDK/JSONModel.framework" />
-      <framework src="src/ios/SeosMobileKeysSDK/Mixpanel.framework" />
+      <framework src="BerTlv.framework" />
+      <framework src="CocoaLumberjack.framework" />
+      <framework src="JSONModel.framework" />
+      <framework src="Mixpanel.framework" />
       <framework src="Foundation.framework" />
       <framework src="Security.framework" />
       <framework src="CoreMotion.framework" />
