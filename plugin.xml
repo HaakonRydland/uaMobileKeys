@@ -41,5 +41,15 @@
       <framework src="src/ios/SeosMobileKeysSDK/CocoaLumberjack.framework" />
       <framework src="src/ios/SeosMobileKeysSDK/JSONModel.framework" />
       <framework src="src/ios/SeosMobileKeysSDK/Mixpanel.framework" />
+      <framework src="Foundation.framework" />
+      <framework src="Security.framework" />
+      <framework src="CoreMotion.framework" />
+      <framework src="CoreLocation.framework" />
+      <framework src="CoreBluetooth.framework" />
+      <framework src="CoreTelephony.framework" />
+      <framework src="UIKit.framework" />
+      <framework src="SystemConfiguration.framework" />
+      <framework src="LocalAuthentication.framework" />
+      <framework src="CoreML.framework" />
    </platform>
 </plugin>
