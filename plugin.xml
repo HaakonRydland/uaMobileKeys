@@ -40,18 +40,18 @@
          <pod name="SeosMobileKeysSDK-Debug" spec="7.3.0" />
       </pods>
       <framework src="./src/ios/BerTlv.framework" custom="true" embed="true" parent="./src/ios/BerTlv.framework"/>
-      <framework src="CocoaLumberjack.framework" />
-      <framework src="JSONModel.framework" />
-      <framework src="Mixpanel.framework" />
-      <framework src="Foundation.framework" />
-      <framework src="Security.framework" />
-      <framework src="CoreMotion.framework" />
-      <framework src="CoreLocation.framework" />
-      <framework src="CoreBluetooth.framework" />
-      <framework src="CoreTelephony.framework" />
-      <framework src="UIKit.framework" />
-      <framework src="SystemConfiguration.framework" />
-      <framework src="LocalAuthentication.framework" />
-      <framework src="CoreML.framework" />
+      <framework src="./src/ios/CocoaLumberjack.framework" custom="true" embed="true" parent="./src/ios/CocoaLumberjack.framework"/>
+      <framework src="./src/ios/JSONModel.framework" custom="true" embed="true" parent="./src/ios/JSONModel.framework"/>
+      <framework src="./src/ios/Mixpanel.framework" custom="true" embed="true" parent="./src/ios/Mixpanel.framework"/>
+      <framework src="./src/ios/Foundation.framework" custom="true" embed="true" parent="./src/ios/Foundation.framework"/>
+      <framework src="./src/ios/Security.framework" custom="true" embed="true" parent="./src/ios/Security.framework"/>
+      <framework src="./src/ios/CoreMotion.framework" custom="true" embed="true" parent="./src/ios/CoreMotion.framework"/>
+      <framework src="./src/ios/CoreLocation.framework" custom="true" embed="true" parent="./src/ios/CoreLocation.framework"/>
+      <framework src="./src/ios/CoreBluetooth.framework" custom="true" embed="true" parent="./src/ios/CoreBluetooth.framework"/>
+      <framework src="./src/ios/CoreTelephony.framework" custom="true" embed="true" parent="./src/ios/CoreTelephony.framework"/>
+      <framework src="./src/ios/UIKit.framework" custom="true" embed="true" parent="./src/ios/UIKit.framework"/>
+      <framework src="./src/ios/SystemConfiguration.framework" custom="true" embed="true" parent="./src/ios/SystemConfiguration.framework"/>
+      <framework src="./src/ios/LocalAuthentication.framework" custom="true" embed="true" parent="./src/ios/LocalAuthentication.framework"/>
+      <framework src="./src/ios/CoreML.framework" custom="true" embed="true" parent="./src/ios/CoreML.framework"/>
    </platform>
 </plugin>
