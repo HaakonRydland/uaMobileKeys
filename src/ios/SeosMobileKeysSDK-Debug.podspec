@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name             = "SeosMobileKeysSDK-Release"
+  s.name             = "SeosMobileKeysSDK-Debug"
   s.version          = "7.3.0"
   s.summary          = "Open readers with your iOS device"
   s.homepage         = "http://www.assaabloy.com/seos"
