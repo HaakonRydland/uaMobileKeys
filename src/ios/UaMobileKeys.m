@@ -1,7 +1,7 @@
 /********* UaMobileKeys.m Cordova Plugin Implementation *******/
 
 #import <Cordova/CDV.h>
-#import <SeosMobileKeysSDK/SeosMobileKeysSDK.h>
+#import <SeosMobileKeysSDK.framework/SeosMobileKeysSDK.h>
 
 @interface UaMobileKeys : CDVPlugin {
   // Member variables go here.
