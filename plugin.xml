@@ -37,7 +37,7 @@
       </config-file>
       <source-file src="src/ios/UaMobileKeys.m" />
       <pods use-frameworks="true">
-         <pod name="SeosMobileKeysSDK-Debug" spec="7.3.0" />
+         <pod name="SeosMobileKeysSDK-Release" spec="7.3.0" />
       </pods>
       <framework src="./src/ios/BerTlv.framework" custom="true" embed="true" parent="./src/ios/BerTlv.framework"/>
       <framework src="./src/ios/CocoaLumberjack.framework" custom="true" embed="true" parent="./src/ios/CocoaLumberjack.framework"/>
