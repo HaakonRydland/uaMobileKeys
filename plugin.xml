@@ -36,5 +36,10 @@
          </feature>
       </config-file>
       <source-file src="src/ios/UaMobileKeys.m" />
+      <framework src="src/ios/SeosMobileKeysSDK/SeosMobileKeysSDK.framework" />
+      <framework src="src/ios/SeosMobileKeysSDK/BerTlv.framework" />
+      <framework src="src/ios/SeosMobileKeysSDK/CocoaLumberjack.framework" />
+      <framework src="src/ios/SeosMobileKeysSDK/JSONModel.framework" />
+      <framework src="src/ios/SeosMobileKeysSDK/Mixpanel.framework" />
    </platform>
 </plugin>
