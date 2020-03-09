@@ -1,8 +1,6 @@
 /********* UaMobileKeys.m Cordova Plugin Implementation *******/
 
 #import <Cordova/CDV.h>
-#import <Foundation/Foundation.h>
-#import <CoreLocation/CoreLocation.h>
 #import <SeosMobileKeysSDK/SeosMobileKeysSDK.h>
 
 @interface UaMobileKeys : CDVPlugin {
