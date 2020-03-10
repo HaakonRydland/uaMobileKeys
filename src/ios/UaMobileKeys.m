@@ -4,7 +4,6 @@
 
 @interface UaMobileKeys : CDVPlugin {
   // Member variables go here.
-  @property(nonatomic) MobileKeysManager *mobileKeysManager;
 }
 
 - (void)coolMethod:(CDVInvokedUrlCommand*)command;
@@ -24,6 +23,7 @@
 
 - (id)init {
     self = [super init];
+    _mobileKeysManager = [self createInitializedMobileKeysManager];
 }
 
 - (void)coolMethod:(CDVInvokedUrlCommand*)command
@@ -43,9 +43,6 @@
 // Mobile keys core methods
 - (void)startup:(CDVInvokedUrlCommand*)command
 {
-    self = [super init];
-    _mobileKeysManager = [self createInitializedMobileKeysManager];
-
     [_mobileKeysManager startup];
 }
 
