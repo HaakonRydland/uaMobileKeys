@@ -44,7 +44,7 @@
             <source url="https://github.com/CocoaPods/Specs.git"/>
          </config>
          <pods use-frameworks="true">
-            <pod name="SeosMobileKeysSDK-Debug" spec="7.5.2" />
+            <pod name="SeosMobileKeysSDK" spec="7.5.2" swift-version="5.0" />
          </pods>
       </podspec>
    </platform>
