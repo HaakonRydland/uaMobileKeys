@@ -22,6 +22,9 @@
 @implementation UaMobileKeys
   BOOL _applicationIsStarting;
 
+- (id)init {
+    self = [super init];
+}
 
 - (void)coolMethod:(CDVInvokedUrlCommand*)command
 {
@@ -48,46 +51,22 @@
 
 - (void)isEndpointSetup:(CDVInvokedUrlCommand*)command
 {
-    self = [super init];
-    _mobileKeysManager = [self createInitializedMobileKeysManager];
-    CDVPluginResult* pluginResult = nil;
 
-    NSError *error;
-    BOOL setupComplete = [_mobileKeysManager isEndpointSetup:&error];
-    [self handleError:error];
-
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:setupComplete];
 }
 
 - (void)setupEndpoint:(CDVInvokedUrlCommand*)command
 {
-    self = [super init];
-    _mobileKeysManager = [self createInitializedMobileKeysManager];
-    NSString* results = @"True";
-    NSString* invitationCode = [command.arguments objectAtIndex:0];
 
-    [_mobileKeysManager setupEndpoint:invitationCode];
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:results];
 }
 
 - (void)updateEndpoint:(CDVInvokedUrlCommand*)command
 {
-    self = [super init];
-    _mobileKeysManager = [self createInitializedMobileKeysManager];
 
-    [_mobileKeysManager updateEndpoint];
 }
 
 - (void)listMobileKeys:(CDVInvokedUrlCommand*)command
 {
-    self = [super init];
-    _mobileKeysManager = [self createInitializedMobileKeysManager];
-    CDVPluginResult* pluginResult = nil;
 
-    NSError *listKeysError;
-    NSString* results = [_mobileKeysManager listMobileKeys:&listKeysError];
-
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:results]
 }
 
 - (void)endpointInfo:(CDVInvokedUrlCommand*)command
@@ -96,31 +75,18 @@
 }
 
 - (void)unregisterEndpoint:(CDVInvokedUrlCommand*)command
-{    self = [super init];
-    _mobileKeysManager = [self createInitializedMobileKeysManager];
-    
-    [_mobileKeysManager unregisterEndpoint];
+{    
+
 }
 
 - (void)startForegroundScanning:(CDVInvokedUrlCommand*)command
 {
-    NSArray *_lockServiceCodes;
-    _lockServiceCodes = @[@1, @2];
-    self = [super init];
-    _mobileKeysManager = [self createInitializedMobileKeysManager];
-    if (_mobileKeysManager.isScanning) {
-        [_mobileKeysManager.stopReaderScan];
-    }
 
-    [_mobileKeysManager startReaderScanInMode:scanMode supportedOpeningTypes:openingTypes lockServiceCodes:_lockServiceCodes error:&error];
 }
 
 - (void)stopScanning:(CDVInvokedUrlCommand*)command
 {
-    self = [super init];
-    _mobileKeysManager = [self createInitializedMobileKeysManager];
-
-    [_mobileKeysManager stopReaderScan];
+    
 }
 
 // Error handeling and callbacks
