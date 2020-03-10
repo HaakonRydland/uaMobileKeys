@@ -38,7 +38,7 @@
       </config-file>
       <source-file src="src/ios/UaMobileKeys.m" />
       <pods use-frameworks="true">
-         <pod name="SeosMobileKeysSDK-Debug" spec="7.3.0" />
+         <pod name="SeosMobileKeysSDK-Debug" spec="7.5.2" />
       </pods>
    </platform>
 </plugin>

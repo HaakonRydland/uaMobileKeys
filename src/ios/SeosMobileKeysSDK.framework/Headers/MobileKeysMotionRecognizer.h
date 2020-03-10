@@ -14,7 +14,6 @@
 @end
 
 @protocol MotionRecognizerProtocol
-@property(nonatomic) BOOL enableMLmodel;
 
 - (void)startTrackingRotation;
 - (void)stopTrackingRotation;

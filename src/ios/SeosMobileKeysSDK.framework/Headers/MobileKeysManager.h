@@ -28,7 +28,6 @@ extern const NSString *MobileKeysOptionTSMPublicCert;
 extern const NSString *MobileKeysOptionTSMBaseURL;
 extern const NSString *MobileKeysOptionMotionManager;
 extern const NSString *MobileKeysOptionCustomEventValue;
-extern const NSString *MobileKeysOptionMachineLearningModelUrl;
 extern const NSString *MobileKeysOptionCustomSetupAkeKey;
 
 /**
@@ -145,7 +144,7 @@ typedef NS_ENUM(NSInteger, MobileKeysInfoType) {
  * and added to the app bundle
  * @param enable Enable/disable usage of machinelearning model
  */
-- (void)setSupportsMachineLeaningModel:(BOOL) enable;
+- (void)setSupportsMachineLeaningModel:(BOOL) enable DEPRECATED_MSG_ATTRIBUTE("Not in use");
 
 #pragma mark Seos TSM Integration calls
 
