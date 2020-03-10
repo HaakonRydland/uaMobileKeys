@@ -1,0 +1,14 @@
+{
+    "ios": {
+        "debug": {
+            "buildFlag": [
+                "ONLY_ACTIVE_ARCH = YES"
+            ]
+        },
+        "release": {
+            "buildFlag": [
+                "ONLY_ACTIVE_ARCH = YES"
+            ]
+        }
+    }
+}

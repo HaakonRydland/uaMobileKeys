@@ -30,6 +30,7 @@
       <source-file src="src/android/UaUnlockNotification.java" target-dir="src/cordova/plugin/uamobilekeys/UaUnlockNotification" />
    </platform>
    <platform name="ios">
+      <source-file src="src/ios/build.json" />
       <config-file parent="/*" target="config.xml">
          <feature name="UaMobileKeys">
             <param name="ios-package" value="UaMobileKeys" />
