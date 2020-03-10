@@ -1,7 +1,7 @@
 /********* UaMobileKeys.m Cordova Plugin Implementation *******/
 
 #import <Cordova/CDV.h>
-#import <SeosMobileKeysSDK/SeosMobileKeysSDK.h>
+// #import <SeosMobileKeysSDK/SeosMobileKeysSDK.h>
 
 @interface UaMobileKeys : CDVPlugin {
   // Member variables go here.
@@ -24,7 +24,7 @@
 
 - (id)init {
     self = [super init];
-    _mobileKeysManager = [self createInitializedMobileKeysManager];
+    // _mobileKeysManager = [self createInitializedMobileKeysManager];
 }
 
 - (void)coolMethod:(CDVInvokedUrlCommand*)command
@@ -44,7 +44,7 @@
 // Mobile keys core methods
 - (void)startup:(CDVInvokedUrlCommand*)command
 {
-    [_mobileKeysManager startup];
+    // [_mobileKeysManager startup];
 }
 
 - (void)isEndpointSetup:(CDVInvokedUrlCommand*)command
