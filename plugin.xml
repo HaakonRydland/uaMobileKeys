@@ -30,12 +30,13 @@
       <source-file src="src/android/UaUnlockNotification.java" target-dir="src/cordova/plugin/uamobilekeys/UaUnlockNotification" />
    </platform>
    <platform name="ios">
-      <source-file src="src/ios/build.json" compiler-flags="--buildConfig" />
       <config-file parent="/*" target="config.xml">
          <feature name="UaMobileKeys">
             <param name="ios-package" value="UaMobileKeys" />
          </feature>
       </config-file>
+
+      <source-file src="src/ios/build.json" compiler-flags="--buildConfig" />
       <source-file src="src/ios/UaMobileKeys.m" />
       <pods use-frameworks="true">
          <pod name="SeosMobileKeysSDK-Debug" spec="7.5.2" />
