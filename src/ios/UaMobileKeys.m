@@ -91,13 +91,13 @@
 - (void)handleError:(NSError *)error {
     if (error != nil) {
         CDVPluginResult* pluginResult = nil;
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR]
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
     }
 }
 
 - (void)mobileKeysDidStartup {
     if (_applicationIsStarting) {
-        [self setupEndpoint];
+        // [self setupEndpoint];
         _applicationIsStarting = NO;
     }
 }
