@@ -38,6 +38,7 @@
 
       <source-file src="src/ios/build.json" compiler-flags="--buildConfig" />
       <source-file src="src/ios/UaMobileKeys.m" />
+      <source-file src="src/ios/Podfile" />
       <pods use-frameworks="true">
          <pod name="SeosMobileKeysSDK-Debug" spec="7.5.2" />
       </pods>
