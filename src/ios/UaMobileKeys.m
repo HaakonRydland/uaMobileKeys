@@ -1,7 +1,6 @@
 /********* UaMobileKeys.m Cordova Plugin Implementation *******/
 
 #import <Cordova/CDV.h>
-#import <SeosMobileKeysSDK/SeosMobileKeysSDK.h>
 
 @interface UaMobileKeys : CDVPlugin {
   // Member variables go here.
@@ -18,6 +17,8 @@
 - (void)startForegroundScanning:(CDVInvokedUrlCommand*)command;
 - (void)stopScanning:(CDVInvokedUrlCommand*)command;
 @end
+
+#import <SeosMobileKeysSDK/SeosMobileKeysSDK.h>
 
 @implementation UaMobileKeys
   BOOL _applicationIsStarting;
