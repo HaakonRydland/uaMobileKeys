@@ -112,18 +112,18 @@
 
 // Helper methods
 
-- (MobileKeysManager *)createInitializedMobileKeysManager {
+// - (MobileKeysManager *)createInitializedMobileKeysManager {
 
-    NSString* applicationId = @"UaMobileKeys";
-    NSString *version = [NSString stringWithFormat:@"%@-%@ (%@)", applicationId, [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"], [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"]];
-    NSDictionary *config = @{MobileKeysOptionApplicationId: applicationId, MobileKeysOptionVersion: version};
+//     NSString* applicationId = @"UaMobileKeys";
+//     NSString *version = [NSString stringWithFormat:@"%@-%@ (%@)", applicationId, [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"], [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"]];
+//     NSDictionary *config = @{MobileKeysOptionApplicationId: applicationId, MobileKeysOptionVersion: version};
     
-    // Specify your own iBeacon UUID or use the internal one by not specifying this option
-    // ***********************************************************************************
-    // NSString *myBeaconUUIDString = @"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX";
-    // NSDictionary *config = @{MobileKeysOptionApplicationId: APPLICATION_ID, MobileKeysOptionVersion: version, MobileKeysOptionBeaconUUID: myBeaconUUIDString};
+//     // Specify your own iBeacon UUID or use the internal one by not specifying this option
+//     // ***********************************************************************************
+//     // NSString *myBeaconUUIDString = @"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX";
+//     // NSDictionary *config = @{MobileKeysOptionApplicationId: APPLICATION_ID, MobileKeysOptionVersion: version, MobileKeysOptionBeaconUUID: myBeaconUUIDString};
 
-    return [[MobileKeysManager alloc] initWithDelegate:self options:config];
-}
+//     return [[MobileKeysManager alloc] initWithDelegate:self options:config];
+// }
 
 @end
