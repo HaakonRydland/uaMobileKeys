@@ -2,8 +2,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
-#import <SeosMobileKeysSDK/SeosMobileKeysSDK.h>
-#import "MobileKeysController.h"
+// #import <SeosMobileKeysSDK/SeosMobileKeysSDK.h>
 #import <Cordova/CDV.h>
 
 @interface UaMobileKeys : CDVPlugin {
