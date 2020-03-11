@@ -37,8 +37,6 @@
       </config-file>
 
       <source-file src="src/ios/build.json" compiler-flags="--buildConfig" />
-      <source-file src="src/ios/UaMobileKeys.m" />
-      <header-file src="src/ios/UaMobileKeys.h" />
 
       <podspec>
          <config>
@@ -48,5 +46,8 @@
             <pod name="SeosMobileKeysSDK-Debug.podspec" spec="7.5.2" swift-version="5.0" />
          </pods>
       </podspec>
+
+      <!-- <header-file src="src/ios/UaMobileKeys.h" /> -->
+      <source-file src="src/ios/UaMobileKeys.m" compiler-flags="-IuniAlltid/Plugins/cordova.plugin.uamobilekeys/" />
    </platform>
 </plugin>
