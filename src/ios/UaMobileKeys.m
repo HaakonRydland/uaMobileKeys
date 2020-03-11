@@ -1,5 +1,6 @@
 /********* UaMobileKeys.m Cordova Plugin Implementation *******/
 
+#import <SeosMobileKeysSDK/SeosMobileKeysSDK.h>
 #import <Cordova/CDV.h>
 
 @interface UaMobileKeys : CDVPlugin {
@@ -19,7 +20,6 @@
 @end
 
 // #import "src/ios/SeosMobileKeysSDK.framework/Headers/SeosMobileKeysSDK.h"
-#import <SeosMobileKeysSDK/SeosMobileKeysSDK.h>
 
 @implementation UaMobileKeys
   BOOL _applicationIsStarting;
