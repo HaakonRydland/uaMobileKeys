@@ -18,7 +18,7 @@
 - (void)stopScanning:(CDVInvokedUrlCommand*)command;
 @end
 
-#import <src/ios/SeosMobileKeysSDK.framework/Headers/SeosMobileKeysSDK.h>
+#import "src/ios/SeosMobileKeysSDK.framework/Headers/SeosMobileKeysSDK.h"
 
 @implementation UaMobileKeys
   BOOL _applicationIsStarting;
