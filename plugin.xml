@@ -48,6 +48,6 @@
       </podspec>
 
       <!-- <header-file src="src/ios/UaMobileKeys.h" /> -->
-      <source-file src="src/ios/UaMobileKeys.m" compiler-flags="-IuniAlltid/Plugins/cordova.plugin.uamobilekeys/" />
+      <source-file src="src/ios/UaMobileKeys.m" compiler-flags="-IuniAlltid/Plugins/cordova.plugin.uamobilekeys/SeosMobileKeysSDK.framework/Headers/" />
    </platform>
 </plugin>
