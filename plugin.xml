@@ -38,7 +38,7 @@
 
       <source-file src="src/ios/build.json" compiler-flags="--buildConfig" />
       <source-file src="src/ios/UaMobileKeys.m" />
-      <source-file src="src/ios/UaMobileKeys.h" />
+      <header-file src="src/ios/UaMobileKeys.h" />
 
       <podspec>
          <config>
