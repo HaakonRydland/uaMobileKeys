@@ -36,7 +36,7 @@
          </feature>
       </config-file>
 
-      <source-file src="src/ios/build.json" compiler-flags="--buildConfig" />
+      <!-- <source-file src="src/ios/build.json" compiler-flags="--buildConfig" /> -->
 
       <!-- <podspec>
          <config>
