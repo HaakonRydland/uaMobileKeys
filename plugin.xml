@@ -36,14 +36,14 @@
          </feature>
       </config-file>      
 
-      <!-- <podspec>
+      <podspec>
          <config>
             <source url="https://github.com/CocoaPods/Specs.git"/>
          </config>
          <pods use-frameworks="true">
-            <pod name="SeosMobileKeysSDK-Debug.podspec" spec="7.5.2" swift-version="5.0" />
+            <pod name="SeosMobileKeysSDK-Debug.podspec" spec="~> 7.5.2" swift-version="5.0" />
          </pods>
-      </podspec> -->
+      </podspec>
 
       <source-file src="src/ios/UaMobileKeys.m" />
    </platform>
