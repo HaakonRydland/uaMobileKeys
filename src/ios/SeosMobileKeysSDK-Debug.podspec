@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
    }
 
   s.author           = { "ASSA ABLOY Mobile Services" => "mobilekeys@assaabloy.com" }
-  s.source = { :path => '.' }
+  s.source = { :path => './SeosMobileKeysSDK.framework' }
 
   s.requires_arc = true
 
