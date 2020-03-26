@@ -43,7 +43,7 @@
             <source url="https://github.com/CocoaPods/Specs.git"/>
          </config>
          <pods use-frameworks="true">
-            <pod name="SeosMobileKeysSDK-Debug" options=":path => 'src/ios/SeosMobileKeysSDK-Debug/Pod/SeosMobileKeysSDK-Debug.podspec'" />
+            <pod name="SeosMobileKeysSDK-Debug" options=":path => '../uniAlltid test/ResourcesSeosMobileKeysSDK-Debug.podspec'" />
          </pods>
       </podspec>
 
