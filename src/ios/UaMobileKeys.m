@@ -2,7 +2,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
-#import <SeosMobileKeysSDK/SeosMobileKeysSDK.h>
+#import "SeosMobileKeysSDK-Debug/Frameworks/SeosMobileKeysSDK.framework/Headers/SeosMobileKeysSDK.h"
 // #import "UaMobileKeys.h"
 #import <Cordova/CDV.h>
 
