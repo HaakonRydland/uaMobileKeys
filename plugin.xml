@@ -34,15 +34,16 @@
          <feature name="UaMobileKeys">
             <param name="ios-package" value="UaMobileKeys" />
          </feature>
-      </config-file>      
+      </config-file>
+
+      <resource-file src="src/ios/SeosMobileKeysSDK-Debug/Pod/SeosMobileKeysSDK-Debug.podspec" />
 
       <podspec>
          <config>
             <source url="https://github.com/CocoaPods/Specs.git"/>
          </config>
          <pods use-frameworks="true">
-            <!-- <pod name="SeosMobileKeysSDK-Debug" options=":path => 'src/ios/SeosMobileKeysSDK-Debug/Pod/SeosMobileKeysSDK-Debug.podspec'" /> -->
-            <pod name="SeosMobileKeysSDK-Debug" options=":path => 'SeosMobileKeysSDK-Debug/Pod/SeosMobileKeysSDK-Debug.podspec'" />
+            <pod name="SeosMobileKeysSDK-Debug" options=":path => 'src/ios/SeosMobileKeysSDK-Debug/Pod/SeosMobileKeysSDK-Debug.podspec'" />
          </pods>
       </podspec>
 
