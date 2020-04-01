@@ -2,8 +2,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
-#import "SeosMobileKeysSDK-Debug/Frameworks/SeosMobileKeysSDK.framework/SeosMobileKeysSDK/SeosMobileKeysSDK.h"
-// #import "UaMobileKeys.h"
+#import <SeosMobileKeysSDK/SeosMobileKeysSDK.h>
 #import <Cordova/CDV.h>
 
 @interface UaMobileKeys : CDVPlugin {
@@ -22,14 +21,18 @@
 - (void)stopScanning:(CDVInvokedUrlCommand*)command;
 @end
 
-// #import "src/ios/SeosMobileKeysSDK.framework/Headers/SeosMobileKeysSDK.h"
-
 @implementation UaMobileKeys
   BOOL _applicationIsStarting;
+  MobileKeysManager* _mobileKeysManager;
 
 - (id)init {
     self = [super init];
-    // _mobileKeysManager = [self createInitializedMobileKeysManager];
+
+    if (self) {
+        _mobileKeysManager = [self createInitializedMobileKeysManager];
+    }
+    
+    return self;
 }
 
 - (void)coolMethod:(CDVInvokedUrlCommand*)command
@@ -49,7 +52,7 @@
 // Mobile keys core methods
 - (void)startup:(CDVInvokedUrlCommand*)command
 {
-    // [_mobileKeysManager startup];
+    [_mobileKeysManager startup];
 }
 
 - (void)isEndpointSetup:(CDVInvokedUrlCommand*)command
@@ -113,18 +116,18 @@
 
 // Helper methods
 
-// - (MobileKeysManager *)createInitializedMobileKeysManager {
+- (MobileKeysManager *)createInitializedMobileKeysManager {
 
-//     NSString* applicationId = @"UaMobileKeys";
-//     NSString *version = [NSString stringWithFormat:@"%@-%@ (%@)", applicationId, [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"], [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"]];
-//     NSDictionary *config = @{MobileKeysOptionApplicationId: applicationId, MobileKeysOptionVersion: version};
+    NSString* applicationId = @"UaMobileKeys";
+    NSString *version = [NSString stringWithFormat:@"%@-%@ (%@)", applicationId, [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"], [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"]];
+    NSDictionary *config = @{MobileKeysOptionApplicationId: applicationId, MobileKeysOptionVersion: version};
     
 //     // Specify your own iBeacon UUID or use the internal one by not specifying this option
 //     // ***********************************************************************************
 //     // NSString *myBeaconUUIDString = @"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX";
 //     // NSDictionary *config = @{MobileKeysOptionApplicationId: APPLICATION_ID, MobileKeysOptionVersion: version, MobileKeysOptionBeaconUUID: myBeaconUUIDString};
 
-//     return [[MobileKeysManager alloc] initWithDelegate:self options:config];
-// }
+    return [[MobileKeysManager alloc] initWithDelegate:self options:config];
+}
 
 @end
