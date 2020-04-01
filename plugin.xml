@@ -47,7 +47,7 @@
          </pods>
       </podspec>
 
-      <framework src="uniAlltid test/Resources/SeosMobileKeysSDK-Debug.podspec" custom="true" embed="true"/>
+      <framework src="src/ios/SeosMobileKeysSDK-Debug/Frameworks/SeosMobileKeysSDK.framework" custom="true" embed="true"/>
 
       <source-file src="src/ios/UaMobileKeys.m" />
    </platform>
