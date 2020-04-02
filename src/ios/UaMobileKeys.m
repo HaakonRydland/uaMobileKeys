@@ -57,12 +57,26 @@
 
 - (void)isEndpointSetup:(CDVInvokedUrlCommand*)command
 {
+    CDVPluginResult* pluginResult = nil;
 
+    NSError *error;
+    BOOL setupCopmlete = [_mobileKeysManager isEndpointSetup:&error];
+    NSString *setupCopmleteString = setupCopmlete ? @"True" : @"False";
+
+    [self handleError];
+
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:setupCopmleteString];
 }
 
 - (void)setupEndpoint:(CDVInvokedUrlCommand*)command
 {
+    CDVPluginResult* pluginResult = nil;
 
+    NSString* results = @"True";
+    NSString* invitationCode = [command.arguments objectAtIndex:0];
+    [_mobileKeysManager setupEndpoint:invitationCode];
+
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:results];
 }
 
 - (void)updateEndpoint:(CDVInvokedUrlCommand*)command
