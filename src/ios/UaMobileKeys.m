@@ -60,12 +60,12 @@
     CDVPluginResult* pluginResult = nil;
 
     NSError *error;
-    BOOL setupCopmlete = [_mobileKeysManager isEndpointSetup:&error];
-    NSString *setupCopmleteString = setupCopmlete ? @"True" : @"False";
+    BOOL setupComplete = [_mobileKeysManager isEndpointSetup:&error];
+    NSString *setupCompleteString = setupComplete ? @"True" : @"False";
 
-    [self handleError];
+    [self handleError:error];
 
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:setupCopmleteString];
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:setupCompleteString];
 }
 
 - (void)setupEndpoint:(CDVInvokedUrlCommand*)command
