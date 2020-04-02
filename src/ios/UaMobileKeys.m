@@ -118,7 +118,7 @@
         [_mobileKeysManager stopReaderScan];
     }
 
-    [_mobileKeysManager startReaderInScanMode:MobileKeysScanModeOptimizePerformance supportedOpeningTypes:_openingTypes lockServiceCodes:_lockServiceCodes error:&error];
+    [_mobileKeysManager startReaderScanInMode:MobileKeysScanModeOptimizePerformance supportedOpeningTypes:_openingTypes lockServiceCodes:_lockServiceCodes error:&error];
 }
 
 - (void)stopScanning:(CDVInvokedUrlCommand*)command
