@@ -25,12 +25,14 @@
   BOOL _applicationIsStarting;
   MobileKeysManager* _mobileKeysManager;
   NSArray<MobileKeysKey*> *_mobilekey;
+  NSArray * _openingTypes;
 
 - (id)init {
     self = [super init];
 
     if (self) {
         _mobileKeysManager = [self createInitializedMobileKeysManager];
+        _openingTypes =@[@(MobileKeysOpeningTypeEnhancedTap)];
     }
     
     return self;
@@ -116,7 +118,7 @@
         [_mobileKeysManager stopReaderScan];
     }
 
-    [_mobileKeysManager startReaderInScanMode:MobileKeysScanModeOptimizePerformance supportedOpeningTypes:OpeningTypeTap lockServiceCodes:_lockServiceCodes error:&error];
+    [_mobileKeysManager startReaderInScanMode:MobileKeysScanModeOptimizePerformance supportedOpeningTypes:_openingTypes lockServiceCodes:_lockServiceCodes error:&error];
 }
 
 - (void)stopScanning:(CDVInvokedUrlCommand*)command
