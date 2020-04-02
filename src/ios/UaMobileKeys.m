@@ -24,6 +24,7 @@
 @implementation UaMobileKeys
   BOOL _applicationIsStarting;
   MobileKeysManager* _mobileKeysManager;
+  NSArray<MobileKeysKey*> *_mobilekey;
 
 - (id)init {
     self = [super init];
@@ -81,12 +82,18 @@
 
 - (void)updateEndpoint:(CDVInvokedUrlCommand*)command
 {
-
+    [_mobileKeysManager updateEndpoint];
 }
 
 - (void)listMobileKeys:(CDVInvokedUrlCommand*)command
 {
+    CDVPluginResult pluginResult = nil;
+    
+    NSError *listKeysError;
+    _mobilekey = [_mobileKeysManager listMobileKeys:&listKeysError];
+    NSString *strResultFromInt = [NSString stringWithFormat:@"%lu", _mobilekey.count];
 
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:strResultFromInt];
 }
 
 - (void)endpointInfo:(CDVInvokedUrlCommand*)command
@@ -96,17 +103,25 @@
 
 - (void)unregisterEndpoint:(CDVInvokedUrlCommand*)command
 {    
-
+    [_mobileKeysManager unregisterEndpoint];
 }
 
 - (void)startForegroundScanning:(CDVInvokedUrlCommand*)command
 {
+    NSArray *_lockServiceCodes;
+    _lockServiceCodes = @[@1, @2];
+    NSError *error;
 
+    if (_mobileKeysManager.isScanning) {
+        [_mobileKeysManager stopReaderScan];
+    }
+
+    [_mobileKeysManager startReaderInScanMode:MobileKeysScanModeOptimizePerformance supportedOpeningTypes:OpeningTypeTap lockServiceCodes:_lockServiceCodes error:&error];
 }
 
 - (void)stopScanning:(CDVInvokedUrlCommand*)command
 {
-    
+    [_mobileKeysManager stopReaderScan];
 }
 
 // Error handeling and callbacks
