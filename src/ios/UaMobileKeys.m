@@ -89,7 +89,7 @@
 
 - (void)listMobileKeys:(CDVInvokedUrlCommand*)command
 {
-    CDVPluginResult pluginResult = nil;
+    CDVPluginResult *pluginResult = nil;
     
     NSError *listKeysError;
     _mobilekey = [_mobileKeysManager listMobileKeys:&listKeysError];
