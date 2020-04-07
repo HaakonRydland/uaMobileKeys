@@ -83,11 +83,11 @@
 {
     CDVPluginResult* pluginResult = nil;
 
-    NSString* results = @"True";
+    // NSString* results = @"True";
     NSString* invitationCode = [command.arguments objectAtIndex:0];
     [_mobileKeysManager setupEndpoint:invitationCode];
 
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:results];
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:invitationCode];
 
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
