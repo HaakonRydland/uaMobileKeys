@@ -85,9 +85,13 @@
 
     // NSString* results = @"True";
     NSString* invitationCode = [command.arguments objectAtIndex:0];
-    [_mobileKeysManager setupEndpoint:invitationCode];
 
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:invitationCode];
+    if ([self isValidCode:invitationCode]) {
+        [_mobileKeysManager setupEndpoint:invitationCode];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:invitationCode];
+    } else {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Invalid code"];
+    }
 
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
@@ -180,7 +184,41 @@
     [self handleError:error];
 }
 
+- (BOOL) isEndpointSetup {
+    NSError *error;
+    BOOL setupComplete = [_mobileKeysManager isEndpointSetup:&error];
+    [self handleError:error];
+
+    return setupComplete;
+}
+
+- (void) mobileKeysDidSetupEndpoint {
+    CDVPluginResult* pluginResult = nil;
+
+    if (!self.isEndpointSetup) {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Endpoint is not setup"];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:@"Callback"];
+    } else {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Endpoint is setup"];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:@"Callback"];
+    }
+}
+
+- (void) mobileKeysDidFailToSetupEndpoint:(NSError * ) error {
+    [self handleError];
+
+    CDVPluginResult* pluginResult = nil;
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Failed to setup endpoint"];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:@"Callback"];
+}
+
 // Helper methods
+- (BOOL)isValidCode:(NSString *)code {
+    NSString *validPattern = @"^[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}$";
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:validPattern options:0 error:nil];
+    
+    return (code != nil) && ([regex firstMatchInString:code options:0 range:NSMakeRange(0, code.length)] != nil);
+}
 
 - (MobileKeysManager *)createInitializedMobileKeysManager {
 
