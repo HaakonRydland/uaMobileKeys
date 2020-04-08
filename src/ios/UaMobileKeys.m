@@ -205,7 +205,7 @@
 }
 
 - (void) mobileKeysDidFailToSetupEndpoint:(NSError * ) error {
-    [self handleError];
+    [self handleError:error];
 
     CDVPluginResult* pluginResult = nil;
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Failed to setup endpoint"];
