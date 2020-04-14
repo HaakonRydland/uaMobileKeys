@@ -218,6 +218,12 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:@"Callback"];
 }
 
+- (void)mobileKeysDidTerminateEndpoint {
+    CDVPluginResult* pluginResult = nil;
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Failed to unregister endpoint"];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:@"Callback"];
+}
+
 // Helper methods
 - (BOOL)isValidCode:(NSString *)code {
     NSString *validPattern = @"^[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}$";
