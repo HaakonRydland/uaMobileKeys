@@ -218,6 +218,14 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:@"Callback"];
 }
 
+- (void)mobileKeysDidFailToUpdateEndpoint(NSError *)error {
+    [self handleError:error];
+
+    CDVPluginResult* pluginResult = nil;
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Failed to update endpoint"];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:@"Callback"];
+}
+
 - (void)mobileKeysDidTerminateEndpoint {
     CDVPluginResult* pluginResult = nil;
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Failed to unregister endpoint"];
