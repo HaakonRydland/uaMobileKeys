@@ -218,7 +218,7 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:@"Callback"];
 }
 
-- (void)mobileKeysDidFailToUpdateEndpoint(NSError *)error {
+- (void)mobileKeysDidFailToUpdateEndpoint:(NSError *)error {
     [self handleError:error];
 
     CDVPluginResult* pluginResult = nil;
