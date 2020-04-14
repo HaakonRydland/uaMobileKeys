@@ -8,7 +8,7 @@
 @interface UaMobileKeys : CDVPlugin {
   // Member variables go here.
 }
-
+@property(nonatomic) MobileKeysManager *mobileKeysManager;
 - (void)coolMethod:(CDVInvokedUrlCommand*)command;
 - (void)startup:(CDVInvokedUrlCommand*)command;
 - (void)isEndpointSetup:(CDVInvokedUrlCommand*)command;
@@ -19,6 +19,7 @@
 - (void)unregisterEndpoint:(CDVInvokedUrlCommand*)command;
 - (void)startForegroundScanning:(CDVInvokedUrlCommand*)command;
 - (void)stopScanning:(CDVInvokedUrlCommand*)command;
+- (id)init:(CDVInvokedUrlCommand*)command;
 @end
 
 @implementation UaMobileKeys
@@ -27,7 +28,7 @@
   NSArray<MobileKeysKey*> *_mobilekey;
   NSArray * _openingTypes;
 
-- (id)init {
+- (id)init:(CDVInvokedUrlCommand*)command {
     self = [super init];
 
     if (self) {
@@ -55,6 +56,11 @@
 // Mobile keys core methods
 - (void)startup:(CDVInvokedUrlCommand*)command
 {
+    if (self) {
+        _mobileKeysManager = [self createInitializedMobileKeysManager];
+        _openingTypes =@[@(MobileKeysOpeningTypeEnhancedTap)];
+    }
+
     CDVPluginResult* pluginResult = nil;
 
     [_mobileKeysManager startup];
