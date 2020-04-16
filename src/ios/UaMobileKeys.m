@@ -36,6 +36,10 @@
         _openingTypes =@[@(MobileKeysOpeningTypeEnhancedTap)];
     }
     
+    CDVPluginResult* pluginResult = nil;
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"True"];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    
     return self;
 }
 

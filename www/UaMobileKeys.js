@@ -82,3 +82,7 @@ UaMobileKeys.prototype.stopScanning = function(arg0, success, error) {
 UaMobileKeys.prototype.coolMethod = function(arg0, success, error) {
     this.pInvoke("coolMethod", arg0, success, error);
 };
+
+UaMobileKeys.prototype.init = function(arg0, success, error) {
+    this.pInvoke("init", arg0, success, error);
+};
