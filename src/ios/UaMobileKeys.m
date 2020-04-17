@@ -43,6 +43,8 @@
         _mobileKeysManager = [self createInitializedMobileKeysManager];
         _openingTypes =@[@(MobileKeysOpeningTypeEnhancedTap)];
     }
+
+    [_mobileKeysManager startup];
     
     return self;
 }
