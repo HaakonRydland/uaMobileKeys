@@ -51,5 +51,6 @@
       <framework src="src/ios/SeosMobileKeysSDK-Debug/Frameworks/SeosMobileKeysSDK.framework" custom="true" embed="true"/>
 
       <source-file src="src/ios/UaMobileKeys.m" />
+      <source-file src="src/ios/UaMobileKeys.h" />
    </platform>
 </plugin>
