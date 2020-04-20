@@ -38,6 +38,7 @@
 #pragma mark - SetupMethods
 - (id)init:(CDVInvokedUrlCommand*)command {
     self = [super init];
+    _startupCallbackId = command.callbackId;
 
     if (self) {
         _mobileKeysManager = [self createInitializedMobileKeysManager];
@@ -222,6 +223,17 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 
+- (void)mobileKeysDidUpdateEndpointWithSummary:(MobileKeysEndpointUpdateSummary *) endpointUpdateSummary {
+    NSString* callbackId = _updateEndpointCallbackId;
+    if (callbackId.length == 0) {
+        callbackId = @"Found no callbackId";
+    }
+
+    CDVPluginResult* pluginResult = nil;
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"True"];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+}
+
 - (void)mobileKeysDidFailToUpdateEndpoint:(NSError *)error {
     [self handleUpdateEndpointError:error];
 }
@@ -235,6 +247,22 @@
     CDVPluginResult* pluginResult = nil;
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Failed to unregister endpoint"];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+}
+
+- (void)mobileKeysDidConnectToReader:(MobileKeysReader *)reader openingType:(MobileKeysOpeningType)type {
+    // give some feedback to user.
+}
+
+- (void)mobileKeysDidFailToConnectToReader:(MobileKeysReader *)reader openingType:(MobileKeysOpeningType)type openingStatus:(MobileKeysOpeningStatusType)status {
+    // log something?
+}
+
+- (void)mobileKeysDidDisconnectFromReader:(MobileKeysReader * )reader openingType:(MobileKeysOpeningType)type openingResult:(MobileKeysOpeningResult *)result {
+    // implementation
+}
+
+- (BOOL)mobileKeysShouldAttemptToOpen:(MobileKeysReader *)reader openingType:(MobileKeysOpeningType)type {
+    return YES;
 }
 
 #pragma mark - Error handling
