@@ -10,6 +10,7 @@
 }
 
 @property(nonatomic) MobileKeysManager *mobileKeysManager;
+@property(nonatomic) CLLocationManager *locationManager;
 - (void)coolMethod:(CDVInvokedUrlCommand*)command;
 - (void)startup:(CDVInvokedUrlCommand*)command;
 - (void)isEndpointSetup:(CDVInvokedUrlCommand*)command;
@@ -28,6 +29,7 @@
   MobileKeysManager* _mobileKeysManager;
   NSArray<MobileKeysKey*> *_mobilekey;
   NSArray * _openingTypes;
+  CLLocationManager* _locationManager;
 
   // CallbackIds
   NSString* _startupCallbackId;
@@ -43,6 +45,14 @@
     if (self) {
         _mobileKeysManager = [self createInitializedMobileKeysManager];
         _openingTypes =@[@(MobileKeysOpeningTypeEnhancedTap)];
+        _locationManager = [[CLLocationManager alloc] init];
+    }
+
+    [[NSNotificationCenter] addObserver:self selector:@selector(handleEnteredBackground) name:UiApplicationDidEnterBackgroundNotification object:nil];
+    [[NSNotificationCenter] addObserver:self selector:@selector(handleDidBecomeActive) name:UiApplicationDidBecomeActiveNotification object:nil];
+
+    if ([_locationManager.class authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) {
+        _locationManager.allowsBackgroundLocationUpdates = YES;
     }
 
     [_mobileKeysManager startup];
@@ -51,12 +61,28 @@
 }
 
 - (MobileKeysManager *)createInitializedMobileKeysManager {
-
     NSString* applicationId = @"UaMobileKeys";
     NSString *version = [NSString stringWithFormat:@"%@-%@ (%@)", applicationId, [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"], [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"]];
     NSDictionary *config = @{MobileKeysOptionApplicationId: applicationId, MobileKeysOptionVersion: version};
 
     return [[MobileKeysManager alloc] initWithDelegate:self options:config];
+}
+
+#pragma mark - Location manager
+- (void)handleDidBecomeActive {
+    if ([_locationManager.class authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) {
+        [_locationManager startUpdatingLocation];
+    }
+}
+
+- (void)handleEnteredBackground {
+    [self getKeysFromSeos];
+
+    if (_mobilekey.count > 0) {
+        if ([_locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+            [_locationManager requestAlwaysAuthorization];
+        }
+    }
 }
 
 #pragma mark - SDK Methods
@@ -93,15 +119,9 @@
     _setupEndpointCallbackId = command.callbackId;
     NSString* invitationCode = [command.arguments objectAtIndex:0];
 
-    CDVPluginResult* pluginResult = nil;
     if ([self isValidCode:invitationCode]) {
         [_mobileKeysManager setupEndpoint:invitationCode];
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"True"];
-    } else {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Invalid code"];
     }
-
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 - (void)updateEndpoint:(CDVInvokedUrlCommand*)command
@@ -245,7 +265,7 @@
     }
 
     CDVPluginResult* pluginResult = nil;
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Failed to unregister endpoint"];
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Managed to unregister endpoint"];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 
@@ -324,6 +344,11 @@
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:validPattern options:0 error:nil];
     
     return (code != nil) && ([regex firstMatchInString:code options:0 range:NSMakeRange(0, code.length)] != nil);
+}
+
+- (void)getKeysFromSeos {
+    NSError *error = nil;
+    _mobilekey = [[_mobileKeysManager listMobileKeys:&error] mutableCopy];
 }
 
 #pragma mark - Test methods
