@@ -206,7 +206,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     public void handleMobileKeysTransactionCompleted()
     {
         // does something if transaction was successful
-        PluginResult result = new PluginResult(PluginResult.Status.OK, "true from callbackComplete");
+        PluginResult result = new PluginResult(PluginResult.Status.OK, "true");
         _callbackContext.sendPluginResult(result);
     }
 
@@ -214,7 +214,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     public void handleMobileKeysTransactionFailed(MobileKeysException mobileKeysException)
     {
         // does something if transaction was unsuccessful
-        PluginResult result = new PluginResult(PluginResult.Status.OK, "false from transaction failed");
+        PluginResult result = new PluginResult(PluginResult.Status.OK, "false");
         _callbackContext.sendPluginResult(result);
     }
 }
