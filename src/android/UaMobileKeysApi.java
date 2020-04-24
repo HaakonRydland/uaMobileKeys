@@ -39,14 +39,16 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     private UaMobileKeysSetup keySetup = new UaMobileKeysSetup();
     private View containerView;
     private int REQUEST_LOCATION_PERMISSION = 1;
+    private CallbackContext _callbackContext;
 
     // Mobile Keys interface
     // applicationStartup
     public void startup(CallbackContext callbackContext) throws MobileKeysException {
+        _callbackContext = callbackContext;
         MobileKeysApi.getInstance().getMobileKeys().applicationStartup(this);
 
-        PluginResult result = new PluginResult(PluginResult.Status.OK, "true");
-        callbackContext.sendPluginResult(result);
+        // PluginResult result = new PluginResult(PluginResult.Status.OK, "true");
+        // callbackContext.sendPluginResult(result);
     }
 
     // isEndpointSetupComplete
@@ -68,18 +70,20 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
 
     // endpointSetup
     public void setupEndpoint(CallbackContext callbackContext, String invitationCode) throws MobileKeysException {
+        _callbackContext = callbackContext;
         MobileKeysApi.getInstance().getMobileKeys().endpointSetup(this, invitationCode, new EndpointSetupConfiguration.Builder().build());
 
-        PluginResult result = new PluginResult(PluginResult.Status.OK, "true");
-        callbackContext.sendPluginResult(result);
+        // PluginResult result = new PluginResult(PluginResult.Status.OK, "true");
+        // callbackContext.sendPluginResult(result);
     }
 
     // endpointUpdate
     public void updateEndpoint(CallbackContext callbackContext) throws MobileKeysException {
+        _callbackContext = callbackContext;
         MobileKeysApi.getInstance().getMobileKeys().endpointUpdate(this);
 
-        PluginResult result = new PluginResult(PluginResult.Status.OK, "true");
-        callbackContext.sendPluginResult(result);
+        // PluginResult result = new PluginResult(PluginResult.Status.OK, "true");
+        // callbackContext.sendPluginResult(result);>
     }
 
     // listMobileKeys
@@ -202,12 +206,16 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     public void handleMobileKeysTransactionCompleted()
     {
         // does something if transaction was successful
+        PluginResult result = new PluginResult(PluginResult.Status.OK, "true from callbackComplete");
+        _callbackContext.sendPluginResult(result);
     }
 
     @Override
     public void handleMobileKeysTransactionFailed(MobileKeysException mobileKeysException)
     {
         // does something if transaction was unsuccessful
+        PluginResult result = new PluginResult(PluginResult.Status.OK, "false from transaction failed");
+        _callbackContext.sendPluginResult(result);
     }
 }
 
