@@ -243,15 +243,16 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 
+// Will be triggered after mobileKeysDidUpdateEndpoint, so this isn't important for our use case right now
 - (void)mobileKeysDidUpdateEndpointWithSummary:(MobileKeysEndpointUpdateSummary *) endpointUpdateSummary {
-    NSString* callbackId = _updateEndpointCallbackId;
-    if (callbackId.length == 0) {
-        callbackId = @"Found no callbackId";
-    }
+    // NSString* callbackId = _updateEndpointCallbackId;
+    // if (callbackId.length == 0) {
+    //     callbackId = @"Found no callbackId";
+    // }
 
-    CDVPluginResult* pluginResult = nil;
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"True"];
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+    // CDVPluginResult* pluginResult = nil;
+    // pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"True"];
+    // [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 
 - (void)mobileKeysDidFailToUpdateEndpoint:(NSError *)error {
@@ -265,7 +266,7 @@
     }
 
     CDVPluginResult* pluginResult = nil;
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Managed to unregister endpoint"];
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Terminated"];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 
