@@ -51,8 +51,8 @@
         _locationManager = [[CLLocationManager alloc] init];
     }
 
-    [[NSNotificationCenter] addObserver:self selector:@selector(handleEnteredBackground) name:UiApplicationDidEnterBackgroundNotification object:nil];
-    [[NSNotificationCenter] addObserver:self selector:@selector(handleDidBecomeActive) name:UiApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEnteredBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
 
     if ([_locationManager.class authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) {
         _locationManager.allowsBackgroundLocationUpdates = YES;
