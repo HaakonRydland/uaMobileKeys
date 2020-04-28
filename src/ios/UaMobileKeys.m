@@ -36,6 +36,7 @@
   NSString* _setupEndpointCallbackId;
   NSString* _terminateEndpointCallbackId;
   NSString* _updateEndpointCallbackId;
+  NSString* _scanCallbackId;
 
 #pragma mark - SetupMethods
 - (id)init:(CDVInvokedUrlCommand*)command {
@@ -43,7 +44,9 @@
     _startupCallbackId = command.callbackId;
 
     if (self) {
-        _mobileKeysManager = [self createInitializedMobileKeysManager];
+        if (_mobileKeysManager == nil) {
+            _mobileKeysManager = [self createInitializedMobileKeysManager];
+        }
         _openingTypes =@[@(MobileKeysOpeningTypeEnhancedTap)];
         _locationManager = [[CLLocationManager alloc] init];
     }
@@ -158,21 +161,16 @@
 
 - (void)startForegroundScanning:(CDVInvokedUrlCommand*)command
 {
+    _scanCallbackId = command.callbackId;
     NSArray *_lockServiceCodes;
     _lockServiceCodes = @[@1, @2];
     NSError *error;
-
-    CDVPluginResult* pluginResult = nil;
 
     if (_mobileKeysManager.isScanning) {
         [_mobileKeysManager stopReaderScan];
     }
 
     [_mobileKeysManager startReaderScanInMode:MobileKeysScanModeOptimizePerformance supportedOpeningTypes:_openingTypes lockServiceCodes:_lockServiceCodes error:&error];
-
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"True"];
-
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 - (void)stopScanning:(CDVInvokedUrlCommand*)command
@@ -271,15 +269,36 @@
 }
 
 - (void)mobileKeysDidConnectToReader:(MobileKeysReader *)reader openingType:(MobileKeysOpeningType)type {
-    // give some feedback to user.
+    NSString* callbackId = _scanCallbackId;
+    if (callbackId.length == 0) {
+        callbackId = @"Found no callbackId";
+    }
+
+    CDVPluginResult* pluginResult = nil;
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Connected to reader"];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 
 - (void)mobileKeysDidFailToConnectToReader:(MobileKeysReader *)reader openingType:(MobileKeysOpeningType)type openingStatus:(MobileKeysOpeningStatusType)status {
-    // log something?
+    NSString* callbackId = _scanCallbackId;
+    if (callbackId.length == 0) {
+        callbackId = @"Found no callbackId";
+    }
+
+    CDVPluginResult* pluginResult = nil;
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Failed to connect to reader"];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 
 - (void)mobileKeysDidDisconnectFromReader:(MobileKeysReader * )reader openingType:(MobileKeysOpeningType)type openingResult:(MobileKeysOpeningResult *)result {
-    // implementation
+    NSString* callbackId = _scanCallbackId;
+    if (callbackId.length == 0) {
+        callbackId = @"Found no callbackId";
+    }
+
+    CDVPluginResult* pluginResult = nil;
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Did disconnect from reader"];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 
 - (BOOL)mobileKeysShouldAttemptToOpen:(MobileKeysReader *)reader openingType:(MobileKeysOpeningType)type {
