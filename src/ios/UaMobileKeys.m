@@ -163,7 +163,7 @@
 {
     _scanCallbackId = command.callbackId;
     NSArray *_lockServiceCodes;
-    _lockServiceCodes = @[@1, @2];
+    _lockServiceCodes = @[@1];
     NSError *error;
 
     if (_mobileKeysManager.isScanning) {
