@@ -171,6 +171,19 @@
     }
 
     [_mobileKeysManager startReaderScanInMode:MobileKeysScanModeOptimizePerformance supportedOpeningTypes:_openingTypes lockServiceCodes:_lockServiceCodes error:&error];
+
+    if (error) {
+        switch (error.code) {
+            case MobileKeysErrorCodeBluetoothLENotAvailable: {
+                CDVPluginResult* pluginResult = nil;
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"No bluetooth available"];
+                [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+                break;
+            }
+            default: [self handleScanningError];
+            break;
+        }
+    }
 }
 
 - (void)stopScanning:(CDVInvokedUrlCommand*)command
@@ -348,6 +361,19 @@
 - (void)handleUpdateEndpointError:(NSError *) error {
     if (error != nil) {
         NSString* callbackId = _updateEndpointCallbackId;
+        if (callbackId.length == 0) {
+            callbackId = @"Found no callbackId";
+        }
+
+        CDVPluginResult* pluginResult = nil;
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+    }
+}
+
+- (void)handleScanningError:(NSError *) error {
+    if (error != nil) {
+        NSString* callbackId = _scanCallbackId;
         if (callbackId.length == 0) {
             callbackId = @"Found no callbackId";
         }
