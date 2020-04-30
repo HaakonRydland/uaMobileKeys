@@ -180,7 +180,7 @@
                 [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
                 break;
             }
-            default: [self handleScanningError];
+            default: [self handleScanningError:error];
             break;
         }
     }
