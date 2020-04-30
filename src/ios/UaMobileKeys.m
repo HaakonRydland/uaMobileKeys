@@ -218,9 +218,9 @@
 
     CDVPluginResult* pluginResult = nil;
     if (!self.isEndpointSetup) {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Endpoint is not setup"];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"False"];
     } else {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Endpoint is setup"];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"True"];
     }
 
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
