@@ -225,21 +225,18 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         _callbackContext.sendPluginResult(result);
     }
 
-    @Override
     public void onReaderConnectionOpened(Reader reader, OpeningType openingType)
     {
         PluginResult result = new PluginResult(PluginResult.Status.OK, "onReaderConnectionOpened");
         _callbackContext.sendPluginResult(result);
     }
 
-    @Override
     public void onReaderConnectionClosed(Reader reader, OpeningResult openingResult)
     {
         PluginResult result = new PluginResult(PluginResult.Status.OK, "onReaderConnectionClosed");
         _callbackContext.sendPluginResult(result);
     }
 
-    @Override
     public void onReaderConnectionFailed(Reader reader, OpeningType openingType, OpeningStatus openingStatus)
     {
         PluginResult result = new PluginResult(PluginResult.Status.OK, "onReaderConnectionFailed");
