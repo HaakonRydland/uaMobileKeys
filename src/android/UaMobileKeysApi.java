@@ -154,15 +154,13 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
 
     // startForegroundScanning
     public void startForegroundScanning(CallbackContext callbackContext, Context context, Activity activity) {
+        _callbackContext = callbackContext;
         if (hasLocationPermissions(context)) {
             ReaderConnectionController controller = MobileKeysApi.getInstance().getReaderConnectionController();
             controller.enableHce();
 
             Notification notification = UaUnlockNotification.create(context);
             controller.startForegroundScanning(notification);
-
-            PluginResult result = new PluginResult(PluginResult.Status.OK, "true");
-            callbackContext.sendPluginResult(result);
         } else {
             requestLocationPermission(context, activity);
         }
@@ -224,6 +222,27 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     {
         // does something if transaction was unsuccessful
         PluginResult result = new PluginResult(PluginResult.Status.OK, "false");
+        _callbackContext.sendPluginResult(result);
+    }
+
+    @Override
+    public void onReaderConnectionOpened(Reader reader, OpeningType openingType)
+    {
+        PluginResult result = new PluginResult(PluginResult.Status.OK, "onReaderConnectionOpened");
+        _callbackContext.sendPluginResult(result);
+    }
+
+    @Override
+    public void onReaderConnectionClosed(Reader reader, OpeningResult openingResult)
+    {
+        PluginResult result = new PluginResult(PluginResult.Status.OK, "onReaderConnectionClosed");
+        _callbackContext.sendPluginResult(result);
+    }
+
+    @Override
+    public void onReaderConnectionFailed(Reader reader, OpeningType openingType, OpeningStatus openingStatus)
+    {
+        PluginResult result = new PluginResult(PluginResult.Status.OK, "onReaderConnectionFailed");
         _callbackContext.sendPluginResult(result);
     }
 }
