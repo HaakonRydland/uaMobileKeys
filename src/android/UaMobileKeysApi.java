@@ -19,6 +19,7 @@ import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.os.Vibrator;
 import android.os.VibrationEffect;
+import android.os.Build;
 import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -236,7 +237,12 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     {
         // Add vibration
         Vibrator vibrator = (Vibrator) _context.getSystemService(_context.VIBRATOR_SERVICE);
-        vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            vibrator.vibrate(30);
+        }
 
         PluginResult result = new PluginResult(PluginResult.Status.OK, "onReaderConnectionClosed" + openingResult.getOpeningStatus());
         _callbackContext.sendPluginResult(result);
