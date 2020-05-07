@@ -17,8 +17,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.app.ActivityCompat;
 import android.support.design.widget.Snackbar;
 import android.view.View;
+import android.os.Vibrator;
 import java.util.List;
-import java.lang.Object;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
