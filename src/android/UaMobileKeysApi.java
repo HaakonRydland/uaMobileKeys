@@ -48,7 +48,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         _callbackContext = callbackContext;
         MobileKeysApi.getInstance().getMobileKeys().applicationStartup(this);
 
-        readerConnectionCallback = new ReaderConnectionCallback(getApplicationContext());
+        readerConnectionCallback = new ReaderConnectionCallback(this);
         readerConnectionCallback.registerReceiver(this);
     }
 
