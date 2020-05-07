@@ -228,14 +228,18 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     @Override
     public void onReaderConnectionOpened(Reader reader, OpeningType openingType)
     {
-        // PluginResult result = new PluginResult(PluginResult.Status.OK, "onReaderConnectionOpened");
-        // _callbackContext.sendPluginResult(result);
+        Vibrator vibrator = (Vibrator) _context.getSystemService(_context.VIBRATOR_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            vibrator.vibrate(30);
+        }
     }
 
     @Override
     public void onReaderConnectionClosed(Reader reader, OpeningResult openingResult)
     {
-        // Add vibration
         Vibrator vibrator = (Vibrator) _context.getSystemService(_context.VIBRATOR_SERVICE);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -244,7 +248,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
             vibrator.vibrate(150);
         }
 
-        PluginResult result = new PluginResult(PluginResult.Status.OK, "onReaderConnectionClosed" + openingResult.getOpeningStatus());
+        PluginResult result = new PluginResult(PluginResult.Status.OK, "true");
         _callbackContext.sendPluginResult(result);
     }
 
