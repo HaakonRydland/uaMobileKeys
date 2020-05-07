@@ -18,6 +18,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.os.Vibrator;
+import android.os.VibrationEffect;
 import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -42,11 +43,13 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     private int REQUEST_LOCATION_PERMISSION = 1;
     private CallbackContext _callbackContext;
     private ReaderConnectionCallback readerConnectionCallback;
+    private Context _context;
 
     // Mobile Keys interface
     // applicationStartup
     public void startup(CallbackContext callbackContext, Context context) throws MobileKeysException {
         _callbackContext = callbackContext;
+        _context = context;
         MobileKeysApi.getInstance().getMobileKeys().applicationStartup(this);
 
         readerConnectionCallback = new ReaderConnectionCallback(context);
@@ -232,7 +235,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     public void onReaderConnectionClosed(Reader reader, OpeningResult openingResult)
     {
         // Add vibration
-        Vibrator vibrator = (Vibrator) Context.getSystemService(Context.VIBRATOR_SERVICE);
+        Vibrator vibrator = (Vibrator) _context.getSystemService(_context.VIBRATOR_SERVICE);
         vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
 
         PluginResult result = new PluginResult(PluginResult.Status.OK, "onReaderConnectionClosed" + openingResult.getOpeningStatus());
