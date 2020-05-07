@@ -33,13 +33,14 @@ import com.assaabloy.mobilekeys.api.MobileKeysException;
 import com.assaabloy.mobilekeys.api.EndpointSetupConfiguration;
 import com.assaabloy.mobilekeys.api.EndpointInfo;
 
-public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback {
+public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback, ReaderConnectionListener {
 
     public UaMobileKeysApi () {}
     private UaMobileKeysSetup keySetup = new UaMobileKeysSetup();
     private View containerView;
     private int REQUEST_LOCATION_PERMISSION = 1;
     private CallbackContext _callbackContext;
+    private ReaderConnectionCallback readerConnectionCallback;
 
     // Mobile Keys interface
     // applicationStartup
@@ -47,8 +48,8 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         _callbackContext = callbackContext;
         MobileKeysApi.getInstance().getMobileKeys().applicationStartup(this);
 
-        // PluginResult result = new PluginResult(PluginResult.Status.OK, "true");
-        // callbackContext.sendPluginResult(result);
+        readerConnectionCallback = new ReaderConnectionCallback(getApplicationContext());
+        readerConnectionCallback.registerReceiver(this);
     }
 
     // isEndpointSetupComplete
@@ -72,18 +73,12 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     public void setupEndpoint(CallbackContext callbackContext, String invitationCode) throws MobileKeysException {
         _callbackContext = callbackContext;
         MobileKeysApi.getInstance().getMobileKeys().endpointSetup(this, invitationCode, new EndpointSetupConfiguration.Builder().build());
-
-        // PluginResult result = new PluginResult(PluginResult.Status.OK, "true");
-        // callbackContext.sendPluginResult(result);
     }
 
     // endpointUpdate
     public void updateEndpoint(CallbackContext callbackContext) throws MobileKeysException {
         _callbackContext = callbackContext;
         MobileKeysApi.getInstance().getMobileKeys().endpointUpdate(this);
-
-        // PluginResult result = new PluginResult(PluginResult.Status.OK, "true");
-        // callbackContext.sendPluginResult(result);>
     }
 
     // listMobileKeys
@@ -225,18 +220,21 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         _callbackContext.sendPluginResult(result);
     }
 
+    @Override
     public void onReaderConnectionOpened(Reader reader, OpeningType openingType)
     {
         PluginResult result = new PluginResult(PluginResult.Status.OK, "onReaderConnectionOpened");
         _callbackContext.sendPluginResult(result);
     }
 
+    @Override
     public void onReaderConnectionClosed(Reader reader, OpeningResult openingResult)
     {
         PluginResult result = new PluginResult(PluginResult.Status.OK, "onReaderConnectionClosed");
         _callbackContext.sendPluginResult(result);
     }
 
+    @Override
     public void onReaderConnectionFailed(Reader reader, OpeningType openingType, OpeningStatus openingStatus)
     {
         PluginResult result = new PluginResult(PluginResult.Status.OK, "onReaderConnectionFailed");
