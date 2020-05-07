@@ -18,6 +18,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 import java.util.List;
+import java.lang.Object;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
