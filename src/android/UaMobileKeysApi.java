@@ -230,6 +230,10 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     @Override
     public void onReaderConnectionClosed(Reader reader, OpeningResult openingResult)
     {
+        // Add vibration
+        Vibrator vibrator = (Vibrator) Context.getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+
         PluginResult result = new PluginResult(PluginResult.Status.OK, "onReaderConnectionClosed" + openingResult.getOpeningStatus());
         _callbackContext.sendPluginResult(result);
     }
@@ -237,7 +241,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     @Override
     public void onReaderConnectionFailed(Reader reader, OpeningType openingType, OpeningStatus openingStatus)
     {
-        PluginResult result = new PluginResult(PluginResult.Status.OK, "onReaderConnectionFailed");
+        PluginResult result = new PluginResult(PluginResult.Status.OK, "false");
         _callbackContext.sendPluginResult(result);
     }
 }
