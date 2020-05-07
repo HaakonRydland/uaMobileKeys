@@ -168,6 +168,15 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         }
     }
 
+    public void checkBluetoothPermission(CallbackContext callbackContext, Context context, Activity activity) {
+        if (!hasLocationPermissions(context)) {
+            requestLocationPermission(context, activity);
+        }
+
+        PluginResult result = new PluginResult(PluginResult.Status.OK, "true");
+        callbackContext.sendPluginResult(result);
+    }
+
     public void stopScanning(CallbackContext callbackContext) {
         try {
             ReaderConnectionController controller = MobileKeysApi.getInstance().getReaderConnectionController();

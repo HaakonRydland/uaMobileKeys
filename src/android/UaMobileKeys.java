@@ -70,6 +70,9 @@ public class UaMobileKeys extends CordovaPlugin {
         } else if (action.equals("stopScanning")) {
             this.stopScanning(callbackContext);
             return true;
+        } else if (action.equals("checkBluetoothPermission")) {
+            this.checkBluetoothPermission(callbackContext);
+            return true;
         }
 
         return false;
@@ -145,6 +148,14 @@ public class UaMobileKeys extends CordovaPlugin {
         Activity acc = cordova.getActivity();
 
         uaKeyApi.startForegroundScanning(callbackContext, context, acc);
+    }
+
+    private void checkBluetoothPermission(CallbackContext callbackContext) {
+        int androidVersionCurrentlyRunning = Build.VERSION.SDK_INT;
+        Context context = (androidVersionCurrentlyRunning >= 21) ? cordova.getActivity().getWindow().getContext() : cordova.getActivity().getApplicationContext();
+        Activity acc = cordova.getActivity();
+
+        uaKeyApi.checkBluetoothPermission(callbackContext, context, acc);
     }
 
     private void stopScanning(CallbackContext callbackContext) {
