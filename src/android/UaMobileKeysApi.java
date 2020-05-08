@@ -222,43 +222,39 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     {
         switch (mobileKeysException.getErrorCode())
         {
+            String errorResult = "false";
+
             case INTERNAL_ERROR:
-                PluginResult internalErrorResult = new PluginResult(PluginResult.Status.OK, "internal_error");
-                _callbackContext.sendPluginResult(internalErrorResult);
+                errorResult = "internal_error";
                 break;
             case SERVER_UNREACHABLE:
-                PluginResult serverUnreachableResult = new PluginResult(PluginResult.Status.OK, "server_unreachable");
-                _callbackContext.sendPluginResult(serverUnreachableResult);
+                errorResult = "server_unreachable";
                 break;
             case SDK_BUSY:
-                PluginResult sdkBusyResult = new PluginResult(PluginResult.Status.OK, "sdk_busy");
-                _callbackContext.sendPluginResult(sdkBusyResult);
+                errorResult = "sdk_busy";
                 break;
             case INVALID_INVITATION_CODE:
-                PluginResult invalidInvitationCodeResult = new PluginResult(PluginResult.Status.OK, "invalid_invitation_code");
-                _callbackContext.sendPluginResult(invalidInvitationCodeResult);
+                errorResult = "invalid_invitation_code";
                 break;
             case DEVICE_SETUP_FAILED:
-                PluginResult deviceSetupFailedResult = new PluginResult(PluginResult.Status.OK, "device_setup_failed");
-                _callbackContext.sendPluginResult(deviceSetupFailedResult);
+                errorResult = "device_setup_failed";
                 break;
             case SDK_INCOMPATIBLE:
-                PluginResult sdkIncompatibleResult = new PluginResult(PluginResult.Status.OK, "sdk_incompatible");
-                _callbackContext.sendPluginResult(sdkIncompatibleResult);
+                errorResult = "sdk_incompatible";
                 break;
             case DEVICE_NOT_ELIGIBLE:
-                PluginResult deviceNotEligibleResult = new PluginResult(PluginResult.Status.OK, "device_not_eligible");
-                _callbackContext.sendPluginResult(deviceNotEligibleResult);
+                errorResult = "device_not_eligible";
                 break;
             case ENDPOINT_NOT_SETUP:
-                PluginResult endpointNotSetupResult = new PluginResult(PluginResult.Status.OK, "endpoint_not_setup");
-                _callbackContext.sendPluginResult(endpointNotSetupResult);
+                errorResult = "endpoint_not_setup";
                 break;
             default:
-                PluginResult result = new PluginResult(PluginResult.Status.OK, "false");
-                _callbackContext.sendPluginResult(result);
+                errorResult = "false";
                 break;
         }
+
+        PluginResult result = new PluginResult(PluginResult.Status.OK, errorResult);
+        _callbackContext.sendPluginResult(result);
     }
 
     @Override
