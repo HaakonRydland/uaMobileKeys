@@ -170,7 +170,8 @@
         [_mobileKeysManager stopReaderScan];
     }
 
-    [_mobileKeysManager startReaderScanInMode:MobileKeysScanModeOptimizePerformance supportedOpeningTypes:_openingTypes lockServiceCodes:_lockServiceCodes error:&error];
+    [_mobileKeysManager setSupportedOpeningTypes:_openingTypes];
+    [_mobileKeysManager startReaderScanInMode:MobileKeysScanModeOptimizePowerConsumption supportedOpeningTypes:_openingTypes lockServiceCodes:_lockServiceCodes error:&error];
 
     if (error) {
         switch (error.code) {
