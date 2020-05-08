@@ -221,8 +221,45 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     public void handleMobileKeysTransactionFailed(MobileKeysException mobileKeysException)
     {
         // does something if transaction was unsuccessful
-        PluginResult result = new PluginResult(PluginResult.Status.OK, "false");
-        _callbackContext.sendPluginResult(result);
+        switch (mobileKeysException.getErrorCode())
+        {
+            case INTERNAL_ERROR:
+                PluginResult result = new PluginResult(PluginResult.Status.OK, "internal_error");
+                _callbackContext.sendPluginResult(result);
+                break;
+            case SERVER_UNREACHABLE:
+                PluginResult result = new PluginResult(PluginResult.Status.OK, "server_unreachable");
+                _callbackContext.sendPluginResult(result);
+                break;
+            case SDK_BUSY:
+                PluginResult result = new PluginResult(PluginResult.Status.OK, "sdk_busy");
+                _callbackContext.sendPluginResult(result);
+                break;
+            case INVALID_INVITATION_CODE:
+                PluginResult result = new PluginResult(PluginResult.Status.OK, "invalid_invidation_code");
+                _callbackContext.sendPluginResult(result);
+                break;
+            case DEVICE_SETUP_FAILED:
+                PluginResult result = new PluginResult(PluginResult.Status.OK, "device_setup_failed");
+                _callbackContext.sendPluginResult(result);
+                break;
+            case SDK_INCOMPATIBLE:
+                PluginResult result = new PluginResult(PluginResult.Status.OK, "sdk_incompatible");
+                _callbackContext.sendPluginResult(result);
+                break;
+            case DEVICE_NOT_ELIGIBLE:
+                PluginResult result = new PluginResult(PluginResult.Status.OK, "device_not_eligible");
+                _callbackContext.sendPluginResult(result);
+                break;
+            case ENDPOINT_NOT_SETUP:
+                PluginResult result = new PluginResult(PluginResult.Status.OK, "endpoint_not_setup");
+                _callbackContext.sendPluginResult(result);
+                break;
+            default:
+                PluginResult result = new PluginResult(PluginResult.Status.OK, "false");
+                _callbackContext.sendPluginResult(result);
+                break;
+        }
     }
 
     @Override
