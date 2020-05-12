@@ -222,10 +222,10 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     @Override
     public void handleMobileKeysTransactionFailed(MobileKeysException mobileKeysException)
     {
+        String errorResult = "false";
+
         switch (mobileKeysException.getErrorCode())
         {
-            String errorResult = "false";
-
             case INTERNAL_ERROR:
                 errorResult = "internal_error";
                 break;
