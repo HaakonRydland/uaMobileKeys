@@ -125,9 +125,8 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
 
         try {
             data = MobileKeysApi.getInstance().getMobileKeys().getEndpointInfo();
-            CustomEndpointInfo cEndpoint = new CustomEndpointInfo(data.getSeosId(), data.getLastServerSyncDate(), data.getMobileKeysAPIVersion(), data.getEndpointAppVersion());
 
-            String json = new Gson().toJson(cEndpoint);
+            String json = new Gson().toJson(data);
             PluginResult result = new PluginResult(PluginResult.Status.OK, json);
             callbackContext.sendPluginResult(result);
         } catch (MobileKeysException e) {
@@ -307,20 +306,6 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     {
         PluginResult result = new PluginResult(PluginResult.Status.OK, "false");
         _callbackContext.sendPluginResult(result);
-    }
-}
-
-public class CustomEndpointInfo {
-    private String seosId = "";
-    private Date lastServerSync = new Date();
-    private String sdkVersion = "";
-    private String seosVersion = "";
-
-    CustomEndpointInfo(String SeosId, Date LastServerSync, String SdkVersion, String SeosVersion) {
-        this.seosId = SeosId;
-        this.lastServerSync = LastServerSync;
-        this.sdkVersion = SdkVersion;
-        this.seosVersion = SeosVersion;
     }
 }
 
