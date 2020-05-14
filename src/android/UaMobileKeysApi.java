@@ -120,6 +120,22 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         callbackContext.sendPluginResult(result);
     }
 
+    public void getUsefulEndpointInfo(CallbackContext callbackContext) {
+        EndpointInfo data = null;
+
+        try {
+            data = MobileKeysApi.getInstance().getMobileKeys().getEndpointInfo();
+            CustomEndpointInfo cEndpoint = new CustomEndpointInfo(data.getSeosId(), data.getLastServerSyncDate(), data.getMobileKeysAPIVersion(), data.getEndpointAppVersion());
+
+            String json = new Gson().toJson(cEndpoint);
+            PluginResult result = new PluginResult(PluginResult.Status.OK, json);
+            callbackContext.sendPluginResult(result);
+        } catch (MobileKeysException e) {
+            System.out.println(e);
+            callbackContext.error("ERROR");
+        }
+    }
+
     // unregisterEndpoint
     public void unregisterEndpoint(CallbackContext callbackContext) {
         MobileKeysApi.getInstance().getMobileKeys().unregisterEndpoint(new MobileKeysCallback() {
@@ -291,6 +307,20 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     {
         PluginResult result = new PluginResult(PluginResult.Status.OK, "false");
         _callbackContext.sendPluginResult(result);
+    }
+}
+
+public class CustomEndpointInfo {
+    private String seosId = "";
+    private Date lastServerSync = new Date();
+    private String sdkVersion = "";
+    private String seosVersion = "";
+
+    CustomEndpointInfo(String SeosId, Date LastServerSync, String SdkVersion, String SeosVersion) {
+        this.seosId = SeosId;
+        this.lastServerSync = LastServerSync;
+        this.sdkVersion = SdkVersion;
+        this.seosVersion = SeosVersion;
     }
 }
 

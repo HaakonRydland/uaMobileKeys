@@ -55,6 +55,9 @@ public class UaMobileKeys extends CordovaPlugin {
         } else if (action.equals("endpointInfo")) {
             this.endpointInfo(callbackContext);
             return true;
+        } else if (action.equals("getUsefulEndpointInfo")) {
+            this.getUsefulEndpointInfo(callbackContext);
+            return true;
         } else if (action.equals("unregisterEndpoint")) {
             this.unregisterEndpoint(callbackContext);
             return true;
@@ -86,7 +89,7 @@ public class UaMobileKeys extends CordovaPlugin {
     }
 
     // Mobile keys implementation
-    private void startup(CallbackContext callbackContext){
+    private void startup(CallbackContext callbackContext) {
         try {
             int androidVersionCurrentlyRunning = Build.VERSION.SDK_INT;
             Context context = (androidVersionCurrentlyRunning >= 21) ? cordova.getActivity().getWindow().getContext() : cordova.getActivity().getApplicationContext();
@@ -97,7 +100,7 @@ public class UaMobileKeys extends CordovaPlugin {
         }
     }
 
-    private void isEndpointSetup(CallbackContext callbackContext){
+    private void isEndpointSetup(CallbackContext callbackContext) {
         try {
             uaKeyApi.isEndpointSetup(callbackContext);
         } catch (MobileKeysException ex) {
@@ -106,7 +109,7 @@ public class UaMobileKeys extends CordovaPlugin {
         }
     }
 
-    private void setupEndpoint(CallbackContext callbackContext, String invitationCode){
+    private void setupEndpoint(CallbackContext callbackContext, String invitationCode) {
         try {
             uaKeyApi.setupEndpoint(callbackContext, invitationCode);
         } catch (MobileKeysException ex) {
@@ -115,7 +118,7 @@ public class UaMobileKeys extends CordovaPlugin {
         }
     }
 
-    private void updateEndpoint(CallbackContext callbackContext){
+    private void updateEndpoint(CallbackContext callbackContext) {
         try {
             uaKeyApi.updateEndpoint(callbackContext);
         } catch (MobileKeysException ex) {
@@ -124,12 +127,16 @@ public class UaMobileKeys extends CordovaPlugin {
         }
     }
 
-    private void listMobileKeys(CallbackContext callbackContext){
+    private void listMobileKeys(CallbackContext callbackContext) {
         uaKeyApi.listMobileKeys(callbackContext);
     }
 
-    private void endpointInfo(CallbackContext callbackContext){
+    private void endpointInfo(CallbackContext callbackContext) {
         uaKeyApi.endpointInfo(callbackContext);
+    }
+
+    private void getUsefulEndpointInfo(CallbackContext callbackContext) {
+        uaKeyApi.getUsefulEndpointInfo(callbackContext);
     }
 
     private void unregisterEndpoint(CallbackContext callbackContext) {
