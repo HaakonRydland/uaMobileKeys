@@ -91,6 +91,6 @@ UaMobileKeys.prototype.checkBluetoothPermission = function(arg0, success, error)
     this.pInvoke("checkBluetoothPermission", arg0, success, error);
 };
 
-UaMobileKeys.prototype.checkBluetoothPermission = function(arg0, success, error) {
+UaMobileKeys.prototype.getUsefulEndpointInfo = function(arg0, success, error) {
     this.pInvoke("getUsefulEndpointInfo", arg0, success, error);
 };
