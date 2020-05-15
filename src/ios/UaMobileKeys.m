@@ -108,7 +108,7 @@
     _setupEndpointCallbackId = command.callbackId;
     NSError *error;
     BOOL setupComplete = [_mobileKeysManager isEndpointSetup:&error];
-    NSString *setupCompleteString = setupComplete ? @"True" : @"False";
+    NSString *setupCompleteString = setupComplete ? @"true" : @"false";
 
     if (error != nil) {
         [self handleEndpointSetupError:error];
@@ -193,7 +193,7 @@
     CDVPluginResult* pluginResult = nil;
     [_mobileKeysManager stopReaderScan];
 
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"True"];
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"true"];
 
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
@@ -217,7 +217,7 @@
     }
 
     CDVPluginResult* pluginResult = nil;
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"True"];
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"true"];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 
@@ -233,9 +233,9 @@
 
     CDVPluginResult* pluginResult = nil;
     if (!self.isEndpointSetup) {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"False"];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"false"];
     } else {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"True"];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"true"];
     }
 
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
@@ -252,7 +252,7 @@
     }
 
     CDVPluginResult* pluginResult = nil;
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"True"];
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"true"];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 
@@ -289,9 +289,9 @@
         callbackId = @"Found no callbackId";
     }
 
-    CDVPluginResult* pluginResult = nil;
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Connected to reader"];
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+    // CDVPluginResult* pluginResult = nil;
+    // pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Connected to reader"];
+    // [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 
 - (void)mobileKeysDidFailToConnectToReader:(MobileKeysReader *)reader openingType:(MobileKeysOpeningType)type openingStatus:(MobileKeysOpeningStatusType)status {
@@ -312,7 +312,7 @@
     }
 
     CDVPluginResult* pluginResult = nil;
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Did disconnect from reader"];
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"true"];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 
