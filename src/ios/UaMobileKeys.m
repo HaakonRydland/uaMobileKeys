@@ -29,6 +29,7 @@
   MobileKeysManager* _mobileKeysManager;
   NSArray<MobileKeysKey*> *_mobilekey;
   NSArray * _openingTypes;
+  NSArray * _openingModesWithoutSeamless;
   CLLocationManager* _locationManager;
 
   // CallbackIds
@@ -47,7 +48,8 @@
         if (_mobileKeysManager == nil) {
             _mobileKeysManager = [self createInitializedMobileKeysManager];
         }
-        _openingTypes =@[@(MobileKeysOpeningTypeEnhancedTap)];
+        // _openingTypes =@[@(MobileKeysOpeningTypeEnhancedTap)];
+        _openingModesWithoutSeamless=@[@(MobileKeysOpeningTypeMotion), @(MobileKeysOpeningTypeProximity), @(MobileKeysOpeningTypeApplicationSpecific), @(MobileKeysOpeningTypeEnhancedTap)];
         _locationManager = [[CLLocationManager alloc] init];
     }
 
@@ -163,15 +165,14 @@
 {
     _scanCallbackId = command.callbackId;
     NSArray *_lockServiceCodes;
-    _lockServiceCodes = @[@1];
+    _lockServiceCodes = @[@1, @2];
     NSError *error;
 
     if (_mobileKeysManager.isScanning) {
         [_mobileKeysManager stopReaderScan];
     }
 
-    [_mobileKeysManager setSupportedOpeningTypes:_openingTypes];
-    [_mobileKeysManager startReaderScanInMode:MobileKeysScanModeOptimizePowerConsumption supportedOpeningTypes:_openingTypes lockServiceCodes:_lockServiceCodes error:&error];
+    [_mobileKeysManager startReaderScanInMode:MobileKeysScanModeOptimizePerformance supportedOpeningTypes:_openingModesWithoutSeamless lockServiceCodes:_lockServiceCodes error:&error];
 
     if (error) {
         switch (error.code) {
