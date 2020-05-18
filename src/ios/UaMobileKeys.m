@@ -43,13 +43,15 @@
 - (id)init:(CDVInvokedUrlCommand*)command {
     self = [super init];
     _startupCallbackId = command.callbackId;
+    BOOL startupHasRun = YES;
 
     if (self) {
         if (_mobileKeysManager == nil) {
+            startupHasRun = NO;
             _mobileKeysManager = [self createInitializedMobileKeysManager];
         }
-        // _openingTypes =@[@(MobileKeysOpeningTypeEnhancedTap)];
-        _openingModesWithoutSeamless=@[@(MobileKeysOpeningTypeMotion), @(MobileKeysOpeningTypeProximity), @(MobileKeysOpeningTypeApplicationSpecific), @(MobileKeysOpeningTypeEnhancedTap)];
+
+        _openingModesWithoutSeamless=@[@(MobileKeysOpeningTypeProximity), @(MobileKeysOpeningTypeEnhancedTap)];
         _locationManager = [[CLLocationManager alloc] init];
     }
 
@@ -60,7 +62,9 @@
         _locationManager.allowsBackgroundLocationUpdates = YES;
     }
 
-    [_mobileKeysManager startup];
+    if (startupHasRun == NO) {
+        [_mobileKeysManager startup];
+    }
     
     return self;
 }
@@ -151,7 +155,18 @@
 
 - (void)endpointInfo:(CDVInvokedUrlCommand*)command
 {
-    
+    NSError *error = nil;
+    MobileKeysEndpointInfo *endpointInfo = [_mobileKeysManager endpointInfo:&error];
+    NSInteger _seosId = [endpointInfo seosId];
+    NSString *_seosIdString = [NSString stringWithFormat: @"%ld", (long)_seosId];
+    NSDate *_lastSync = [endpointInfo lastServerSyncDate];
+    NSString *_seosVersion = [endpointInfo seosAppletVersion];
+
+    NSString *usefulInfo = [NSString stringWithFormat:@"%@,%@,%@", _seosIdString, _lastSync, _seosVersion];
+
+    CDVPluginResult* pluginResult = nil;
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:usefulInfo];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 - (void)unregisterEndpoint:(CDVInvokedUrlCommand*)command
@@ -172,7 +187,7 @@
         [_mobileKeysManager stopReaderScan];
     }
 
-    [_mobileKeysManager startReaderScanInMode:MobileKeysScanModeOptimizePerformance supportedOpeningTypes:_openingModesWithoutSeamless lockServiceCodes:_lockServiceCodes error:&error];
+    [_mobileKeysManager startReaderScanInMode:MobileKeysScanModeOptimizePowerConsumption supportedOpeningTypes:_openingModesWithoutSeamless lockServiceCodes:_lockServiceCodes error:&error];
 
     if (error) {
         switch (error.code) {
