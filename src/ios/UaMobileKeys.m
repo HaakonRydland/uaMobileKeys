@@ -56,8 +56,8 @@
         _locationManager = [[CLLocationManager alloc] init];
     }
 
-    /*
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEnteredBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    /*
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
     
     if ([_locationManager.class authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) {
@@ -90,10 +90,17 @@
 - (void)handleEnteredBackground {
     [self getKeysFromSeos];
 
-    if (_mobilekey.count > 0) {
-        if ([_locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
-            [_locationManager requestAlwaysAuthorization];
+    if (_mobileKeysManager.isScanning) {
+        NSString* callbackId = _scanCallbackId;
+        if (callbackId.length == 0) {
+            callbackId = @"Found no callbackId";
         }
+
+        CDVPluginResult* pluginResult = nil;
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"background_entered"];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+
+        [_mobileKeysManager stopReaderScan];
     }
 }
 
