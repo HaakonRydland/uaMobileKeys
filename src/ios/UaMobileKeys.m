@@ -3,6 +3,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import <SeosMobileKeysSDK/SeosMobileKeysSDK.h>
+#import <AudioToolbox/AudioServices.h>
 #import <Cordova/CDV.h>
 
 @interface UaMobileKeys : CDVPlugin {
@@ -55,12 +56,14 @@
         _locationManager = [[CLLocationManager alloc] init];
     }
 
+    /*
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEnteredBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
-
+    
     if ([_locationManager.class authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) {
         _locationManager.allowsBackgroundLocationUpdates = YES;
     }
+    */
 
     if (startupHasRun == NO) {
         [_mobileKeysManager startup];
@@ -325,6 +328,8 @@
     if (callbackId.length == 0) {
         callbackId = @"Found no callbackId";
     }
+
+    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
 
     CDVPluginResult* pluginResult = nil;
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"true"];
