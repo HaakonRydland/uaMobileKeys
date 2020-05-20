@@ -45,16 +45,24 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     private CallbackContext _callbackContext;
     private ReaderConnectionCallback readerConnectionCallback;
     private Context _context;
+    private boolean startupHasRun;
 
     // Mobile Keys interface
     // applicationStartup
     public void startup(CallbackContext callbackContext, Context context) throws MobileKeysException {
         _callbackContext = callbackContext;
         _context = context;
-        MobileKeysApi.getInstance().getMobileKeys().applicationStartup(this);
 
-        readerConnectionCallback = new ReaderConnectionCallback(context);
-        readerConnectionCallback.registerReceiver(this);
+        if (!startupHasRun) {
+            MobileKeysApi.getInstance().getMobileKeys().applicationStartup(this);
+            startupHasRun = true;
+            readerConnectionCallback = new ReaderConnectionCallback(context);
+            readerConnectionCallback.registerReceiver(this);
+        } else {
+            // Startup has already been called.
+            PluginResult result = new PluginResult(PluginResult.Status.OK, "already_done");
+            _callbackContext.sendPluginResult(result);
+        }
     }
 
     // isEndpointSetupComplete
