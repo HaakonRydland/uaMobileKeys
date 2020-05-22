@@ -31,7 +31,6 @@
   NSArray<MobileKeysKey*> *_mobilekey;
   NSArray * _openingTypes;
   NSArray * _openingModesWithoutSeamless;
-  CLLocationManager* _locationManager;
 
   // CallbackIds
   NSString* _startupCallbackId;
@@ -39,6 +38,8 @@
   NSString* _terminateEndpointCallbackId;
   NSString* _updateEndpointCallbackId;
   NSString* _scanCallbackId;
+  NSString* _listKeysCallbackId;
+  NSString* _endpointInfoCallbackId;
 
 #pragma mark - SetupMethods
 - (id)init:(CDVInvokedUrlCommand*)command {
@@ -52,8 +53,7 @@
             _mobileKeysManager = [self createInitializedMobileKeysManager];
         }
 
-        _openingModesWithoutSeamless=@[@(MobileKeysOpeningTypeProximity), @(MobileKeysOpeningTypeEnhancedTap)];
-        _locationManager = [[CLLocationManager alloc] init];
+        _openingModesWithoutSeamless=@[@(MobileKeysOpeningTypeProximity)];
     }
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEnteredBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
@@ -77,13 +77,7 @@
     return [[MobileKeysManager alloc] initWithDelegate:self options:config];
 }
 
-#pragma mark - Location manager
-- (void)handleDidBecomeActive {
-    if ([_locationManager.class authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) {
-        [_locationManager startUpdatingLocation];
-    }
-}
-
+#pragma mark - Event listener functions
 - (void)handleEnteredBackground {
     [self getKeysFromSeos];
 
@@ -149,12 +143,17 @@
 
 - (void)listMobileKeys:(CDVInvokedUrlCommand*)command
 {
-    CDVPluginResult* pluginResult = nil;
-    
+    _listKeysCallbackId = command.callbackId;
     NSError *listKeysError;
     _mobilekey = [_mobileKeysManager listMobileKeys:&listKeysError];
+
+    if (listKeysError != nil) {
+        [self handleListKeysError:listKeysError];
+    }
+
     NSString *strResultFromInt = [NSString stringWithFormat:@"%lu", _mobilekey.count];
 
+    CDVPluginResult* pluginResult = nil;
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:strResultFromInt];
 
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
@@ -162,8 +161,14 @@
 
 - (void)endpointInfo:(CDVInvokedUrlCommand*)command
 {
+    _endpointInfoCallbackId = command.callbackId;
     NSError *error = nil;
     MobileKeysEndpointInfo *endpointInfo = [_mobileKeysManager endpointInfo:&error];
+
+    if (error != nil) {
+        [self handleEndpointInfoError:error];
+    }
+
     NSInteger _seosId = [endpointInfo seosId];
     NSString *_seosIdString = [NSString stringWithFormat: @"%ld", (long)_seosId];
     NSDate *_lastSync = [endpointInfo lastServerSyncDate];
@@ -352,9 +357,9 @@
             callbackId = @"Found no callbackId";
         }
 
-        CDVPluginResult* pluginResult = nil;
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-        [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+    CDVPluginResult* pluginResult = nil;
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"false"];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
     }
 }
 
@@ -366,7 +371,7 @@
         }
 
         CDVPluginResult* pluginResult = nil;
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"false"];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
     }
 }
@@ -379,7 +384,7 @@
         }
 
         CDVPluginResult* pluginResult = nil;
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"false"];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
     }
 }
@@ -392,7 +397,33 @@
         }
 
         CDVPluginResult* pluginResult = nil;
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"false"];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+    }
+}
+
+- (void)handleListKeysError:(NSError *) error {
+    if (error != nil) {
+        NSString* callbackId = _listKeysCallbackId;
+        if (callbackId.length == 0) {
+            callbackId = @"Found no callbackId";
+        }
+
+        CDVPluginResult* pluginResult = nil;
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"false"];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+    }
+}
+
+- (void)handleEndpointInfoError:(NSError *) error {
+    if (error != nil) {
+        NSString* callbackId = _endpointInfoCallbackId;
+        if (callbackId.length == 0) {
+            callbackId = @"Found no callbackId";
+        }
+
+        CDVPluginResult* pluginResult = nil;
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"false"];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
     }
 }
@@ -405,7 +436,7 @@
         }
 
         CDVPluginResult* pluginResult = nil;
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"false"];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
     }
 }
