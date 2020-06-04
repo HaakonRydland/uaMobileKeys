@@ -340,9 +340,10 @@
 
     AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
 
-    CDVPluginResult* pluginResult = nil;
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"true"];
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+	// To allow the 'background_entered CDVPluginResult' to hit the UA startForegroundScanning callback (UNIE-959)
+    // CDVPluginResult* pluginResult = nil;
+    // pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"true"];
+    // [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 
 - (BOOL)mobileKeysShouldAttemptToOpen:(MobileKeysReader *)reader openingType:(MobileKeysOpeningType)type {
