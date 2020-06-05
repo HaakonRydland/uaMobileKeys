@@ -1,0 +1,11 @@
+framework module SeosMobileKeysSDK {
+  umbrella header "SeosMobileKeysSDK.h"
+
+  export *
+  module * { export * }
+}
+
+module SeosMobileKeysSDK.Swift {
+    header "SeosMobileKeysSDK-Swift.h"
+    requires objc
+}

@@ -1,0 +1,489 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)
+// swift-module-flags: -target x86_64-apple-ios11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name SeosMobileKeysSDK
+import CoreGraphics
+import Foundation
+@_exported import SeosMobileKeysSDK
+import Swift
+import UIKit
+import os.log
+import os
+extension UInt8 {
+  public func isConstructedTag() -> Swift.Bool
+  public func has(bit: Swift.UInt8) -> Swift.Bool
+  public mutating func set(bit: Swift.UInt8)
+  public static func fromInt(int: Swift.Int) -> Swift.UInt8
+}
+@objc open class LegacySeosFileSystemDataFormat : ObjectiveC.NSObject {
+  @objc public var endOfData: Swift.UInt32
+  @objc public var seosFileSystem: SeosMobileKeysSDK.SeosFileSystem
+  @objc public init(seosFileSystem: SeosMobileKeysSDK.SeosFileSystem)
+  @objc public init(rawData: Foundation.Data)
+  @objc public func exportToLegacyDataFormat() -> Foundation.Data
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public class ReaderRepository : ObjectiveC.NSObject {
+  @objc public init(clock: SeosMobileKeysSDK.Clock)
+  @objc public func closestReader() -> SeosMobileKeysSDK.MobileKeysReader?
+  @objc public func closestActivePeripheralForOpeningType(type: SeosMobileKeysSDK.MobileKeysOpeningType) -> SeosMobileKeysSDK.MobileKeysReader?
+  @objc public func closestPeripheralForOpeningType(type: SeosMobileKeysSDK.MobileKeysOpeningType, enforceTimeout: Swift.Bool) -> SeosMobileKeysSDK.MobileKeysReader?
+  @objc public func addRssi(reader: SeosMobileKeysSDK.MobileKeysReader, rssi: Swift.Int)
+  @objc public func updateOrSave(reader: SeosMobileKeysSDK.MobileKeysReader)
+  @objc public func findReader(uuid: Swift.String) -> SeosMobileKeysSDK.MobileKeysReader?
+  @objc public func removeReader(uuid: Swift.String)
+  @objc public func listAllActiveReaders() -> [SeosMobileKeysSDK.MobileKeysReader]
+  @objc override dynamic public init()
+  @objc deinit
+}
+public class DataScanner {
+  public convenience init(data: Foundation.Data)
+  public init(data: Foundation.Data, maxPos: Swift.Int)
+  @objc deinit
+}
+@objc public enum TriggerStatus : Swift.Int, Swift.RawRepresentable {
+  public typealias RawValue = Swift.Int
+  case success
+  case unsupportedOpeningType
+  case noReaderInRange
+  case readerInTimeout
+  case readerNotFound
+  case readerNotActive
+  case noAction
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public class TriggerResult : ObjectiveC.NSObject {
+  @objc public var reader: SeosMobileKeysSDK.MobileKeysReader?
+  @objc public var openingType: SeosMobileKeysSDK.MobileKeysOpeningType
+  @objc public var status: SeosMobileKeysSDK.TriggerStatus
+  @objc public var success: Swift.Bool {
+    @objc get
+  }
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public class OpeningTriggerController : ObjectiveC.NSObject {
+  @objc public init(repository: SeosMobileKeysSDK.ReaderRepository)
+  @objc public func rssiTrigger(reader: SeosMobileKeysSDK.MobileKeysReader) -> (SeosMobileKeysSDK.TriggerResult)
+  @objc public func readerConnectedTrigger(reader: SeosMobileKeysSDK.MobileKeysReader) -> (SeosMobileKeysSDK.TriggerResult)
+  @objc public func userActionClosestReader(type: SeosMobileKeysSDK.MobileKeysOpeningType) -> (SeosMobileKeysSDK.TriggerResult)
+  @objc public func specificReader(reader: SeosMobileKeysSDK.MobileKeysReader, type: SeosMobileKeysSDK.MobileKeysOpeningType) -> (SeosMobileKeysSDK.TriggerResult)
+  @objc public func setSupportedOpeningTypes(types: Swift.Array<Swift.Int>)
+  @objc public func supportsOpeningType(type: SeosMobileKeysSDK.MobileKeysOpeningType) -> Swift.Bool
+  @objc override dynamic public init()
+  @objc deinit
+}
+public class UniversalTLV : Swift.CustomStringConvertible {
+  public var tag: SeosMobileKeysSDK.Tag
+  public var length: Swift.UInt16
+  public var rawPayload: Foundation.Data?
+  public var constructedPayload: [SeosMobileKeysSDK.UniversalTLV]
+  public init(tag: SeosMobileKeysSDK.Tag, rawPayload: Foundation.Data)
+  public init?(constructedTag: SeosMobileKeysSDK.Tag, constructedPayload: [SeosMobileKeysSDK.UniversalTLV])
+  public convenience init(rawData: Foundation.Data)
+  public init(dataScanner: SeosMobileKeysSDK.DataScanner)
+  public static func parse(rawData: Foundation.Data) -> [SeosMobileKeysSDK.UniversalTLV]
+  public static func parse(dataScanner: SeosMobileKeysSDK.DataScanner) -> [SeosMobileKeysSDK.UniversalTLV]
+  @objc deinit
+}
+extension UniversalTLV {
+  public var description: Swift.String {
+    get
+  }
+  public func debugDescription(indent: Swift.Int) -> Swift.String
+}
+public typealias SearchableTLV = SeosMobileKeysSDK.UniversalTLV
+extension UniversalTLV {
+  public func findFirst(findTag: SeosMobileKeysSDK.Tag) -> SeosMobileKeysSDK.UniversalTLV?
+  public func findDirectChildren(findTagPrefix: Foundation.Data) -> [SeosMobileKeysSDK.UniversalTLV]
+  public func findAll(findTag: SeosMobileKeysSDK.Tag) -> [SeosMobileKeysSDK.UniversalTLV]
+}
+extension UniversalTLV {
+  public func toData() -> Foundation.Data
+}
+extension UniversalTLV : Swift.Equatable {
+  public static func == (lhs: SeosMobileKeysSDK.UniversalTLV, rhs: SeosMobileKeysSDK.UniversalTLV) -> Swift.Bool
+}
+public class GlobalDataFile : Swift.CustomStringConvertible {
+  public var oid: Foundation.Data
+  public var diversifier: Foundation.Data
+  public var getAccess: SeosMobileKeysSDK.AccessRights
+  public var putAccess: SeosMobileKeysSDK.AccessRights
+  public var globalKeys: [SeosMobileKeysSDK.UniversalTLV]
+  public var otherTags: [SeosMobileKeysSDK.UniversalTLV]
+  public init(withTLV: SeosMobileKeysSDK.UniversalTLV)
+  public var description: Swift.String {
+    get
+  }
+  public func debugDescription(indent: Swift.Int) -> Swift.String
+  @objc deinit
+}
+@objc open class NewSeosFileSystemDataFormat : ObjectiveC.NSObject {
+  @objc public var endOfData: Swift.UInt32
+  @objc public var seosFileSystem: SeosMobileKeysSDK.SeosFileSystem
+  @objc public init(seosFileSystem: SeosMobileKeysSDK.SeosFileSystem)
+  @objc public init(rawData: Foundation.Data)
+  @objc public func exportToVersion3DataFormat() -> Foundation.Data
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public class SeosFileSystem : ObjectiveC.NSObject {
+  public var seosSystemEEPROM: SeosMobileKeysSDK.SeosSystemEeprom!
+  public var snmpData: Foundation.Data?
+  public var gdf: SeosMobileKeysSDK.UniversalTLV?
+  public var adfs: [SeosMobileKeysSDK.UniversalTLV]
+  @objc override dynamic public init()
+  public init(eeprom: SeosMobileKeysSDK.SeosSystemEeprom, snmp: Foundation.Data, gdf: SeosMobileKeysSDK.UniversalTLV?, adfs: [SeosMobileKeysSDK.UniversalTLV])
+  public convenience init(eeprom: Foundation.Data, snmp: Foundation.Data, gdf: SeosMobileKeysSDK.UniversalTLV?, adfs: [SeosMobileKeysSDK.UniversalTLV])
+  @objc public func toString() -> Swift.String
+  @objc public func toShortString() -> Swift.String
+  @objc public func isEmpty() -> Swift.Bool
+  @objc deinit
+}
+extension SeosFileSystem {
+  @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
+}
+@objc public class SeosSystemEeprom : ObjectiveC.NSObject {
+  final public let newEepromVersion: Swift.UInt16
+  final public let newEepromEof: Swift.UInt32
+  public var wrappingKey: Foundation.Data!
+  public var nvManagerLockFlag: Swift.UInt8!
+  public var useStaticUID: Swift.UInt8!
+  public var initFS: Swift.UInt8!
+  public var endOfData: Swift.UInt32!
+  public var fileSystemVersion: Swift.UInt16!
+  @objc override dynamic public init()
+  public init(oldVersion: Foundation.Data)
+  public func exportOldVersion() -> Foundation.Data
+  public init(newVersion: Foundation.Data)
+  public func exportNewVersion() -> Foundation.Data
+  @objc deinit
+}
+extension SeosSystemEeprom {
+  @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
+  public func isEmpty() -> Swift.Bool
+}
+@objc public class RssiMeasurement : ObjectiveC.NSObject {
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension UniversalTLV {
+  public static func parseSeos(rawData: Foundation.Data) -> [SeosMobileKeysSDK.UniversalTLV]
+  public static func parseSeos(dataScanner: SeosMobileKeysSDK.DataScanner) -> [SeosMobileKeysSDK.UniversalTLV]
+}
+public enum AccessType {
+  case READ
+  case WRITE
+  public static func == (a: SeosMobileKeysSDK.AccessType, b: SeosMobileKeysSDK.AccessType) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public class AccessRights : Swift.CustomStringConvertible {
+  public var accessType: SeosMobileKeysSDK.AccessType
+  public var accessRights: [SeosMobileKeysSDK.AccessRight]
+  public convenience init(accessType: SeosMobileKeysSDK.AccessType)
+  public init(accessType: SeosMobileKeysSDK.AccessType, accessRights: [SeosMobileKeysSDK.AccessRight])
+  public func addAccessRight(accessRight: SeosMobileKeysSDK.AccessRight)
+  public func toUniversalTLV() -> SeosMobileKeysSDK.UniversalTLV
+  public var description: Swift.String {
+    get
+  }
+  @objc deinit
+}
+@objc public class SeosNvramDataFormat : ObjectiveC.NSObject {
+  @objc public var endOfData: Swift.UInt32
+  @objc public var seosFileSystem: SeosMobileKeysSDK.SeosFileSystem
+  @objc public init(seosFileSystem: SeosMobileKeysSDK.SeosFileSystem)
+  @objc public init(rawData: Foundation.Data)
+  @objc public func exportTo32x32() -> Foundation.Data
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public class NVRamByteWriter : ObjectiveC.NSObject {
+  public var data: Foundation.Data!
+  public init(size: Swift.Int)
+  public func write(_ data: Foundation.Data) throws
+  public func write(_ value: Swift.UInt8) throws
+  public func writeZeroCount(_ value: Swift.Int) throws
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public enum ReaderCapabilities : Swift.Int, Swift.RawRepresentable {
+  public typealias RawValue = Swift.Int
+  case advertising
+  case connecting
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum OpeningType : Swift.Int, Swift.RawRepresentable {
+  public typealias RawValue = Swift.Int
+  case tap
+  case twistAndGo
+  case seamless
+  case userInitiated
+  case enhancedTap
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public class Reader : ObjectiveC.NSObject {
+  @objc public init(uuid: Swift.String)
+  @objc override dynamic public init()
+  @objc deinit
+}
+public enum AuthenticationKeyRequired : Swift.String {
+  case NO_AUTH
+  case LOCAL_ADF_KEYSET_REQUIRED
+  case LOCAL_ADF_KEYSET_OPTIONAL
+  case GLOBAL_GDF_KEYSET
+  case GRANTED_CONTACT
+  case GRANTED_CONTACTLESS
+  case ACCESS_ALWAYS
+  case TBD
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct AuthenticationKeys {
+}
+public struct AuthenticationLookupTable {
+  public init()
+}
+public struct ReverseAuthenticationLookupTable {
+  public init()
+}
+public class AccessRight : Swift.CustomStringConvertible {
+  public var tag: SeosMobileKeysSDK.Tag
+  public var rights: [Swift.UInt8]
+  public init(tag: SeosMobileKeysSDK.Tag, rights: [Swift.UInt8])
+  public func toUniversalTLV() -> SeosMobileKeysSDK.UniversalTLV
+  public var description: Swift.String {
+    get
+  }
+  @objc deinit
+}
+extension UInt16 {
+  public static func fromInt(int: Swift.Int) -> Swift.UInt16
+}
+public enum LogCategory : Swift.String {
+  case SEOS
+  case BLE
+  case TSM
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum LogLevel : Swift.String {
+  case DEFAULT
+  case DEBUG
+  case INFO
+  case ERROR
+  case FAULT
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct Logger {
+  public static func debug(_ category: SeosMobileKeysSDK.LogCategory, _ message: Any)
+  public static func error(_ category: SeosMobileKeysSDK.LogCategory, _ message: Any)
+  public static func debug(_ message: Any)
+  public static func info(_ message: Any)
+  public static func error(_ message: Any)
+}
+extension Data {
+  public init(hex: Swift.String)
+  public func hexadecimal() -> Swift.String
+}
+extension Data {
+  public var firstByte: Swift.UInt8 {
+    get
+  }
+  public var uint16: Swift.UInt16 {
+    get
+  }
+  public init<T>(from value: T)
+  public func to<T>(type: T.Type) -> T
+  public func splitData(chunkSize: Swift.Int) -> [Foundation.Data]
+}
+extension Data {
+  public func checkSum() -> Swift.Int
+}
+extension Data {
+  public func tlvLength(forceTwoBytesLen: Swift.Bool) -> Foundation.Data
+  public func tlvLength() -> Foundation.Data
+}
+public enum TagFamily : Swift.UInt8 {
+  case Universal
+  case Application
+  case Context
+  case Private
+  public typealias RawValue = Swift.UInt8
+  public init?(rawValue: Swift.UInt8)
+  public var rawValue: Swift.UInt8 {
+    get
+  }
+}
+public enum UniversalTagNumbers : Swift.UInt8 {
+  case Undefined
+  case Integer
+  case BitString
+  case OctetString
+  case Null
+  case ObjectIdentifier
+  case RelativeOid
+  case Sequence
+  case Set
+  case PrintableString
+  case T61String
+  case IA5String
+  case UTCTime
+  public typealias RawValue = Swift.UInt8
+  public init?(rawValue: Swift.UInt8)
+  public var rawValue: Swift.UInt8 {
+    get
+  }
+}
+public class Tag : Swift.Equatable, Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+  public var tagAsData: Foundation.Data
+  public var tagFamily: SeosMobileKeysSDK.TagFamily
+  public var constructed: Swift.Bool
+  public var high: Swift.Bool
+  public var forceTwoByteLength: Swift.Bool
+  public static func == (lhs: SeosMobileKeysSDK.Tag, rhs: SeosMobileKeysSDK.Tag) -> Swift.Bool
+  public init(dataScanner: SeosMobileKeysSDK.DataScanner)
+  public convenience init(bytes: Foundation.Data)
+  public convenience init(singleByte: Swift.UInt8)
+  public convenience init(firstByte: Swift.UInt8, secondByte: Swift.UInt8)
+  public func startsWithHex(prefix: Swift.String) -> Swift.Bool
+  @objc deinit
+}
+@objc public protocol Clock {
+  @objc func currentTimeIntervalSince1970() -> Foundation.TimeInterval
+  @objc func now() -> Foundation.Date
+  @objc func future(time: Foundation.TimeInterval) -> Foundation.Date
+  @objc func past(time: Foundation.TimeInterval) -> Foundation.Date
+}
+@objc public class RealClock : ObjectiveC.NSObject, SeosMobileKeysSDK.Clock {
+  @objc public func currentTimeIntervalSince1970() -> Foundation.TimeInterval
+  @objc public func now() -> Foundation.Date
+  @objc public func future(time: Foundation.TimeInterval) -> Foundation.Date
+  @objc public func past(time: Foundation.TimeInterval) -> Foundation.Date
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public class FakeClock : SeosMobileKeysSDK.RealClock {
+  @objc override dynamic public init()
+  @objc override public func currentTimeIntervalSince1970() -> Foundation.TimeInterval
+  @objc override public func now() -> Foundation.Date
+  @objc public func tick()
+  @objc public func spendTime(time: Foundation.TimeInterval)
+  @objc deinit
+}
+public class DataReadStream {
+  public init(data: Foundation.Data)
+  @objc deinit
+  public var hasBytesAvailable: Swift.Bool {
+    get
+  }
+  public var bytesAvailable: Swift.Int {
+    get
+  }
+  public func readBytes<T>() throws -> T
+  public func read() throws -> Swift.Int8
+  public func read() throws -> Swift.UInt8
+  public func read() throws -> Swift.Int16
+  public func read() throws -> Swift.UInt16
+  public func read() throws -> Swift.Int32
+  public func read() throws -> Swift.UInt32
+  public func read() throws -> Swift.Int64
+  public func read() throws -> Swift.UInt64
+  public func read() throws -> Swift.Float
+  public func read() throws -> Swift.Float64
+  public func read(count: Swift.Int) throws -> Foundation.Data
+  public func read() throws -> Swift.Bool
+}
+public class DataWriteStream {
+  public var count: Swift.Int
+  public init()
+  @objc deinit
+  public var data: Foundation.Data? {
+    get
+  }
+  public func writeBytes<T>(value: T) throws
+  public func writeZeroCount(_ value: Swift.Int) throws
+  public func write(_ value: Swift.Int8) throws
+  public func write(_ value: Swift.UInt8) throws
+  public func write(_ value: Swift.Int16) throws
+  public func write(_ value: Swift.UInt16) throws
+  public func write(_ value: Swift.Int32) throws
+  public func write(_ value: Swift.UInt32) throws
+  public func write(_ value: Swift.Int64) throws
+  public func write(_ value: Swift.UInt64) throws
+  public func write(_ value: Swift.Float32) throws
+  public func write(_ value: Swift.Float64) throws
+  public func write(_ data: Foundation.Data) throws
+  public func write(_ value: Swift.Bool) throws
+}
+@objc public enum ReaderModuleType : Swift.Int, Swift.RawRepresentable {
+  public typealias RawValue = Swift.Int
+  case BleScanner
+  case BleAdvertiser
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public protocol LegacyStateMachineDelegateProtocol {
+  @objc func didTransitionFrom(to: SeosMobileKeysSDK.State, from: SeosMobileKeysSDK.State)
+}
+@objc public enum State : Swift.Int, Swift.RawRepresentable {
+  public typealias RawValue = Swift.Int
+  case IDLE
+  case TRYINGTOSTART
+  case STARTED
+  case ADVERTISING
+  case SCANNING
+  case CONNECTING
+  case CONNECTED
+  case SERVICE_DISCOVERY
+  case SERVICES_DISCOVERED
+  case CHARACTERISTIC_DISCOVERY
+  case CHARACTERISTICS_DISCOVERED
+  case DATA_TRANSFER
+  case DISCONNECTING
+  case DISCONNECTED
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public class LegacyReaderModuleState : ObjectiveC.NSObject {
+  @objc public var state: SeosMobileKeysSDK.State {
+    @objc get
+    @objc set(newValue)
+  }
+  @objc public init(delegate: SeosMobileKeysSDK.LegacyStateMachineDelegateProtocol, initialState: SeosMobileKeysSDK.State, readerModuleType: SeosMobileKeysSDK.ReaderModuleType)
+  @objc public func allowTransition(to: SeosMobileKeysSDK.State, from: SeosMobileKeysSDK.State) -> Swift.Bool
+  @objc public func didTransition(to: SeosMobileKeysSDK.State, from: SeosMobileKeysSDK.State)
+  @objc public func toString() -> Swift.String
+  @objc public func text(state: SeosMobileKeysSDK.State) -> Swift.String
+  @objc override dynamic public init()
+  @objc deinit
+}

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="cordova.plugin.uamobilekeys" version="0.0.1">
    <name>UaMobileKeys</name>
+   <!-- TODO: add DEBUG param? -->
    <js-module name="UaMobileKeys" src="www/UaMobileKeys.js">
       <clobbers target="cordova.plugins.UaMobileKeys" />
    </js-module>
@@ -36,7 +37,8 @@
          </feature>
       </config-file>
 
-      <resource-file src="src/ios/SeosMobileKeysSDK-Debug/Pod/SeosMobileKeysSDK-Debug.podspec" />
+      <!-- <resource-file src="src/ios/SeosMobileKeysSDK-Debug/Pod/SeosMobileKeysSDK-Debug.podspec" /> -->
+	  <resource-file src="src/ios/SeosMobileKeysSDK-Release/Pod/SeosMobileKeysSDK-Release.podspec" />
 
       <podspec>
          <config>
@@ -44,12 +46,14 @@
          </config>
          <pods use-frameworks="true">
             <!-- <pod name="SeosMobileKeysSDK-Debug" options=":path => 'uniAlltid test/Resources/SeosMobileKeysSDK-Debug.podspec'" /> -->
-            <pod name="SeosMobileKeysSDK-Debug" options=":path => 'uniAlltid - demo/Resources/SeosMobileKeysSDK-Release.podspec'" />
+            <!-- <pod name="SeosMobileKeysSDK-Debug" options=":path => 'uniAlltid - demo/Resources/SeosMobileKeysSDK-Debug.podspec'" /> -->
+			<pod name="SeosMobileKeysSDK-Release" options=":path => 'uniAlltid - demo/Resources/SeosMobileKeysSDK-Release.podspec'" />
             <!-- <pod name="SeosMobileKeysSDK-Debug" options=":path => 'Lommelunen Eiendom/Resources/SeosMobileKeysSDK-Debug.podspec'" /> -->
          </pods>
       </podspec>
 
-      <framework src="src/ios/SeosMobileKeysSDK-Debug/Frameworks/SeosMobileKeysSDK.framework" custom="true" embed="true"/>
+      <!-- <framework src="src/ios/SeosMobileKeysSDK-Debug/Frameworks/SeosMobileKeysSDK.framework" custom="true" embed="true"/> -->
+	  <framework src="src/ios/SeosMobileKeysSDK-Release/Frameworks/SeosMobileKeysSDK.framework" custom="true" embed="true"/>
 
       <source-file src="src/ios/UaMobileKeys.m" />
       <source-file src="src/ios/UaMobileKeys.h" />
