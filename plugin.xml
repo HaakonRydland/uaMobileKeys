@@ -44,7 +44,7 @@
          </config>
          <pods use-frameworks="true">
             <!-- <pod name="SeosMobileKeysSDK-Debug" options=":path => 'uniAlltid test/Resources/SeosMobileKeysSDK-Debug.podspec'" /> -->
-            <pod name="SeosMobileKeysSDK-Debug" options=":path => 'uniAlltid - demo/Resources/SeosMobileKeysSDK-Debug.podspec'" />
+            <pod name="SeosMobileKeysSDK-Debug" options=":path => 'uniAlltid - demo/Resources/SeosMobileKeysSDK-Release.podspec'" />
             <!-- <pod name="SeosMobileKeysSDK-Debug" options=":path => 'Lommelunen Eiendom/Resources/SeosMobileKeysSDK-Debug.podspec'" /> -->
          </pods>
       </podspec>
