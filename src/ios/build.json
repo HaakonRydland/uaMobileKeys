@@ -2,12 +2,18 @@
     "ios": {
         "debug": {
             "buildFlag": [
-                "ONLY_ACTIVE_ARCH = YES"
+                "ONLY_ACTIVE_ARCH = YES",
+				"VALID_ARCHS = arm64 armv7 armv7s x86_64 i386",
+				"GGC_DYNAMIC_NO_PIC = NO",
+				"LD_NO_PIE = NO"
             ]
         },
         "release": {
             "buildFlag": [
-                "ONLY_ACTIVE_ARCH = YES"
+                "ONLY_ACTIVE_ARCH = YES",
+				"VALID_ARCHS = arm64 armv7 armv7s x86_64 i386",
+				"GGC_DYNAMIC_NO_PIC = NO",
+				"LD_NO_PIE = NO"
             ]
         }
     }
