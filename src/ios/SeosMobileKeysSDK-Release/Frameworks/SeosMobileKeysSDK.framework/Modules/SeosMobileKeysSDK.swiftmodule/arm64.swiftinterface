@@ -11,7 +11,7 @@ import os
 extension UInt8 {
   public func isConstructedTag() -> Swift.Bool
   public func has(bit: Swift.UInt8) -> Swift.Bool
-  public mutating func set(bit: Swift.UInt8)
+  mutating public func set(bit: Swift.UInt8)
   public static func fromInt(int: Swift.Int) -> Swift.UInt8
 }
 @objc open class LegacySeosFileSystemDataFormat : ObjectiveC.NSObject {
@@ -37,7 +37,7 @@ extension UInt8 {
   @objc deinit
 }
 public class DataScanner {
-  public convenience init(data: Foundation.Data)
+  convenience public init(data: Foundation.Data)
   public init(data: Foundation.Data, maxPos: Swift.Int)
   @objc deinit
 }
@@ -83,7 +83,7 @@ public class UniversalTLV : Swift.CustomStringConvertible {
   public var constructedPayload: [SeosMobileKeysSDK.UniversalTLV]
   public init(tag: SeosMobileKeysSDK.Tag, rawPayload: Foundation.Data)
   public init?(constructedTag: SeosMobileKeysSDK.Tag, constructedPayload: [SeosMobileKeysSDK.UniversalTLV])
-  public convenience init(rawData: Foundation.Data)
+  convenience public init(rawData: Foundation.Data)
   public init(dataScanner: SeosMobileKeysSDK.DataScanner)
   public static func parse(rawData: Foundation.Data) -> [SeosMobileKeysSDK.UniversalTLV]
   public static func parse(dataScanner: SeosMobileKeysSDK.DataScanner) -> [SeosMobileKeysSDK.UniversalTLV]
@@ -137,7 +137,7 @@ public class GlobalDataFile : Swift.CustomStringConvertible {
   public var adfs: [SeosMobileKeysSDK.UniversalTLV]
   @objc override dynamic public init()
   public init(eeprom: SeosMobileKeysSDK.SeosSystemEeprom, snmp: Foundation.Data, gdf: SeosMobileKeysSDK.UniversalTLV?, adfs: [SeosMobileKeysSDK.UniversalTLV])
-  public convenience init(eeprom: Foundation.Data, snmp: Foundation.Data, gdf: SeosMobileKeysSDK.UniversalTLV?, adfs: [SeosMobileKeysSDK.UniversalTLV])
+  convenience public init(eeprom: Foundation.Data, snmp: Foundation.Data, gdf: SeosMobileKeysSDK.UniversalTLV?, adfs: [SeosMobileKeysSDK.UniversalTLV])
   @objc public func toString() -> Swift.String
   @objc public func toShortString() -> Swift.String
   @objc public func isEmpty() -> Swift.Bool
@@ -186,7 +186,7 @@ public enum AccessType {
 public class AccessRights : Swift.CustomStringConvertible {
   public var accessType: SeosMobileKeysSDK.AccessType
   public var accessRights: [SeosMobileKeysSDK.AccessRight]
-  public convenience init(accessType: SeosMobileKeysSDK.AccessType)
+  convenience public init(accessType: SeosMobileKeysSDK.AccessType)
   public init(accessType: SeosMobileKeysSDK.AccessType, accessRights: [SeosMobileKeysSDK.AccessRight])
   public func addAccessRight(accessRight: SeosMobileKeysSDK.AccessRight)
   public func toUniversalTLV() -> SeosMobileKeysSDK.UniversalTLV
@@ -368,9 +368,9 @@ public class Tag : Swift.Equatable, Swift.CustomStringConvertible {
   public var forceTwoByteLength: Swift.Bool
   public static func == (lhs: SeosMobileKeysSDK.Tag, rhs: SeosMobileKeysSDK.Tag) -> Swift.Bool
   public init(dataScanner: SeosMobileKeysSDK.DataScanner)
-  public convenience init(bytes: Foundation.Data)
-  public convenience init(singleByte: Swift.UInt8)
-  public convenience init(firstByte: Swift.UInt8, secondByte: Swift.UInt8)
+  convenience public init(bytes: Foundation.Data)
+  convenience public init(singleByte: Swift.UInt8)
+  convenience public init(firstByte: Swift.UInt8, secondByte: Swift.UInt8)
   public func startsWithHex(prefix: Swift.String) -> Swift.Bool
   @objc deinit
 }
@@ -477,7 +477,7 @@ public class DataWriteStream {
 @objc public class LegacyReaderModuleState : ObjectiveC.NSObject {
   @objc public var state: SeosMobileKeysSDK.State {
     @objc get
-    @objc set(newValue)
+    @objc set
   }
   @objc public init(delegate: SeosMobileKeysSDK.LegacyStateMachineDelegateProtocol, initialState: SeosMobileKeysSDK.State, readerModuleType: SeosMobileKeysSDK.ReaderModuleType)
   @objc public func allowTransition(to: SeosMobileKeysSDK.State, from: SeosMobileKeysSDK.State) -> Swift.Bool
@@ -487,3 +487,30 @@ public class DataWriteStream {
   @objc override dynamic public init()
   @objc deinit
 }
+extension SeosMobileKeysSDK.TriggerStatus : Swift.Equatable {}
+extension SeosMobileKeysSDK.TriggerStatus : Swift.Hashable {}
+extension SeosMobileKeysSDK.AccessType : Swift.Equatable {}
+extension SeosMobileKeysSDK.AccessType : Swift.Hashable {}
+extension SeosMobileKeysSDK.ReaderCapabilities : Swift.Equatable {}
+extension SeosMobileKeysSDK.ReaderCapabilities : Swift.Hashable {}
+extension SeosMobileKeysSDK.OpeningType : Swift.Equatable {}
+extension SeosMobileKeysSDK.OpeningType : Swift.Hashable {}
+extension SeosMobileKeysSDK.AuthenticationKeyRequired : Swift.Equatable {}
+extension SeosMobileKeysSDK.AuthenticationKeyRequired : Swift.Hashable {}
+extension SeosMobileKeysSDK.AuthenticationKeyRequired : Swift.RawRepresentable {}
+extension SeosMobileKeysSDK.LogCategory : Swift.Equatable {}
+extension SeosMobileKeysSDK.LogCategory : Swift.Hashable {}
+extension SeosMobileKeysSDK.LogCategory : Swift.RawRepresentable {}
+extension SeosMobileKeysSDK.LogLevel : Swift.Equatable {}
+extension SeosMobileKeysSDK.LogLevel : Swift.Hashable {}
+extension SeosMobileKeysSDK.LogLevel : Swift.RawRepresentable {}
+extension SeosMobileKeysSDK.TagFamily : Swift.Equatable {}
+extension SeosMobileKeysSDK.TagFamily : Swift.Hashable {}
+extension SeosMobileKeysSDK.TagFamily : Swift.RawRepresentable {}
+extension SeosMobileKeysSDK.UniversalTagNumbers : Swift.Equatable {}
+extension SeosMobileKeysSDK.UniversalTagNumbers : Swift.Hashable {}
+extension SeosMobileKeysSDK.UniversalTagNumbers : Swift.RawRepresentable {}
+extension SeosMobileKeysSDK.ReaderModuleType : Swift.Equatable {}
+extension SeosMobileKeysSDK.ReaderModuleType : Swift.Hashable {}
+extension SeosMobileKeysSDK.State : Swift.Equatable {}
+extension SeosMobileKeysSDK.State : Swift.Hashable {}
