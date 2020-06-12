@@ -31,6 +31,8 @@
   NSArray<MobileKeysKey*> *_mobilekey;
   NSArray * _openingTypes;
   NSArray * _openingModesWithoutSeamless;
+  static const NSTimeInterval minTimeBetweenConnections = 1.0;
+  NSDate* _timeOfLastConnection;
 
   // CallbackIds
   NSString* _startupCallbackId;
@@ -52,7 +54,7 @@
             startupHasRun = NO;
             _mobileKeysManager = [self createInitializedMobileKeysManager];
         }
-
+        _timeOfLastConnection = [NSDate dateWithTimeIntervalSince1970:1.0];
         _openingModesWithoutSeamless=@[@(MobileKeysOpeningTypeProximity)];
     }
 
@@ -70,7 +72,7 @@
 }
 
 - (MobileKeysManager *)createInitializedMobileKeysManager {
-    NSString* applicationId = @"UaMobileKeys";
+    NSString* applicationId = @"AAH.ONB.PRECERT.VIEW-SOFTWARE";
     NSString *version = [NSString stringWithFormat:@"%@-%@ (%@)", applicationId, [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"], [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"]];
     NSDictionary *config = @{MobileKeysOptionApplicationId: applicationId, MobileKeysOptionVersion: version};
 
@@ -316,9 +318,10 @@
         callbackId = @"Found no callbackId";
     }
 
-    // CDVPluginResult* pluginResult = nil;
-    // pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Connected to reader"];
-    // [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+    BOOL enoughTimeHasPassed = ([[NSDate date] timeIntervalSinceDate:_timeOfLastConnection] > minTimeBetweenConnections);
+    if (enoughTimeHasPassed) {
+        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+    }
 }
 
 - (void)mobileKeysDidFailToConnectToReader:(MobileKeysReader *)reader openingType:(MobileKeysOpeningType)type openingStatus:(MobileKeysOpeningStatusType)status {
