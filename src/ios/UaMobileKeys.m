@@ -341,7 +341,7 @@
         callbackId = @"Found no callbackId";
     }
 
-    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+    // AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
 
 	// To allow the 'background_entered CDVPluginResult' to hit the UA startForegroundScanning callback (UNIE-959)
     // CDVPluginResult* pluginResult = nil;
