@@ -193,26 +193,38 @@
 - (void)startForegroundScanning:(CDVInvokedUrlCommand*)command
 {
     _scanCallbackId = command.callbackId;
-    NSArray *_lockServiceCodes;
-    _lockServiceCodes = @[@1, @2];
-    NSError *error;
 
-    if (_mobileKeysManager.isScanning) {
-        [_mobileKeysManager stopReaderScan];
-    }
+    NSString* lockCodeString = [command.arguments objectAtIndex:0];
 
-    [_mobileKeysManager startReaderScanInMode:MobileKeysScanModeOptimizePowerConsumption supportedOpeningTypes:_openingModesWithoutSeamless lockServiceCodes:_lockServiceCodes error:&error];
+    if (lockCodeString == nil || [lockCodeString length] == 0) {
+        CDVPluginResult* pluginResult = nil;
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"no_lock_code"];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    } else {
+        NSInteger lockCodeInt = [lockCodeString integerValue];
+        NSNumber *lockNum = [NSNumber numberWithInteger:lockCodeInt];
+        NSArray *_lockServiceCodes;
+        _lockServiceCodes = @[lockNum, @2];
 
-    if (error) {
-        switch (error.code) {
-            case MobileKeysErrorCodeBluetoothLENotAvailable: {
-                CDVPluginResult* pluginResult = nil;
-                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"No bluetooth available"];
-                [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        NSError *error;
+
+        if (_mobileKeysManager.isScanning) {
+            [_mobileKeysManager stopReaderScan];
+        }
+
+        [_mobileKeysManager startReaderScanInMode:MobileKeysScanModeOptimizePowerConsumption supportedOpeningTypes:_openingModesWithoutSeamless lockServiceCodes:_lockServiceCodes error:&error];
+
+        if (error) {
+            switch (error.code) {
+                case MobileKeysErrorCodeBluetoothLENotAvailable: {
+                    CDVPluginResult* pluginResult = nil;
+                    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"No bluetooth available"];
+                    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+                    break;
+                }
+                default: [self handleScanningError:error];
                 break;
             }
-            default: [self handleScanningError:error];
-            break;
         }
     }
 }
