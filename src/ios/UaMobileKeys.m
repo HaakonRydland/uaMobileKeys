@@ -72,7 +72,7 @@
 }
 
 - (MobileKeysManager *)createInitializedMobileKeysManager {
-    NSString* applicationId = @"AAH.ONB.PRECERT.VIEW-SOFTWARE";
+    NSString* applicationId = @"AAH.VIEW-SOFTWARE";
     NSString *version = [NSString stringWithFormat:@"%@-%@ (%@)", applicationId, [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"], [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"]];
     NSDictionary *config = @{MobileKeysOptionApplicationId: applicationId, MobileKeysOptionVersion: version};
 
