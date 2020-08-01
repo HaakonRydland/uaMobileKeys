@@ -8,7 +8,7 @@ android {
         versionName "0.0.2"
         buildConfigField 'String', 'AAMK_APP_ID', '"UaMobileKeys"'
         buildConfigField 'String', 'AAMK_APP_ID_DESCRIPTION', '"Plugin for Mobile Keys"'
-        buildConfigField 'int', 'AAMK_LOCK_SERVICE_CODE', '9'
+        buildConfigField 'int', 'AAMK_LOCK_SERVICE_CODE', '1'
         buildConfigField 'String', 'AAMK_EMAIL_LOGS_MAIL', '"har@view.no"'
     }
 
