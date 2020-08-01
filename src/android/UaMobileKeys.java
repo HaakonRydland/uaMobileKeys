@@ -19,10 +19,6 @@ import android.content.Context;
 import android.os.Build;
 import android.app.Activity;
 
-
-/**
- * This class echoes a string called from JavaScript.
- */
 public class UaMobileKeys extends CordovaPlugin {
     private UaMobileKeysApi uaKeyApi = new UaMobileKeysApi();
     private UaMobileKeysSetup uaSetup = new UaMobileKeysSetup();
@@ -32,16 +28,9 @@ public class UaMobileKeys extends CordovaPlugin {
     // Main method for selecting the correct native code, based on input from JavaScript Interface
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+        int lockCode = 1;
         if (!uaSetup.isMobileKeysInitialized()) {
-            String lockCode = args.getString(0);
-            int lockCodeInt;
-            try {
-                lockCodeInt = Integer.parseInt(lockCode);
-            }
-            catch (NumberFormatException e) {
-                lockCodeInt = 1;
-            }
-            this.initializeMobileKeysApi(lockCodeInt);
+            this.initializeMobileKeysApi(lockCode);
         }
 
         if (action.equals("startup")) {
@@ -70,15 +59,7 @@ public class UaMobileKeys extends CordovaPlugin {
             this.unregisterEndpoint(callbackContext);
             return true;
         } else if (action.equals("initializeMobileKeysApi")) {
-            String lockCode = args.getString(0);
-            int lockCodeInt;
-            try {
-                lockCodeInt = Integer.parseInt(lockCode);
-            }
-            catch (NumberFormatException e) {
-                lockCodeInt = 1;
-            }
-            this.initializeMobileKeysApi(lockCodeInt);
+            this.initializeMobileKeysApi(lockCode);
             return true;
         } else if (action.equals("startScanning")) {
             this.startScanning(callbackContext);

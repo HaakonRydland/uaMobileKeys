@@ -18,9 +18,8 @@ public class UaMobileKeysSetup extends CordovaPlugin {
 
     public void initializeMobileKeysApi(Context context, int lockCode)
     {
-        int lockCode2 = 1;
         OpeningTrigger[] openingTriggers = {new TapOpeningTrigger(context)};
-        ScanConfiguration scanConfiguration = new ScanConfiguration.Builder(openingTriggers, lockCode2)
+        ScanConfiguration scanConfiguration = new ScanConfiguration.Builder(openingTriggers, lockCode)
                 .setBluetoothModeIfSupported(BluetoothMode.DUAL)
                 .setScanMode(ScanMode.OPTIMIZE_PERFORMANCE)
                 .setRssiSensitivity(RssiSensitivity.HIGH)
