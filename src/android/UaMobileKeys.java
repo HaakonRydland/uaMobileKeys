@@ -63,7 +63,8 @@ public class UaMobileKeys extends CordovaPlugin {
             this.unregisterEndpoint(callbackContext);
             return true;
         } else if (action.equals("initializeMobileKeysApi")) {
-            this.initializeMobileKeysApi();
+            String lockCode = args.getString(0);
+            this.initializeMobileKeysApi(lockCode);
             return true;
         } else if (action.equals("startScanning")) {
             this.startScanning(callbackContext);
@@ -86,7 +87,7 @@ public class UaMobileKeys extends CordovaPlugin {
     private void initializeMobileKeysApi(String lockCode) {
         int androidVersionCurrentlyRunning = Build.VERSION.SDK_INT;
         Context context = (androidVersionCurrentlyRunning >= 21) ? cordova.getActivity().getWindow().getContext() : cordova.getActivity().getApplicationContext();
-        
+
         uaSetup.initializeMobileKeysApi(context, lockCode);
     }
 
