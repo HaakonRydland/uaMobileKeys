@@ -28,9 +28,17 @@ public class UaMobileKeys extends CordovaPlugin {
     // Main method for selecting the correct native code, based on input from JavaScript Interface
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        int lockCode = 1;
+
         if (!uaSetup.isMobileKeysInitialized()) {
-            this.initializeMobileKeysApi(lockCode);
+            int lockCodeInt;
+            String lockCode = args.getString(0);
+            try {
+                lockCodeInt = Integer.parseInt(lockCode);
+            } catch (NumberFormatException e) {
+                lockCodeInt = 0;
+            }
+
+            this.initializeMobileKeysApi(lockCodeInt);
         }
 
         if (action.equals("startup")) {
@@ -59,7 +67,15 @@ public class UaMobileKeys extends CordovaPlugin {
             this.unregisterEndpoint(callbackContext);
             return true;
         } else if (action.equals("initializeMobileKeysApi")) {
-            this.initializeMobileKeysApi(lockCode);
+            int lockCodeInt;
+            String lockCode = args.getString(0);
+            try {
+                lockCodeInt = Integer.parseInt(lockCode);
+            } catch (NumberFormatException e) {
+                lockCodeInt = 0;
+            }
+
+            this.initializeMobileKeysApi(lockCodeInt);
             return true;
         } else if (action.equals("startScanning")) {
             this.startScanning(callbackContext);
