@@ -39,7 +39,7 @@ public class UaMobileKeys extends CordovaPlugin {
                 lockCodeInt = Integer.parseInt(lockCode);
             }
             catch (NumberFormatException e) {
-                lockCodeInt = 0;
+                lockCodeInt = 1;
             }
             this.initializeMobileKeysApi(lockCodeInt);
         }
@@ -76,7 +76,7 @@ public class UaMobileKeys extends CordovaPlugin {
                 lockCodeInt = Integer.parseInt(lockCode);
             }
             catch (NumberFormatException e) {
-                lockCodeInt = 0;
+                lockCodeInt = 1;
             }
             this.initializeMobileKeysApi(lockCodeInt);
             return true;
