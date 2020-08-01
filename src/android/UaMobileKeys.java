@@ -33,7 +33,8 @@ public class UaMobileKeys extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if (!uaSetup.isMobileKeysInitialized()) {
-            this.initializeMobileKeysApi();
+            String lockCode = args.getString(0);
+            this.initializeMobileKeysApi(lockCode);
         }
 
         if (action.equals("startup")) {
@@ -82,10 +83,11 @@ public class UaMobileKeys extends CordovaPlugin {
     }
 
     // Initialize Mobile Keys Api - should only be called once
-    private void initializeMobileKeysApi() {
+    private void initializeMobileKeysApi(String lockCode) {
         int androidVersionCurrentlyRunning = Build.VERSION.SDK_INT;
         Context context = (androidVersionCurrentlyRunning >= 21) ? cordova.getActivity().getWindow().getContext() : cordova.getActivity().getApplicationContext();
-        uaSetup.initializeMobileKeysApi(context);
+        
+        uaSetup.initializeMobileKeysApi(context, lockCode);
     }
 
     // Mobile keys implementation
