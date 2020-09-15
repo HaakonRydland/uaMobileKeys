@@ -18,8 +18,8 @@
       <source-file src="proguard.cfg" target-dir="./proguard.cfg" />
       <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
       <framework src="build-extras.gradle" custom="true" type="gradleReference" />
-      <resource-file src="libs/mobilekeys-android-sdk-release-7.4.3.aar" target="libs/mobilekeys-android-sdk-release-7.4.3.aar" />
-      <resource-file src="libs/mobilekeys-android-sdk-debug-7.4.3.aar" target="libs/mobilekeys-android-sdk-debug-7.4.3.aar" />
+      <resource-file src="libs/mobilekeys-android-sdk-release-7.3.1.aar" target="libs/mobilekeys-android-sdk-release-7.3.1.aar" />
+      <resource-file src="libs/mobilekeys-android-sdk-debug-7.3.1.aar" target="libs/mobilekeys-android-sdk-debug-7.3.1.aar" />
       <resource-file src="src/android/res/drawable-hdpi/ic_stat_vpn_key.png" target="src/android/res/drawable-hdpi/ic_stat_vpn_key.png" />
       <resource-file src="src/android/res/drawable-mdpi/ic_stat_vpn_key.png" target="src/android/res/drawable-mdpi/ic_stat_vpn_key.png" />
       <resource-file src="src/android/res/drawable-xhdpi/ic_stat_vpn_key.png" target="src/android/res/drawable-xhdpi/ic_stat_vpn_key.png" />
