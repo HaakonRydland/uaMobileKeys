@@ -227,7 +227,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     // Prompts the user to enable access to bluetooth for the app if it's not already enabled
     private void requestLocationPermission(Context context, Activity activity) {
         if (!hasLocationPermissions(context)) {
-            ActivityCompat.requestPermissions(getPermissions(),
+            ActivityCompat.requestPermissions(activity, getPermissions(),
                     REQUEST_LOCATION_PERMISSION);
         }
     }
