@@ -251,7 +251,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
 
     public static String[] getPermissions(){
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q ?
-                new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_BACKGROUND_LOCATION} :
+                new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION} :
                 new String[]{Manifest.permission.ACCESS_COARSE_LOCATION};
     }
 
