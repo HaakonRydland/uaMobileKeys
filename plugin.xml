@@ -38,7 +38,7 @@
       </config-file>
 
       <!-- <resource-file src="src/ios/SeosMobileKeysSDK-Debug/Pod/SeosMobileKeysSDK-Debug.podspec" /> -->
-	  <resource-file src="src/ios/SeosMobileKeysSDK-Release/Pod/SeosMobileKeysSDK-Release.podspec" />
+	   <resource-file src="src/ios/SeosMobileKeysSDK-Release/Pod/SeosMobileKeysSDK-Release.podspec" />
 
       <podspec>
          <config>
@@ -49,9 +49,9 @@
             <!-- <pod name="SeosMobileKeysSDK-Debug" options=":path => 'uniAlltid - demo/Resources/SeosMobileKeysSDK-Debug.podspec'" /> -->
             <!-- <pod name="SeosMobileKeysSDK-Debug" options=":path => 'Lommelunen Eiendom/Resources/SeosMobileKeysSDK-Debug.podspec'" /> -->
 
+            <pod name="SeosMobileKeysSDK-Debug" options=":path => 'uniAlltid test/Resources/SeosMobileKeysSDK-Release.podspec'" />
             <!-- <pod name="SeosMobileKeysSDK-Release" options=":path => 'unialltid/Resources/SeosMobileKeysSDK-Release.podspec'" /> -->
-            <!-- <pod name="SeosMobileKeysSDK-Release" options=":path => 'unialltid test/Resources/SeosMobileKeysSDK-Release.podspec'" /> -->
-            <pod name="SeosMobileKeysSDK-Release" options=":path => 'SINN Bolig/Resources/SeosMobileKeysSDK-Release.podspec'" />
+            <!-- <pod name="SeosMobileKeysSDK-Release" options=":path => 'SINN Bolig/Resources/SeosMobileKeysSDK-Release.podspec'" /> -->
             <!-- <pod name="SeosMobileKeysSDK-Release" options=":path => 'Studentinord Bolig/Resources/SeosMobileKeysSDK-Release.podspec'" /> -->
          </pods>
       </podspec>
