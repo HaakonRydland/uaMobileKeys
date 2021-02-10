@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)
+// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
 // swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name SeosMobileKeysSDK
 import CoreGraphics
 import Foundation
@@ -11,7 +11,7 @@ import os
 extension UInt8 {
   public func isConstructedTag() -> Swift.Bool
   public func has(bit: Swift.UInt8) -> Swift.Bool
-  mutating public func set(bit: Swift.UInt8)
+  public mutating func set(bit: Swift.UInt8)
   public static func fromInt(int: Swift.Int) -> Swift.UInt8
 }
 @objc open class LegacySeosFileSystemDataFormat : ObjectiveC.NSObject {
@@ -20,8 +20,8 @@ extension UInt8 {
   @objc public init(seosFileSystem: SeosMobileKeysSDK.SeosFileSystem)
   @objc public init(rawData: Foundation.Data)
   @objc public func exportToLegacyDataFormat() -> Foundation.Data
-  @objc override dynamic public init()
   @objc deinit
+  @objc override dynamic public init()
 }
 @objc public class ReaderRepository : ObjectiveC.NSObject {
   @objc public init(clock: SeosMobileKeysSDK.Clock)
@@ -33,8 +33,8 @@ extension UInt8 {
   @objc public func findReader(uuid: Swift.String) -> SeosMobileKeysSDK.MobileKeysReader?
   @objc public func removeReader(uuid: Swift.String)
   @objc public func listAllActiveReaders() -> [SeosMobileKeysSDK.MobileKeysReader]
-  @objc override dynamic public init()
   @objc deinit
+  @objc override dynamic public init()
 }
 public class DataScanner {
   convenience public init(data: Foundation.Data)
@@ -55,26 +55,26 @@ public class DataScanner {
     get
   }
 }
-@objc public class TriggerResult : ObjectiveC.NSObject {
+@_hasMissingDesignatedInitializers @objc public class TriggerResult : ObjectiveC.NSObject {
   @objc public var reader: SeosMobileKeysSDK.MobileKeysReader?
   @objc public var openingType: SeosMobileKeysSDK.MobileKeysOpeningType
   @objc public var status: SeosMobileKeysSDK.TriggerStatus
   @objc public var success: Swift.Bool {
     @objc get
   }
-  @objc override dynamic public init()
   @objc deinit
+  @objc override dynamic public init()
 }
 @objc public class OpeningTriggerController : ObjectiveC.NSObject {
   @objc public init(repository: SeosMobileKeysSDK.ReaderRepository)
   @objc public func rssiTrigger(reader: SeosMobileKeysSDK.MobileKeysReader) -> (SeosMobileKeysSDK.TriggerResult)
   @objc public func readerConnectedTrigger(reader: SeosMobileKeysSDK.MobileKeysReader) -> (SeosMobileKeysSDK.TriggerResult)
   @objc public func userActionClosestReader(type: SeosMobileKeysSDK.MobileKeysOpeningType) -> (SeosMobileKeysSDK.TriggerResult)
-  @objc public func specificReader(reader: SeosMobileKeysSDK.MobileKeysReader, type: SeosMobileKeysSDK.MobileKeysOpeningType) -> (SeosMobileKeysSDK.TriggerResult)
+  @objc public func specificReader(reader: SeosMobileKeysSDK.MobileKeysReader, type: SeosMobileKeysSDK.MobileKeysOpeningType, checkSystemWideEnabledOpeningModes: Swift.Bool = true) -> (SeosMobileKeysSDK.TriggerResult)
   @objc public func setSupportedOpeningTypes(types: Swift.Array<Swift.Int>)
   @objc public func supportsOpeningType(type: SeosMobileKeysSDK.MobileKeysOpeningType) -> Swift.Bool
-  @objc override dynamic public init()
   @objc deinit
+  @objc override dynamic public init()
 }
 public class UniversalTLV : Swift.CustomStringConvertible {
   public var tag: SeosMobileKeysSDK.Tag
@@ -127,10 +127,10 @@ public class GlobalDataFile : Swift.CustomStringConvertible {
   @objc public init(seosFileSystem: SeosMobileKeysSDK.SeosFileSystem)
   @objc public init(rawData: Foundation.Data)
   @objc public func exportToVersion3DataFormat() -> Foundation.Data
-  @objc override dynamic public init()
   @objc deinit
+  @objc override dynamic public init()
 }
-@objc public class SeosFileSystem : ObjectiveC.NSObject {
+@objc @_inheritsConvenienceInitializers public class SeosFileSystem : ObjectiveC.NSObject {
   public var seosSystemEEPROM: SeosMobileKeysSDK.SeosSystemEeprom!
   public var snmpData: Foundation.Data?
   public var gdf: SeosMobileKeysSDK.UniversalTLV?
@@ -146,7 +146,7 @@ public class GlobalDataFile : Swift.CustomStringConvertible {
 extension SeosFileSystem {
   @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
 }
-@objc public class SeosSystemEeprom : ObjectiveC.NSObject {
+@objc @_inheritsConvenienceInitializers public class SeosSystemEeprom : ObjectiveC.NSObject {
   final public let newEepromVersion: Swift.UInt16
   final public let newEepromEof: Swift.UInt32
   public var wrappingKey: Foundation.Data!
@@ -166,9 +166,9 @@ extension SeosSystemEeprom {
   @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
   public func isEmpty() -> Swift.Bool
 }
-@objc public class RssiMeasurement : ObjectiveC.NSObject {
-  @objc override dynamic public init()
+@_inheritsConvenienceInitializers @objc public class RssiMeasurement : ObjectiveC.NSObject {
   @objc deinit
+  @objc override dynamic public init()
 }
 extension UniversalTLV {
   public static func parseSeos(rawData: Foundation.Data) -> [SeosMobileKeysSDK.UniversalTLV]
@@ -201,8 +201,8 @@ public class AccessRights : Swift.CustomStringConvertible {
   @objc public init(seosFileSystem: SeosMobileKeysSDK.SeosFileSystem)
   @objc public init(rawData: Foundation.Data)
   @objc public func exportTo32x32() -> Foundation.Data
-  @objc override dynamic public init()
   @objc deinit
+  @objc override dynamic public init()
 }
 @objc public class NVRamByteWriter : ObjectiveC.NSObject {
   public var data: Foundation.Data!
@@ -236,8 +236,8 @@ public class AccessRights : Swift.CustomStringConvertible {
 }
 @objc public class Reader : ObjectiveC.NSObject {
   @objc public init(uuid: Swift.String)
-  @objc override dynamic public init()
   @objc deinit
+  @objc override dynamic public init()
 }
 public enum AuthenticationKeyRequired : Swift.String {
   case NO_AUTH
@@ -380,15 +380,15 @@ public class Tag : Swift.Equatable, Swift.CustomStringConvertible {
   @objc func future(time: Foundation.TimeInterval) -> Foundation.Date
   @objc func past(time: Foundation.TimeInterval) -> Foundation.Date
 }
-@objc public class RealClock : ObjectiveC.NSObject, SeosMobileKeysSDK.Clock {
+@_inheritsConvenienceInitializers @objc public class RealClock : ObjectiveC.NSObject, SeosMobileKeysSDK.Clock {
   @objc public func currentTimeIntervalSince1970() -> Foundation.TimeInterval
   @objc public func now() -> Foundation.Date
   @objc public func future(time: Foundation.TimeInterval) -> Foundation.Date
   @objc public func past(time: Foundation.TimeInterval) -> Foundation.Date
-  @objc override dynamic public init()
   @objc deinit
+  @objc override dynamic public init()
 }
-@objc public class FakeClock : SeosMobileKeysSDK.RealClock {
+@_inheritsConvenienceInitializers @objc public class FakeClock : SeosMobileKeysSDK.RealClock {
   @objc override dynamic public init()
   @objc override public func currentTimeIntervalSince1970() -> Foundation.TimeInterval
   @objc override public func now() -> Foundation.Date
@@ -484,8 +484,8 @@ public class DataWriteStream {
   @objc public func didTransition(to: SeosMobileKeysSDK.State, from: SeosMobileKeysSDK.State)
   @objc public func toString() -> Swift.String
   @objc public func text(state: SeosMobileKeysSDK.State) -> Swift.String
-  @objc override dynamic public init()
   @objc deinit
+  @objc override dynamic public init()
 }
 extension SeosMobileKeysSDK.TriggerStatus : Swift.Equatable {}
 extension SeosMobileKeysSDK.TriggerStatus : Swift.Hashable {}

@@ -1,12 +1,12 @@
 Pod::Spec.new do |s|
   s.name             = "SeosMobileKeysSDK-Debug"
-  s.version          = "7.5.2"
+  s.version          = "7.6.3"
   s.summary          = "Open readers with your iOS device"
   s.homepage         = "http://www.assaabloy.com/seos"
   s.license      = {
      :type => 'Copyright',
      :text => <<-LICENSE
-       Copyright (c) 2019 ASSA ABLOY Mobile Services. Version 7.5.2. All rights reserved.
+       Copyright (c) 2019 ASSA ABLOY Mobile Services. Version 7.6.3. All rights reserved.
        LICENSE
    }
 
@@ -23,10 +23,10 @@ Pod::Spec.new do |s|
 
   s.module_name = 'SeosMobileKeysSDK'
 
-  s.dependency 'JSONModel', '~> 1.8.0'
-  s.dependency 'CocoaLumberjack/Swift', '~> 3.5.3'
-  s.dependency 'Mixpanel', '~> 3.4.9'
-  s.dependency 'BerTlv', '~> 0.2.5'
+  s.dependency 'JSONModel'
+  s.dependency 'CocoaLumberjack/Swift'
+  s.dependency 'Mixpanel'
+  s.dependency 'BerTlv'
   s.vendored_frameworks = 'SeosMobileKeysSDK.framework'
-
 end
+
