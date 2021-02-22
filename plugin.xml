@@ -15,11 +15,16 @@
          <meta-data android:name="allowBackup" android:value="false" />
       </config-file>
 
+      <edit-config file="AndroidManifest.xml" target="/manifest" mode="merge">
+         <manifest xmlns:tools="http://schemas.android.com/tools" />
+         <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" tools:node="remove" />
+      </edit-config>
+
       <source-file src="proguard.cfg" target-dir="./proguard.cfg" />
       <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
       <framework src="build-extras.gradle" custom="true" type="gradleReference" />
-      <resource-file src="libs/mobilekeys-android-sdk-release-7.4.7.aar" target="libs/mobilekeys-android-sdk-release-7.4.7.aar" />
-      <resource-file src="libs/mobilekeys-android-sdk-debug-7.4.7.aar" target="libs/mobilekeys-android-sdk-debug-7.4.7.aar" />
+      <resource-file src="libs/mobilekeys-android-sdk-release-7.4.8.aar" target="libs/mobilekeys-android-sdk-release-7.4.8.aar" />
+      <resource-file src="libs/mobilekeys-android-sdk-debug-7.4.8.aar" target="libs/mobilekeys-android-sdk-debug-7.4.8.aar" />
       <resource-file src="src/android/res/drawable-hdpi/ic_stat_vpn_key.png" target="src/android/res/drawable-hdpi/ic_stat_vpn_key.png" />
       <resource-file src="src/android/res/drawable-mdpi/ic_stat_vpn_key.png" target="src/android/res/drawable-mdpi/ic_stat_vpn_key.png" />
       <resource-file src="src/android/res/drawable-xhdpi/ic_stat_vpn_key.png" target="src/android/res/drawable-xhdpi/ic_stat_vpn_key.png" />
@@ -45,7 +50,7 @@
             <source url="https://github.com/CocoaPods/Specs.git"/>
          </config>
          <pods use-frameworks="true">
-            <pod name="SeosMobileKeysSDK-Debug" options=":path => './Resources/SeosMobileKeysSDK-Debug.podspec'" />
+            <pod name="SeosMobileKeysSDK-Debug" options=":path => 'uniAlltid test/Resources/SeosMobileKeysSDK-Debug.podspec'" />
             <!-- <pod name="SeosMobileKeysSDK-Debug" options=":path => 'uniAlltid - demo/Resources/SeosMobileKeysSDK-Debug.podspec'" /> -->
             <!-- <pod name="SeosMobileKeysSDK-Debug" options=":path => 'Lommelunen Eiendom/Resources/SeosMobileKeysSDK-Debug.podspec'" /> -->
 
