@@ -15,11 +15,6 @@
          <meta-data android:name="allowBackup" android:value="false" />
       </config-file>
 
-      <edit-config file="AndroidManifest.xml" target="/manifest" mode="merge">
-         <manifest xmlns:tools="http://schemas.android.com/tools" />
-         <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" tools:node="remove" />
-      </edit-config>
-
       <source-file src="proguard.cfg" target-dir="./proguard.cfg" />
       <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
       <framework src="build-extras.gradle" custom="true" type="gradleReference" />
