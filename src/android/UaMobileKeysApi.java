@@ -342,14 +342,13 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     }
 
     private static String GenerateJsonResponse(byte[] payload) {
-        LockFeedbackObject lockFeedback = new LockFeedbackObject();
         if (containsData(payload)) {
-            lockFeedback.DoorId = DoorId(payload);
-            lockFeedback.DidUnlock = Boolean.toString(didUnlock(payload));
-            lockFeedback.BatteryStatus = ReaderBatteryStatus(payload);
+            String sDoorId = DoorId(payload);
+            String sDidUnlock = Boolean.toString(didUnlock(payload));
+            String sBatteryStatus = ReaderBatteryStatus(payload);
 
             // Maybe add try/parse
-            String results = new Gson().toJson(lockFeedback);
+            String results = sDoorId;
             return results;
         } 
         
@@ -421,13 +420,20 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         return doorIdResult;
     }
 
-    public static ReaderBatteryStatus ReaderBatteryStatus(byte[] payload) {
-        ReaderBatteryStatus result = ReaderBatteryStatus.NotApplicable;
+    public static String ReaderBatteryStatus(byte[] payload) {
         String resultString = partialResult(payload, 7, 1);
         if(resultString.length() > 0) {
             int resultAsValue = Integer.parseInt(resultString, 16);
-            result = ReaderBatteryStatus.fromInt(resultAsValue);
+
+            if (resultAsValue == 0x00) {
+                return "Good";
+            } else if (resultAsValue == 0x001) {
+                return "Warning";
+            } else if (resultAsValue == 0x02) {
+                return "Critical";
+            }
         }
-        return result;
+
+        return "NotApplicable";
     }
 }
