@@ -361,20 +361,6 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         return payload.length>0;
     }
 
-    public static Boolean didUnlock(byte[] payload) {
-        if (!containsData(payload)) {
-            return false;
-        }
-
-        String result = partialResult(payload, 1, 1);
-        int unlockStatus = Integer.parseInt(result);
-        if (unlockStatus > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     private static String partialResult(byte[] payload, int location, int length) {
         String dataAsString = openingStatusPayloadAsString(payload);
 
@@ -445,57 +431,3 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         return result;
     }
 }
-
-public enum ReaderBatteryStatus {
-    Good (0x00),
-    Warning (0x01),
-    Critical (0x02),
-    NotApplicable (-1);
-
-    private final int value;
-    private ReaderBatteryStatus(int value) {
-        this.value = value;
-    }
-
-    public static ReaderBatteryStatus fromInt(int id) {
-        ReaderBatteryStatus foundValue = NotApplicable;
-        for (ReaderBatteryStatus type : ReaderBatteryStatus.values()) {
-            if (type.value == id ) {
-                foundValue = type;
-                break;
-            }
-        }
-        return foundValue;
-    }
-}
-
-public class LockFeedbackObject {
-    String DoorId;
-    String DidUnlock;
-    String BatteryStatus;
-
-    public String getDoorId() {
-        return DoorId;
-    }
-
-    public void setDoorId(String doorId) {
-        this.DoorId = doorId;
-    }
-
-    public String getDidUnlock() {
-        return this.DidUnlock;
-    }
-
-    public void setDidUnlock(String didUnlock) {
-        this.DidUnlock = didUnlock;
-    }
-
-    public String getBatteryStatus() {
-        return this.BatteryStatus;
-    }
-
-    public void setBatteryStatus(String batteryStatus) {
-        this.BatteryStatus = batteryStatus;
-    }
-}
-

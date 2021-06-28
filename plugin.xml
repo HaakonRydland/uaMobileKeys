@@ -29,6 +29,8 @@
       <source-file src="src/android/UaMobileKeysSetup.java" target-dir="src/cordova/plugin/uamobilekeys/UaMobileKeysSetup" />
       <source-file src="src/android/UaMobileKeysApi.java" target-dir="src/cordova/plugin/uamobilekeys/UaMobileKeysApi" />
       <source-file src="src/android/UaUnlockNotification.java" target-dir="src/cordova/plugin/uamobilekeys/UaUnlockNotification" />
+      <source-file src="src/android/ReaderBatteryStatus.java" target-dir="src/cordova/plugin/uamobilekeys/ReaderBatteryStatus" />
+      <source-file src="src/android/LockFeedbackObject.java" target-dir="src/cordova/plugin/uamobilekeys/LockFeedbackObject" />
    </platform>
    <platform name="ios">
       <config-file parent="/*" target="config.xml">
