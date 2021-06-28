@@ -1,6 +1,4 @@
 package cordova.plugin.uamobilekeys;
-package LockFeedbackObject;
-package ReaderBatteryStatus;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
