@@ -327,7 +327,10 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
             vibrator.vibrate(150);
         }
 
-        PluginResult result = new PluginResult(PluginResult.Status.OK, "true");
+        // Generates and returns stauts payload as JSON if successfull and "false" if error
+        String jsonResponse = GenerateJsonResponse(openingResult.getStatusPayload());
+
+        PluginResult result = new PluginResult(PluginResult.Status.OK, jsonResponse);
         _callbackContext.sendPluginResult(result);
     }
 
@@ -336,6 +339,163 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     {
         PluginResult result = new PluginResult(PluginResult.Status.OK, "false");
         _callbackContext.sendPluginResult(result);
+    }
+
+    private static String GenerateJsonResponse(byte[] payload) {
+        LockFeedbackObject lockFeedback = new LockFeedbackObject();
+        if (containsData(payload)) {
+            lockFeedback.DoorId = DoorId(payload);
+            lockFeedback.DidUnlock = Boolean.toString(didUnlock(payload));
+            lockFeedback.BatteryStatus = ReaderBatteryStatus(payload);
+
+            // Maybe add try/parse
+            String results = new Gson().toJson(lockFeedback);
+            return results;
+        } 
+        
+        return "false";
+    }
+
+    // Door feedback implementation
+    public static Boolean containsData(byte[] payload) {
+        return payload.length>0;
+    }
+
+    public static Boolean didUnlock(byte[] payload) {
+        if (!containsData(payload)) {
+            return false;
+        }
+
+        String result = partialResult(payload, 1, 1);
+        int unlockStatus = Integer.parseInt(result);
+        if (unlockStatus > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private static String partialResult(byte[] payload, int location, int length) {
+        String dataAsString = openingStatusPayloadAsString(payload);
+
+        int formatStart = 0;
+        int formatLength = 2;
+
+        int useLocation = location * 2;
+        int useLength = length * 2;
+
+        ReaderResultDataFormat dataFormat = ReaderResultDataFormat.Unknown;
+        String result = "";
+
+        if (dataAsString.length() >= useLocation + useLength) {
+            String dataFormatString = dataAsString.substring(formatStart, formatStart+formatLength);
+
+            if (dataFormatString.length() > 0) {
+                int resultAsValue = Integer.parseInt(dataFormatString);
+                 dataFormat= ReaderResultDataFormat.fromInt(resultAsValue);
+            }
+            if (dataFormat == ReaderResultDataFormat.Standard) {
+                result = dataAsString.substring(useLocation, useLocation + useLength);
+            }
+        }
+        return result;
+    }
+
+    private static String openingStatusPayloadAsString(byte[] payload) {
+        String result = "";
+        for (int i =0;i<payload.length;i++) {
+            String thisThing = String.format("%02x", payload[i]);
+            result = result.concat(thisThing);
+        }
+        return result;
+    }
+
+    public static Boolean didUnlock(byte[] payload) {
+        if (!containsData(payload)) {
+            return false;
+        }
+
+        String result = partialResult(payload, 1, 1);
+        int unlockStatus = Integer.parseInt(result);
+        if (unlockStatus > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static String DoorId(byte[] payload) {
+
+        String resultString = partialResult(payload, 3, 4);
+        String doorIdResult = "";
+        if (resultString.length()>0) {
+            int resultAsValue = Integer.parseInt(resultString, 16);
+            doorIdResult = String.format("%d", resultAsValue);
+        }
+        return doorIdResult;
+    }
+
+    public static ReaderBatteryStatus ReaderBatteryStatus(byte[] payload) {
+        ReaderBatteryStatus result = ReaderBatteryStatus.NotApplicable;
+        String resultString = partialResult(payload, 7, 1);
+        if(resultString.length() > 0) {
+            int resultAsValue = Integer.parseInt(resultString, 16);
+            result = ReaderBatteryStatus.fromInt(resultAsValue);
+        }
+        return result;
+    }
+}
+
+public enum ReaderBatteryStatus {
+    Good (0x00),
+    Warning (0x01),
+    Critical (0x02),
+    NotApplicable (-1);
+
+    private final int value;
+    private ReaderBatteryStatus(int value) {
+        this.value = value;
+    }
+
+    public static ReaderBatteryStatus fromInt(int id) {
+        ReaderBatteryStatus foundValue = NotApplicable;
+        for (ReaderBatteryStatus type : ReaderBatteryStatus.values()) {
+            if (type.value == id ) {
+                foundValue = type;
+                break;
+            }
+        }
+        return foundValue;
+    }
+}
+
+public class LockFeedbackObject {
+    String DoorId;
+    String DidUnlock;
+    String BatteryStatus;
+
+    public String getDoorId() {
+        return DoorId;
+    }
+
+    public void setDoorId(String doorId) {
+        this.DoorId = doorId;
+    }
+
+    public String getDidUnlock() {
+        return this.DidUnlock;
+    }
+
+    public void setDidUnlock(String didUnlock) {
+        this.DidUnlock = didUnlock;
+    }
+
+    public String getBatteryStatus() {
+        return this.BatteryStatus;
+    }
+
+    public void setBatteryStatus(String batteryStatus) {
+        this.BatteryStatus = batteryStatus;
     }
 }
 
