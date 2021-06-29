@@ -369,7 +369,7 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         int useLocation = location * 2;
         int useLength = length * 2;
 
-        ReaderResultDataFormat dataFormat = ReaderResultDataFormat.Unknown;
+        String rrdf = "Unknown";
         String result = "";
 
         if (dataAsString.length() >= useLocation + useLength) {
@@ -377,13 +377,21 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
 
             if (dataFormatString.length() > 0) {
                 int resultAsValue = Integer.parseInt(dataFormatString);
-                 dataFormat= ReaderResultDataFormat.fromInt(resultAsValue);
+                rrdf = fromInt(resultAsValue);
             }
-            if (dataFormat == ReaderResultDataFormat.Standard) {
+            if (rrdf == "Standard") {
                 result = dataAsString.substring(useLocation, useLocation + useLength);
             }
         }
         return result;
+    }
+
+    private static String fromInt(int id) {
+        if (id == 0x01) {
+            return "Standard";
+        } 
+
+        return "Unknown";
     }
 
     private static String openingStatusPayloadAsString(byte[] payload) {
