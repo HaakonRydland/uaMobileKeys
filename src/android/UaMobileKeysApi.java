@@ -328,9 +328,9 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         }
 
         // Generates and returns stauts payload as JSON if successfull and "false" if error
-        String jsonResponse = GenerateJsonResponse(openingResult.getStatusPayload());
+        String response = GenerateResponse(openingResult.getStatusPayload());
 
-        PluginResult result = new PluginResult(PluginResult.Status.OK, jsonResponse);
+        PluginResult result = new PluginResult(PluginResult.Status.OK, response);
         _callbackContext.sendPluginResult(result);
     }
 
@@ -341,15 +341,14 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
         _callbackContext.sendPluginResult(result);
     }
 
-    private static String GenerateJsonResponse(byte[] payload) {
+    private static String GenerateResponse(byte[] payload) {
         if (containsData(payload)) {
             String sDoorId = DoorId(payload);
             String sDidUnlock = Boolean.toString(didUnlock(payload));
             String sBatteryStatus = ReaderBatteryStatus(payload);
 
             // Maybe add try/parse
-            String results = sDoorId;
-            return results;
+            return sDoorId + ";" + sDidUnlock + ";" + sBatteryStatus;
         } 
         
         return "false";
