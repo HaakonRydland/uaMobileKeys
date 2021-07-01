@@ -5,6 +5,7 @@
 #import <SeosMobileKeysSDK/SeosMobileKeysSDK.h>
 #import <AudioToolbox/AudioServices.h>
 #import <Cordova/CDV.h>
+#import "NSData+OpeningStatusPayload.h"
 
 @interface UaMobileKeys : CDVPlugin {
 
@@ -352,6 +353,33 @@
     if (callbackId.length == 0) {
         callbackId = @"Found no callbackId";
     }
+
+    NSData *data = result.statusPayload;
+    NSString *didUnlock = @"False;";
+    NSString *doorId = @";";
+    NSString *batteryStatus = @"NotApplicable";
+    
+    if ([data containsData]) {
+        if ([data didUnlock]) {
+            didUnlock = @"True;";
+        }
+
+        doorId = [[data doorId] stringByAppendingString:@";"];
+
+        if ([data readerBatteryStatus] == ReaderBatteryStatusGood) {
+            batteryStatus = @"Good";
+        } else if ([data readerBatteryStatus] == ReaderBatteryStatusWarning) {
+            batteryStatus = @"Warning";
+        } else if ([data readerBatteryStatus] == ReaderBatteryStatusCritical) {
+            batteryStatus = @"Critical";
+        }
+    }
+
+    NSString *results = [NSString stringWithFormat:@"%@|%@|%@", doorId, didUnlock, batteryStatus];
+    
+    CDVPluginResult* pluginResult = nil;
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:results];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 
     // AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
 
