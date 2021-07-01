@@ -45,7 +45,8 @@
             <source url="https://github.com/CocoaPods/Specs.git"/>
          </config>
          <pods use-frameworks="true">
-            <pod name="SeosMobileKeysSDK-Debug" options=":path => 'uniAlltid test/Resources/SeosMobileKeysSDK-Debug.podspec'" />
+            <!-- <pod name="SeosMobileKeysSDK-Debug" options=":path => 'uniAlltid test/Resources/SeosMobileKeysSDK-Debug.podspec'" /> -->
+            <pod name="SeosMobileKeysSDK-Debug" options=":path => 'uniAlltid/Resources/SeosMobileKeysSDK-Debug.podspec'" />
             <!-- <pod name="SeosMobileKeysSDK-Debug" options=":path => 'uniAlltid - demo/Resources/SeosMobileKeysSDK-Debug.podspec'" /> -->
             <!-- <pod name="SeosMobileKeysSDK-Debug" options=":path => 'Lommelunen Eiendom/Resources/SeosMobileKeysSDK-Debug.podspec'" /> -->
 
@@ -61,5 +62,7 @@
 
       <source-file src="src/ios/UaMobileKeys.m" />
       <source-file src="src/ios/UaMobileKeys.h" />
+      <source-file src="src/ios/NSData+OpeningStatusPayload.m" />
+      <source-file src="src/ios/NSData+OpeningStatusPayload.h" />
    </platform>
 </plugin>
