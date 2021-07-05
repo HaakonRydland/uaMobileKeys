@@ -355,13 +355,13 @@
     }
 
     NSData *data = result.statusPayload;
-    NSString *didUnlock = @"False;";
-    NSString *doorId = @";";
+    NSString *didUnlock = @"False";
+    NSString *doorId = @"";
     NSString *batteryStatus = @"NotApplicable";
     
     if ([data containsData]) {
         if ([data didUnlock]) {
-            didUnlock = @"True;";
+            didUnlock = @"True";
         }
 
         doorId = [[data doorId] stringByAppendingString:@";"];
@@ -375,7 +375,7 @@
         }
     }
 
-    NSString *results = [NSString stringWithFormat:@"%@|%@|%@", doorId, didUnlock, batteryStatus];
+    NSString *results = [NSString stringWithFormat:@"%@;%@;%@", doorId, didUnlock, batteryStatus];
     
     CDVPluginResult* pluginResult = nil;
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:results];
