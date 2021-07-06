@@ -364,7 +364,7 @@
             didUnlock = @"True";
         }
 
-        doorId = [[data doorId] stringByAppendingString:@";"];
+        doorId = [data doorId];
 
         if ([data readerBatteryStatus] == ReaderBatteryStatusGood) {
             batteryStatus = @"Good";
