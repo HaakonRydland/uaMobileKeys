@@ -57,8 +57,8 @@
          </pods>
       </podspec>
 
-      <framework src="src/ios/SeosMobileKeysSDK-Debug/Frameworks/SeosMobileKeysSDK.framework" custom="true" embed="true"/>
-	  <!-- <framework src="src/ios/SeosMobileKeysSDK-Release/Frameworks/SeosMobileKeysSDK.framework" custom="true" embed="true"/> -->
+      <!-- <framework src="src/ios/SeosMobileKeysSDK-Debug/Frameworks/SeosMobileKeysSDK.framework" custom="true" embed="true"/> -->
+	  <framework src="src/ios/SeosMobileKeysSDK-Release/Frameworks/SeosMobileKeysSDK.framework" custom="true" embed="true"/>
 
       <source-file src="src/ios/UaMobileKeys.m" />
       <source-file src="src/ios/UaMobileKeys.h" />
