@@ -37,7 +37,7 @@ android {
     defaultConfig {
         applicationId "com.cordova.uamobilekeys"
         minSdkVersion 19
-        targetSdkVersion 30
+        targetSdkVersion 31
         multiDexEnabled true
         versionCode 1
         versionName "0.0.2"
@@ -83,8 +83,8 @@ android {
 
 dependencies {
     //compile(name:'foo', ext:'aar')
-    debugImplementation(group: 'com.assaabloy.mobilekeys.api', name: 'mobilekeys-android-sdk-debug', version: '7.4.8', ext: 'aar')
-    releaseImplementation(group: 'com.assaabloy.mobilekeys.api', name: 'mobilekeys-android-sdk-release', version: '7.4.8', ext: 'aar')
+    debugImplementation(group: 'com.assaabloy.mobilekeys.api', name: 'mobilekeys-android-sdk-debug', version: '8.0.1', ext: 'aar')
+    releaseImplementation(group: 'com.assaabloy.mobilekeys.api', name: 'mobilekeys-android-sdk-release', version: '8.0.1', ext: 'aar')
 
     // Mobile Keys SDK transitive dependencies
     implementation "org.bouncycastle:bcprov-jdk15on:1.70"
