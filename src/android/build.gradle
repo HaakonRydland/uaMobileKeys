@@ -87,7 +87,7 @@ dependencies {
     releaseImplementation(group: 'com.assaabloy.mobilekeys.api', name: 'mobilekeys-android-sdk-release', version: '8.0.1', ext: 'aar')
 
     // Mobile Keys SDK transitive dependencies
-    implementation "org.bouncycastle:bcprov-jdk15on:1.70"
+    implementation "org.bouncycastle:bcprov-jdk15on:1.58"
     implementation "com.google.code.gson:gson:2.8.9"
     implementation "org.slf4j:slf4j-api:1.7.25"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
