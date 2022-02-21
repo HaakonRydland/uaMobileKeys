@@ -78,6 +78,7 @@ android {
     packagingOptions {
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/LICENSE'
+        exclude 'META-INF/proguard/androidx-annotations.pro'
     }
 }
 
@@ -91,6 +92,7 @@ dependencies {
     implementation "com.google.code.gson:gson:2.8.9"
     implementation "org.slf4j:slf4j-api:1.7.25"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.security:security-crypto:1.1.0-alpha03"
 
     //You can depend on 5.2.1 if your application depend on support-v4 (verified drop-in replacement).
     implementation "com.mixpanel.android:mixpanel-android:4.8.7@aar"
