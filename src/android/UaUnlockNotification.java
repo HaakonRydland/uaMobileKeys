@@ -7,12 +7,12 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Build;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationCompat.BigTextStyle;
-import android.support.v4.content.ContextCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationCompat.BigTextStyle;
+import androidx.core.content.ContextCompat;
 
 
-import static android.support.v4.app.NotificationCompat.VISIBILITY_SECRET;
+import static androidx.core.app.NotificationCompat.VISIBILITY_SECRET;
 import static java.util.Objects.requireNonNull;
 
 public final class UaUnlockNotification
