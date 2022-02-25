@@ -229,9 +229,18 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     private boolean hasLocationPermissions(Context context)
     {
         boolean permissionGranted = true;
-        permissionGranted &= ContextCompat.checkSelfPermission(context,
-                Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(context,
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+
+        // Android 12 permissions
+        if (Build.VERSION.SDK_INT >= 31) {
+            permissionGranted &= ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_ADVERTISE) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED;
+            return permissionGranted;
+        }
+
+        permissionGranted &= ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED 
+            || ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+
 
         if (Build.VERSION.SDK_INT >= 29) {
             permissionGranted &= ContextCompat.checkSelfPermission(context,
@@ -250,9 +259,13 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     }
 
     public static String[] getPermissions(){
-        return Build.VERSION.SDK_INT >= 29 ?
-                new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION} :
-                new String[]{Manifest.permission.ACCESS_COARSE_LOCATION};
+        if (Build.VERSION.SDK_INT >= 31) {
+            return new String[]{Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_ADVERTISE, Manifest.permission.BLUETOOTH_CONNECT};
+        } else if (Build.VERSION.SDK_INT >= 29) {
+            return new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION};
+        } else {
+            return new String[]{Manifest.permission.ACCESS_COARSE_LOCATION};
+        }
     }
 
     // MobileKeysCallback interface implementation
