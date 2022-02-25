@@ -1,14 +1,15 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.31.1 clang-1300.0.29.1)
 // swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name SeosMobileKeysSDK
 import CoreGraphics
 import Foundation
 @_exported import SeosMobileKeysSDK
 import Swift
 import UIKit
+import _Concurrency
 import os.log
 import os
-extension UInt8 {
+extension Swift.UInt8 {
   public func isConstructedTag() -> Swift.Bool
   public func has(bit: Swift.UInt8) -> Swift.Bool
   public mutating func set(bit: Swift.UInt8)
@@ -21,7 +22,6 @@ extension UInt8 {
   @objc public init(rawData: Foundation.Data)
   @objc public func exportToLegacyDataFormat() -> Foundation.Data
   @objc deinit
-  @objc override dynamic public init()
 }
 @objc public class ReaderRepository : ObjectiveC.NSObject {
   @objc public init(clock: SeosMobileKeysSDK.Clock)
@@ -33,8 +33,8 @@ extension UInt8 {
   @objc public func findReader(uuid: Swift.String) -> SeosMobileKeysSDK.MobileKeysReader?
   @objc public func removeReader(uuid: Swift.String)
   @objc public func listAllActiveReaders() -> [SeosMobileKeysSDK.MobileKeysReader]
+  @objc public func removeInactiveReaders(callback: @escaping (SeosMobileKeysSDK.MobileKeysReader) -> ())
   @objc deinit
-  @objc override dynamic public init()
 }
 public class DataScanner {
   public convenience init(data: Foundation.Data)
@@ -63,7 +63,6 @@ public class DataScanner {
     @objc get
   }
   @objc deinit
-  @objc override dynamic public init()
 }
 @objc public class OpeningTriggerController : ObjectiveC.NSObject {
   @objc public init(repository: SeosMobileKeysSDK.ReaderRepository)
@@ -74,7 +73,6 @@ public class DataScanner {
   @objc public func setSupportedOpeningTypes(types: Swift.Array<Swift.Int>)
   @objc public func supportsOpeningType(type: SeosMobileKeysSDK.MobileKeysOpeningType) -> Swift.Bool
   @objc deinit
-  @objc override dynamic public init()
 }
 public class UniversalTLV : Swift.CustomStringConvertible {
   public var tag: SeosMobileKeysSDK.Tag
@@ -89,22 +87,22 @@ public class UniversalTLV : Swift.CustomStringConvertible {
   public static func parse(dataScanner: SeosMobileKeysSDK.DataScanner) -> [SeosMobileKeysSDK.UniversalTLV]
   @objc deinit
 }
-extension UniversalTLV {
+extension SeosMobileKeysSDK.UniversalTLV {
   public var description: Swift.String {
     get
   }
   public func debugDescription(indent: Swift.Int) -> Swift.String
 }
 public typealias SearchableTLV = SeosMobileKeysSDK.UniversalTLV
-extension UniversalTLV {
+extension SeosMobileKeysSDK.UniversalTLV {
   public func findFirst(findTag: SeosMobileKeysSDK.Tag) -> SeosMobileKeysSDK.UniversalTLV?
   public func findDirectChildren(findTagPrefix: Foundation.Data) -> [SeosMobileKeysSDK.UniversalTLV]
   public func findAll(findTag: SeosMobileKeysSDK.Tag) -> [SeosMobileKeysSDK.UniversalTLV]
 }
-extension UniversalTLV {
+extension SeosMobileKeysSDK.UniversalTLV {
   public func toData() -> Foundation.Data
 }
-extension UniversalTLV : Swift.Equatable {
+extension SeosMobileKeysSDK.UniversalTLV : Swift.Equatable {
   public static func == (lhs: SeosMobileKeysSDK.UniversalTLV, rhs: SeosMobileKeysSDK.UniversalTLV) -> Swift.Bool
 }
 public class GlobalDataFile : Swift.CustomStringConvertible {
@@ -128,7 +126,6 @@ public class GlobalDataFile : Swift.CustomStringConvertible {
   @objc public init(rawData: Foundation.Data)
   @objc public func exportToVersion3DataFormat() -> Foundation.Data
   @objc deinit
-  @objc override dynamic public init()
 }
 @objc @_inheritsConvenienceInitializers public class SeosFileSystem : ObjectiveC.NSObject {
   public var seosSystemEEPROM: SeosMobileKeysSDK.SeosSystemEeprom!
@@ -143,7 +140,7 @@ public class GlobalDataFile : Swift.CustomStringConvertible {
   @objc public func isEmpty() -> Swift.Bool
   @objc deinit
 }
-extension SeosFileSystem {
+extension SeosMobileKeysSDK.SeosFileSystem {
   @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
 }
 @objc @_inheritsConvenienceInitializers public class SeosSystemEeprom : ObjectiveC.NSObject {
@@ -162,15 +159,15 @@ extension SeosFileSystem {
   public func exportNewVersion() -> Foundation.Data
   @objc deinit
 }
-extension SeosSystemEeprom {
+extension SeosMobileKeysSDK.SeosSystemEeprom {
   @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
   public func isEmpty() -> Swift.Bool
 }
 @_inheritsConvenienceInitializers @objc public class RssiMeasurement : ObjectiveC.NSObject {
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
-extension UniversalTLV {
+extension SeosMobileKeysSDK.UniversalTLV {
   public static func parseSeos(rawData: Foundation.Data) -> [SeosMobileKeysSDK.UniversalTLV]
   public static func parseSeos(dataScanner: SeosMobileKeysSDK.DataScanner) -> [SeosMobileKeysSDK.UniversalTLV]
 }
@@ -178,10 +175,10 @@ public enum AccessType {
   case READ
   case WRITE
   public static func == (a: SeosMobileKeysSDK.AccessType, b: SeosMobileKeysSDK.AccessType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 public class AccessRights : Swift.CustomStringConvertible {
   public var accessType: SeosMobileKeysSDK.AccessType
@@ -202,7 +199,6 @@ public class AccessRights : Swift.CustomStringConvertible {
   @objc public init(rawData: Foundation.Data)
   @objc public func exportTo32x32() -> Foundation.Data
   @objc deinit
-  @objc override dynamic public init()
 }
 @objc public class NVRamByteWriter : ObjectiveC.NSObject {
   public var data: Foundation.Data!
@@ -210,7 +206,6 @@ public class AccessRights : Swift.CustomStringConvertible {
   public func write(_ data: Foundation.Data) throws
   public func write(_ value: Swift.UInt8) throws
   public func writeZeroCount(_ value: Swift.Int) throws
-  @objc override dynamic public init()
   @objc deinit
 }
 @objc public enum ReaderCapabilities : Swift.Int, Swift.RawRepresentable {
@@ -237,7 +232,6 @@ public class AccessRights : Swift.CustomStringConvertible {
 @objc public class Reader : ObjectiveC.NSObject {
   @objc public init(uuid: Swift.String)
   @objc deinit
-  @objc override dynamic public init()
 }
 public enum AuthenticationKeyRequired : Swift.String {
   case NO_AUTH
@@ -248,8 +242,8 @@ public enum AuthenticationKeyRequired : Swift.String {
   case GRANTED_CONTACTLESS
   case ACCESS_ALWAYS
   case TBD
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -272,15 +266,15 @@ public class AccessRight : Swift.CustomStringConvertible {
   }
   @objc deinit
 }
-extension UInt16 {
+extension Swift.UInt16 {
   public static func fromInt(int: Swift.Int) -> Swift.UInt16
 }
 public enum LogCategory : Swift.String {
   case SEOS
   case BLE
   case TSM
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -291,8 +285,8 @@ public enum LogLevel : Swift.String {
   case INFO
   case ERROR
   case FAULT
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -304,11 +298,11 @@ public struct Logger {
   public static func info(_ message: Any)
   public static func error(_ message: Any)
 }
-extension Data {
+extension Foundation.Data {
   public init(hex: Swift.String)
   public func hexadecimal() -> Swift.String
 }
-extension Data {
+extension Foundation.Data {
   public var firstByte: Swift.UInt8 {
     get
   }
@@ -319,10 +313,10 @@ extension Data {
   public func to<T>(type: T.Type) -> T
   public func splitData(chunkSize: Swift.Int) -> [Foundation.Data]
 }
-extension Data {
+extension Foundation.Data {
   public func checkSum() -> Swift.Int
 }
-extension Data {
+extension Foundation.Data {
   public func tlvLength(forceTwoBytesLen: Swift.Bool) -> Foundation.Data
   public func tlvLength() -> Foundation.Data
 }
@@ -331,8 +325,8 @@ public enum TagFamily : Swift.UInt8 {
   case Application
   case Context
   case Private
-  public typealias RawValue = Swift.UInt8
   public init?(rawValue: Swift.UInt8)
+  public typealias RawValue = Swift.UInt8
   public var rawValue: Swift.UInt8 {
     get
   }
@@ -351,8 +345,8 @@ public enum UniversalTagNumbers : Swift.UInt8 {
   case T61String
   case IA5String
   case UTCTime
-  public typealias RawValue = Swift.UInt8
   public init?(rawValue: Swift.UInt8)
+  public typealias RawValue = Swift.UInt8
   public var rawValue: Swift.UInt8 {
     get
   }
@@ -385,8 +379,8 @@ public class Tag : Swift.Equatable, Swift.CustomStringConvertible {
   @objc public func now() -> Foundation.Date
   @objc public func future(time: Foundation.TimeInterval) -> Foundation.Date
   @objc public func past(time: Foundation.TimeInterval) -> Foundation.Date
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @_inheritsConvenienceInitializers @objc public class FakeClock : SeosMobileKeysSDK.RealClock {
   @objc override dynamic public init()
@@ -485,5 +479,4 @@ public class DataWriteStream {
   @objc public func toString() -> Swift.String
   @objc public func text(state: SeosMobileKeysSDK.State) -> Swift.String
   @objc deinit
-  @objc override dynamic public init()
 }

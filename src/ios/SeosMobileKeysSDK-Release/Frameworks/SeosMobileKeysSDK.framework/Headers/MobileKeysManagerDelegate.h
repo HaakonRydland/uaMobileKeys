@@ -42,15 +42,16 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)mobileKeysDidFailToSetupEndpoint:(NSError *)error;
 
+@optional
  /**
  * Callback for when `-[MobileKeysManager updateEndpoint]` was successfully completed and the endpoint has been updated.
  * @note since version 2.0. There are two versions of this callback, both have been marked @optional for technical reasons,
  * but at least one of them should be implemented
  * @see -[MobileKeysManagerDelegate mobileKeysDidUpdateEndpointWithSummary:]
  */
-@optional
 - (void)mobileKeysDidUpdateEndpoint;
 
+@optional
 /**
  * Callback for when `-[MobileKeysManager updateEndpoint]` was successfully completed and the endpoint has been updated.
  * @note since version 6.2. There are two versions of this callback, both have been marked @optional for technical reasons,
@@ -58,7 +59,6 @@ NS_ASSUME_NONNULL_BEGIN
  * @param endpointUpdateSummary a summary of the update performed
  * @see -[MobileKeysManagerDelegate mobileKeysDidUpdateEndpoint]
  */
-@optional
 - (void)mobileKeysDidUpdateEndpointWithSummary:(MobileKeysEndpointUpdateSummary *) endpointUpdateSummary;
  /**
  * Callback for when `-[MobileKeysManager updateEndpoint]` failed. The endpoint wasn't updated.
@@ -110,6 +110,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (BOOL)mobileKeysShouldAttemptToOpen:(MobileKeysReader *)reader openingType:(MobileKeysOpeningType)type;
 
+@optional
 /**
 * IMPORTANT: Only implement this callback method if you absolutely need scan results for all Readers.
 * If this method is NOT implemented, the SDK assumes that it returns YES. See below.
@@ -134,10 +135,9 @@ NS_ASSUME_NONNULL_BEGIN
 * @note since version 5.1
 * @deprecated this delegate callback will be moved to `MobileKeysManagerExtendedDelegate`
 */
-@optional
 - (BOOL)mobileKeysShouldInteractWithScannedReader:(MobileKeysReader *)mobileKeysReader DEPRECATED_MSG_ATTRIBUTE("This delegate callback will moved to MobileKeysManagerExtendedDelegate");
 
-
+@optional
 /**
 * Callback for when the user did an unlock gesture. If this method is implemented, the SDK will enable it's own built-in
  * motion detection, even if the MobileKeysOpeningType "Motion" is not specified eh nscanning
@@ -145,8 +145,14 @@ NS_ASSUME_NONNULL_BEGIN
  * @note since version 2.0
  * @deprecated this delegate callback will be moved to `MobileKeysManagerExtendedDelegate`
  */
- @optional
 - (void)mobileKeysUserDidUnlockGesture DEPRECATED_MSG_ATTRIBUTE("This delegate callback will moved to MobileKeysManagerExtendedDelegate");
 
+@optional
+/**
+ * An optional callback for when the reader gets inactive.
+ * @param reader - The reader that stopped updating RSSI
+ * @note since version 7.6.4
+ */
+- (void)mobileKeysReaderDisappeared:(MobileKeysReader*) reader;
 @end
 NS_ASSUME_NONNULL_END
