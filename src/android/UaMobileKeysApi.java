@@ -332,13 +332,13 @@ public class UaMobileKeysApi extends CordovaPlugin implements MobileKeysCallback
     @Override
     public void onReaderConnectionClosed(Reader reader, OpeningResult openingResult)
     {
-        Vibrator vibrator = (Vibrator) _context.getSystemService(_context.VIBRATOR_SERVICE);
+        // Vibrator vibrator = (Vibrator) _context.getSystemService(_context.VIBRATOR_SERVICE);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            vibrator.vibrate(VibrationEffect.createOneShot(150, VibrationEffect.DEFAULT_AMPLITUDE));
-        } else {
-            vibrator.vibrate(150);
-        }
+        // if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        //     vibrator.vibrate(VibrationEffect.createOneShot(150, VibrationEffect.DEFAULT_AMPLITUDE));
+        // } else {
+        //     vibrator.vibrate(150);
+        // }
 
         // Generates and returns stauts payload as JSON if successfull and "false" if error
         String response = GenerateResponse(openingResult.getStatusPayload());
