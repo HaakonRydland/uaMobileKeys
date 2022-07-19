@@ -52,8 +52,8 @@
 
             <!-- <pod name="SeosMobileKeysSDK-Release" options=":path => 'uniAlltid test/Resources/SeosMobileKeysSDK-Release.podspec'" /> -->
             <!-- <pod name="SeosMobileKeysSDK-Release" options=":path => 'unialltid/Resources/SeosMobileKeysSDK-Release.podspec'" /> -->
-            <pod name="SeosMobileKeysSDK-Release" options=":path => 'SINN Bolig/Resources/SeosMobileKeysSDK-Release.podspec'" />
-            <!-- <pod name="SeosMobileKeysSDK-Release" options=":path => 'Studentinord Bolig/Resources/SeosMobileKeysSDK-Release.podspec'" /> -->
+            <!-- <pod name="SeosMobileKeysSDK-Release" options=":path => 'SINN Bolig/Resources/SeosMobileKeysSDK-Release.podspec'" /> -->
+            <pod name="SeosMobileKeysSDK-Release" options=":path => 'Studentinord Bolig/Resources/SeosMobileKeysSDK-Release.podspec'" />
          </pods>
       </podspec>
 
