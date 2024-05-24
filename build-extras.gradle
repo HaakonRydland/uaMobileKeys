@@ -1,11 +1,11 @@
 android {
     defaultConfig {
         applicationId "com.cordova.uamobilekeys"
-        minSdkVersion 22
+        minSdkVersion 24
         targetSdkVersion 33
         multiDexEnabled true
         versionCode 1
-        versionName "0.0.2"
+        versionName "0.0.3"
         buildConfigField 'String', 'AAMK_APP_ID', '"UaMobileKeys"'
         buildConfigField 'String', 'AAMK_APP_ID_DESCRIPTION', '"Plugin for Mobile Keys"'
         buildConfigField 'int', 'AAMK_LOCK_SERVICE_CODE', '9'
