@@ -1,6 +1,6 @@
 {
   "name": "cordova.plugin.uamobilekeys",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Plugin for mobile keys",
   "cordova": {
     "id": "cordova.plugin.uamobilekeys",
